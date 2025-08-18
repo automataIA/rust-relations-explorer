@@ -1,0 +1,2 @@
+# Treat all warnings as errors in CI contexts; locally we can override via flags if needed
+warns = ["clippy::all", "clippy::pedantic"]

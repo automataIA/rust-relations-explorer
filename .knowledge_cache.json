@@ -1,0 +1,5416 @@
+{
+  "entries": {
+    "./benches/build_graph.rs": {
+      "meta": {
+        "mtime": 1755524109,
+        "len": 1179
+      },
+      "node": {
+        "path": "./benches/build_graph.rs",
+        "items": [
+          {
+            "id": "file:./benches/build_graph.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "build_graph",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./benches/build_graph.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:bench_build_graph:5",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "bench_build_graph",
+            "visibility": "Private",
+            "location": {
+              "file": "./benches/build_graph.rs",
+              "line_start": 5,
+              "line_end": 5
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "knowledge_rs::graph::KnowledgeGraph",
+            "alias": null
+          },
+          {
+            "path": "knowledge_rs::utils::cache::CacheMode",
+            "alias": null
+          },
+          {
+            "path": "std::path::Path",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 2,
+          "import_count": 3
+        }
+      }
+    },
+    "./tests/app_run_cli.rs": {
+      "meta": {
+        "mtime": 1755537638,
+        "len": 9112
+      },
+      "node": {
+        "path": "./tests/app_run_cli.rs",
+        "items": [
+          {
+            "id": "file:./tests/app_run_cli.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "app_run_cli",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/app_run_cli.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:write_file:7",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "write_file",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/app_run_cli.rs",
+              "line_start": 7,
+              "line_end": 7
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:app_build_generates_dot_and_json:15",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "app_build_generates_dot_and_json",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/app_run_cli.rs",
+              "line_start": 15,
+              "line_end": 15
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:app_query_connected_files_json_branch:55",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "app_query_connected_files_json_branch",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/app_run_cli.rs",
+              "line_start": 55,
+              "line_end": 55
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:app_query_function_usage_callers_and_callees:79",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "app_query_function_usage_callers_and_callees",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/app_run_cli.rs",
+              "line_start": 79,
+              "line_end": 79
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:app_query_cycles_json_branch:115",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "app_query_cycles_json_branch",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/app_run_cli.rs",
+              "line_start": 115,
+              "line_end": 115
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:app_query_path_json_path_and_no_path:135",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "app_query_path_json_path_and_no_path",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/app_run_cli.rs",
+              "line_start": 135,
+              "line_end": 135
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:app_query_module_centrality_json:171",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "app_query_module_centrality_json",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/app_run_cli.rs",
+              "line_start": 171,
+              "line_end": 171
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:app_query_trait_impls_text_and_json:193",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "app_query_trait_impls_text_and_json",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/app_run_cli.rs",
+              "line_start": 193,
+              "line_end": 193
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:app_build_with_cache_flags_and_no_ignore:223",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "app_build_with_cache_flags_and_no_ignore",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/app_run_cli.rs",
+              "line_start": 223,
+              "line_end": 223
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:app_query_hubs_text_branch:274",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "app_query_hubs_text_branch",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/app_run_cli.rs",
+              "line_start": 274,
+              "line_end": 274
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "knowledge_rs::app::run_cli",
+            "alias": null
+          },
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "std::io::Write",
+            "alias": null
+          },
+          {
+            "path": "std::path::PathBuf",
+            "alias": null
+          },
+          {
+            "path": "tempfile::tempdir",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 11,
+          "import_count": 5
+        }
+      }
+    },
+    "./examples/generate_synthetic.rs": {
+      "meta": {
+        "mtime": 1755525260,
+        "len": 1674
+      },
+      "node": {
+        "path": "./examples/generate_synthetic.rs",
+        "items": [
+          {
+            "id": "file:./examples/generate_synthetic.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "generate_synthetic",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./examples/generate_synthetic.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:main:11",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "main",
+            "visibility": "Private",
+            "location": {
+              "file": "./examples/generate_synthetic.rs",
+              "line_start": 11,
+              "line_end": 11
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "std::env",
+            "alias": null
+          },
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "std::io::Write",
+            "alias": null
+          },
+          {
+            "path": "std::path::PathBuf",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 2,
+          "import_count": 4
+        }
+      }
+    },
+    "./src/app.rs": {
+      "meta": {
+        "mtime": 1755537498,
+        "len": 19419
+      },
+      "node": {
+        "path": "./src/app.rs",
+        "items": [
+          {
+            "id": "file:./src/app.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "app",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./src/app.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:run_cli:8",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "run_cli",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/app.rs",
+              "line_start": 8,
+              "line_end": 8
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:HubRow:209",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "HubRow",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/app.rs",
+              "line_start": 209,
+              "line_end": 209
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:Row:238",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "Row",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/app.rs",
+              "line_start": 238,
+              "line_end": 238
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:Row:266",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "Row",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/app.rs",
+              "line_start": 266,
+              "line_end": 266
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "crate::graph::KnowledgeGraph",
+            "alias": null
+          },
+          {
+            "path": "crate::query::Query",
+            "alias": null
+          },
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "crate::query::TraitImplsQuery",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 5,
+          "import_count": 4
+        }
+      }
+    },
+    "./src/parser/mod.rs": {
+      "meta": {
+        "mtime": 1755542888,
+        "len": 8559
+      },
+      "node": {
+        "path": "./src/parser/mod.rs",
+        "items": [
+          {
+            "id": "file:./src/parser/mod.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "mod",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:compile:21",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "compile",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 21,
+              "line_end": 21
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:default:33",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "default",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 33,
+              "line_end": 33
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:new:37",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "new",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 37,
+              "line_end": 37
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:parse_file:40",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "parse_file",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 40,
+              "line_end": 40
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:extract_items:47",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "extract_items",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 47,
+              "line_end": 47
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:extract_imports:104",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "extract_imports",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 104,
+              "line_end": 104
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:parse_visibility:116",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "parse_visibility",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 116,
+              "line_end": 116
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:line_number_for:128",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "line_number_for",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 128,
+              "line_end": 128
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:test_extract_fn_struct_enum_and_visibility:139",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "test_extract_fn_struct_enum_and_visibility",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 139,
+              "line_end": 139
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:top:141",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "top",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 141,
+              "line_end": 141
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:hidden:142",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "hidden",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 142,
+              "line_end": 142
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:test_extract_imports_with_alias:161",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "test_extract_imports_with_alias",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 161,
+              "line_end": 161
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:test_async_const_functions_and_tuple_struct:174",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "test_async_const_functions_and_tuple_struct",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 174,
+              "line_end": 174
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:af:176",
+            "item_type": {
+              "Function": {
+                "is_async": true,
+                "is_const": false
+              }
+            },
+            "name": "af",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 176,
+              "line_end": 176
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:cf:177",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": true
+              }
+            },
+            "name": "cf",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 177,
+              "line_end": 177
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:scoped:179",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "scoped",
+            "visibility": {
+              "PubIn": "self"
+            },
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 179,
+              "line_end": 179
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:RustParser:7",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "RustParser",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 7,
+              "line_end": 7
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:RegexPatterns:12",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "RegexPatterns",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 12,
+              "line_end": 12
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:S:143",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "S",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 143,
+              "line_end": 143
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:TS:178",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "TS",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 178,
+              "line_end": 178
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:E:144",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "E",
+            "visibility": "PubSuper",
+            "location": {
+              "file": "./src/parser/mod.rs",
+              "line_start": 144,
+              "line_end": 144
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "crate::errors::ParseError",
+            "alias": null
+          },
+          {
+            "path": "regex::Regex",
+            "alias": null
+          },
+          {
+            "path": "std::path::Path",
+            "alias": null
+          },
+          {
+            "path": "super::*",
+            "alias": null
+          },
+          {
+            "path": "std::collections::HashMap",
+            "alias": null
+          },
+          {
+            "path": "crate::module::Thing",
+            "alias": "Alias"
+          }
+        ],
+        "metrics": {
+          "item_count": 22,
+          "import_count": 6
+        }
+      }
+    },
+    "./src/main.rs": {
+      "meta": {
+        "mtime": 1755537435,
+        "len": 16760
+      },
+      "node": {
+        "path": "./src/main.rs",
+        "items": [
+          {
+            "id": "file:./src/main.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "main",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./src/main.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:main:1",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "main",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/main.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:HubRow:189",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "HubRow",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/main.rs",
+              "line_start": 189,
+              "line_end": 189
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:Row:235",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "Row",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/main.rs",
+              "line_start": 235,
+              "line_end": 235
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:Row:276",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "Row",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/main.rs",
+              "line_start": 276,
+              "line_end": 276
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "knowledge_rs::cli::parse",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 5,
+          "import_count": 1
+        }
+      }
+    },
+    "./benches/queries.rs": {
+      "meta": {
+        "mtime": 1755523974,
+        "len": 2166
+      },
+      "node": {
+        "path": "./benches/queries.rs",
+        "items": [
+          {
+            "id": "file:./benches/queries.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "queries",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./benches/queries.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:build_graph_once:6",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "build_graph_once",
+            "visibility": "Private",
+            "location": {
+              "file": "./benches/queries.rs",
+              "line_start": 6,
+              "line_end": 6
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:bench_queries:12",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "bench_queries",
+            "visibility": "Private",
+            "location": {
+              "file": "./benches/queries.rs",
+              "line_start": 12,
+              "line_end": 12
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "knowledge_rs::graph::KnowledgeGraph",
+            "alias": null
+          },
+          {
+            "path": "knowledge_rs::utils::cache::CacheMode",
+            "alias": null
+          },
+          {
+            "path": "std::path::Path",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 3,
+          "import_count": 3
+        }
+      }
+    },
+    "./examples/generate_svg.rs": {
+      "meta": {
+        "mtime": 1755523600,
+        "len": 1214
+      },
+      "node": {
+        "path": "./examples/generate_svg.rs",
+        "items": [
+          {
+            "id": "file:./examples/generate_svg.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "generate_svg",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./examples/generate_svg.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:main:4",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "main",
+            "visibility": "Private",
+            "location": {
+              "file": "./examples/generate_svg.rs",
+              "line_start": 4,
+              "line_end": 4
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "knowledge_rs::graph::KnowledgeGraph",
+            "alias": null
+          },
+          {
+            "path": "knowledge_rs::utils::cache::CacheMode",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 2,
+          "import_count": 2
+        }
+      }
+    },
+    "./src/query/mod.rs": {
+      "meta": {
+        "mtime": 1755523547,
+        "len": 21171
+      },
+      "node": {
+        "path": "./src/query/mod.rs",
+        "items": [
+          {
+            "id": "file:./src/query/mod.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "mod",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:run:10",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "run",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 10,
+              "line_end": 10
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:new:22",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "new",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 22,
+              "line_end": 22
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:run:27",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "run",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 27,
+              "line_end": 27
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:run:60",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "run",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 60,
+              "line_end": 60
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:callers:116",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "callers",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 116,
+              "line_end": 116
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:callees:118",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "callees",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 118,
+              "line_end": 118
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:run:122",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "run",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 122,
+              "line_end": 122
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:new:166",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "new",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 166,
+              "line_end": 166
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:run:170",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "run",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 170,
+              "line_end": 170
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:dfs:196",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "dfs",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 196,
+              "line_end": 196
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:run:238",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "run",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 238,
+              "line_end": 238
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:new:304",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "new",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 304,
+              "line_end": 304
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:run:308",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "run",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 308,
+              "line_end": 308
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:new:361",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "new",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 361,
+              "line_end": 361
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:run:365",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "run",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 365,
+              "line_end": 365
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:make_fn:420",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "make_fn",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 420,
+              "line_end": 420
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:graph_fixture:436",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "graph_fixture",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 436,
+              "line_end": 436
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:connected_files_query_basic:486",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "connected_files_query_basic",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 486,
+              "line_end": 486
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:function_usage_callers_and_callees:497",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "function_usage_callers_and_callees",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 497,
+              "line_end": 497
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:cycle_detection_detects_simple_cycle:511",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "cycle_detection_detects_simple_cycle",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 511,
+              "line_end": 511
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:trait_impls_basic:526",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "trait_impls_basic",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 526,
+              "line_end": 526
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:TraitImplsQuery:16",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "TraitImplsQuery",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 16,
+              "line_end": 16
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:ConnectedFilesQuery:48",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "ConnectedFilesQuery",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 48,
+              "line_end": 48
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:FunctionUsageQuery:109",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "FunctionUsageQuery",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 109,
+              "line_end": 109
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:CycleDetectionQuery:162",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "CycleDetectionQuery",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 162,
+              "line_end": 162
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:ShortestPathQuery:225",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "ShortestPathQuery",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 225,
+              "line_end": 225
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:HubsQuery:297",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "HubsQuery",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 297,
+              "line_end": 297
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:ModuleCentralityQuery:354",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "ModuleCentralityQuery",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 354,
+              "line_end": 354
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:UsageDirection:106",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "UsageDirection",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 106,
+              "line_end": 106
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:CentralityMetric:294",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "CentralityMetric",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/query/mod.rs",
+              "line_start": 294,
+              "line_end": 294
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "super::*",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 31,
+          "import_count": 1
+        }
+      }
+    },
+    "./src/cli/mod.rs": {
+      "meta": {
+        "mtime": 1755522172,
+        "len": 9249
+      },
+      "node": {
+        "path": "./src/cli/mod.rs",
+        "items": [
+          {
+            "id": "file:./src/cli/mod.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "mod",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./src/cli/mod.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:parse:235",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "parse",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/cli/mod.rs",
+              "line_start": 235,
+              "line_end": 235
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:Cli:10",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "Cli",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/cli/mod.rs",
+              "line_start": 10,
+              "line_end": 10
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:Commands:16",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "Commands",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/cli/mod.rs",
+              "line_start": 16,
+              "line_end": 16
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:QueryCommands:77",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "QueryCommands",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/cli/mod.rs",
+              "line_start": 77,
+              "line_end": 77
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [],
+        "metrics": {
+          "item_count": 5,
+          "import_count": 0
+        }
+      }
+    },
+    "./src/graph/resolver.rs": {
+      "meta": {
+        "mtime": 1755545490,
+        "len": 25614
+      },
+      "node": {
+        "path": "./src/graph/resolver.rs",
+        "items": [
+          {
+            "id": "file:./src/graph/resolver.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "resolver",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:mk_fn:26",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "mk_fn",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 26,
+              "line_end": 26
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:mk_file_item:37",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "mk_file_item",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 37,
+              "line_end": 37
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:graph_fixture:48",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "graph_fixture",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 48,
+              "line_end": 48
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:resolve_crate_path:84",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "resolve_crate_path",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 84,
+              "line_end": 84
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:alias_underscore_is_ignored:94",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "alias_underscore_is_ignored",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 94,
+              "line_end": 94
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:exposure_reexport_maps_last_segment:119",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "exposure_reexport_maps_last_segment",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 119,
+              "line_end": 119
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:deep_super_navigation_and_helpers:156",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "deep_super_navigation_and_helpers",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 156,
+              "line_end": 156
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:resolve_multi_segment_chain:217",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "resolve_multi_segment_chain",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 217,
+              "line_end": 217
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:resolve_alias_splicing_with_suffix:252",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "resolve_alias_splicing_with_suffix",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 252,
+              "line_end": 252
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:resolve_super_and_self:288",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "resolve_super_and_self",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 288,
+              "line_end": 288
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:resolve_alias_basic:302",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "resolve_alias_basic",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 302,
+              "line_end": 302
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:module_segments_for:317",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "module_segments_for",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 317,
+              "line_end": 317
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:new:349",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "new",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 349,
+              "line_end": 349
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:resolve_import:419",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "resolve_import",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 419,
+              "line_end": 419
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:is_item_function:501",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "is_item_function",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 501,
+              "line_end": 501
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:is_file_level_module:510",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "is_file_level_module",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 510,
+              "line_end": 510
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:resolve_scoped_chain:522",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "resolve_scoped_chain",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 522,
+              "line_end": 522
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:base_src_dir:586",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "base_src_dir",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 586,
+              "line_end": 586
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:Resolver:6",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "Resolver",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/resolver.rs",
+              "line_start": 6,
+              "line_end": 6
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "std::collections::HashMap",
+            "alias": null
+          },
+          {
+            "path": "std::sync::Arc",
+            "alias": null
+          },
+          {
+            "path": "super::*",
+            "alias": null
+          },
+          {
+            "path": "crate::graph::*",
+            "alias": null
+          },
+          {
+            "path": "std::path::PathBuf",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 20,
+          "import_count": 5
+        }
+      }
+    },
+    "./tests/cli_smoke.rs": {
+      "meta": {
+        "mtime": 1755522972,
+        "len": 1645
+      },
+      "node": {
+        "path": "./tests/cli_smoke.rs",
+        "items": [
+          {
+            "id": "file:./tests/cli_smoke.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "cli_smoke",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/cli_smoke.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:cli_build_and_connected_files_smoke:11",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "cli_build_and_connected_files_smoke",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_smoke.rs",
+              "line_start": 11,
+              "line_end": 11
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:top:21",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "top",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/cli_smoke.rs",
+              "line_start": 21,
+              "line_end": 21
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:child:25",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "child",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/cli_smoke.rs",
+              "line_start": 25,
+              "line_end": 25
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:write_file:49",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "write_file",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_smoke.rs",
+              "line_start": 49,
+              "line_end": 49
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "assert_cmd::prelude::*",
+            "alias": null
+          },
+          {
+            "path": "predicates::prelude::*",
+            "alias": null
+          },
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "std::io::Write",
+            "alias": null
+          },
+          {
+            "path": "std::path::PathBuf",
+            "alias": null
+          },
+          {
+            "path": "std::process::Command",
+            "alias": null
+          },
+          {
+            "path": "tempfile::tempdir",
+            "alias": null
+          },
+          {
+            "path": "crate::top",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 5,
+          "import_count": 8
+        }
+      }
+    },
+    "./tests/parser_props.rs": {
+      "meta": {
+        "mtime": 1755522984,
+        "len": 966
+      },
+      "node": {
+        "path": "./tests/parser_props.rs",
+        "items": [
+          {
+            "id": "file:./tests/parser_props.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "parser_props",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/parser_props.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:parser_never_panics_on_arbitrary_input:8",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "parser_never_panics_on_arbitrary_input",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/parser_props.rs",
+              "line_start": 8,
+              "line_end": 8
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:parser_produces_reasonable_counts:16",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "parser_produces_reasonable_counts",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/parser_props.rs",
+              "line_start": 16,
+              "line_end": 16
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "proptest::prelude::*",
+            "alias": null
+          },
+          {
+            "path": "knowledge_rs::parser::RustParser",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 3,
+          "import_count": 2
+        }
+      }
+    },
+    "./src/visualization/mod.rs": {
+      "meta": {
+        "mtime": 1755532407,
+        "len": 14587
+      },
+      "node": {
+        "path": "./src/visualization/mod.rs",
+        "items": [
+          {
+            "id": "file:./src/visualization/mod.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "mod",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:default:25",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "default",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 25,
+              "line_end": 25
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:default:37",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "default",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 37,
+              "line_end": 37
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:new:44",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "new",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 44,
+              "line_end": 44
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:generate_svg_with_options:45",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "generate_svg_with_options",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 45,
+              "line_end": 45
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:enhance_svg:72",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "enhance_svg",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 72,
+              "line_end": 72
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:new:109",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "new",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 109,
+              "line_end": 109
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:generate_dot:110",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "generate_dot",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 110,
+              "line_end": 110
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:generate_dot_with_options:114",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "generate_dot_with_options",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 114,
+              "line_end": 114
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:write_module_cluster:207",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "write_module_cluster",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 207,
+              "line_end": 207
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:sanitize_id:249",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "sanitize_id",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 249,
+              "line_end": 249
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:escape_label:258",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "escape_label",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 258,
+              "line_end": 258
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:style_for_item_with_theme:262",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "style_for_item_with_theme",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 262,
+              "line_end": 262
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:test_sanitize_id_basic:295",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "test_sanitize_id_basic",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 295,
+              "line_end": 295
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:test_escape_label_quotes:304",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "test_escape_label_quotes",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 304,
+              "line_end": 304
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:test_style_for_item_with_theme_all_variants:311",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "test_style_for_item_with_theme_all_variants",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 311,
+              "line_end": 311
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:test_enhance_svg_injection:348",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "test_enhance_svg_injection",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 348,
+              "line_end": 348
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:DotOptions:15",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "DotOptions",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 15,
+              "line_end": 15
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:SvgOptions:31",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "SvgOptions",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 31,
+              "line_end": 31
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:SvgGenerator:41",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "SvgGenerator",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 41,
+              "line_end": 41
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:DotGenerator:106",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "DotGenerator",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 106,
+              "line_end": 106
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:DotTheme:6",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "DotTheme",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 6,
+              "line_end": 6
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:RankDir:9",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "RankDir",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 9,
+              "line_end": 9
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:EdgeStyle:12",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "EdgeStyle",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/visualization/mod.rs",
+              "line_start": 12,
+              "line_end": 12
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "crate::errors::KnowledgeGraphError",
+            "alias": null
+          },
+          {
+            "path": "std::collections::HashSet",
+            "alias": null
+          },
+          {
+            "path": "std::io::Write",
+            "alias": null
+          },
+          {
+            "path": "super::*",
+            "alias": null
+          },
+          {
+            "path": "crate::graph::ItemType",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 24,
+          "import_count": 5
+        }
+      }
+    },
+    "./tests/utils_tests.rs": {
+      "meta": {
+        "mtime": 1755527040,
+        "len": 1495
+      },
+      "node": {
+        "path": "./tests/utils_tests.rs",
+        "items": [
+          {
+            "id": "file:./tests/utils_tests.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "utils_tests",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/utils_tests.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:table_renderer_produces_expected_grid:7",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "table_renderer_produces_expected_grid",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/utils_tests.rs",
+              "line_start": 7,
+              "line_end": 7
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:file_walker_respects_ignore_and_no_ignore:17",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "file_walker_respects_ignore_and_no_ignore",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/utils_tests.rs",
+              "line_start": 17,
+              "line_end": 17
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:write:40",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "write",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/utils_tests.rs",
+              "line_start": 40,
+              "line_end": 40
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "std::io::Write",
+            "alias": null
+          },
+          {
+            "path": "tempfile::tempdir",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 4,
+          "import_count": 3
+        }
+      }
+    },
+    "./examples/query_connected.rs": {
+      "meta": {
+        "mtime": 1755523404,
+        "len": 1677
+      },
+      "node": {
+        "path": "./examples/query_connected.rs",
+        "items": [
+          {
+            "id": "file:./examples/query_connected.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "query_connected",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./examples/query_connected.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:main:3",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "main",
+            "visibility": "Private",
+            "location": {
+              "file": "./examples/query_connected.rs",
+              "line_start": 3,
+              "line_end": 3
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "knowledge_rs::utils::cache::CacheMode",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 2,
+          "import_count": 1
+        }
+      }
+    },
+    "./tests/cli_svg_and_queries.rs": {
+      "meta": {
+        "mtime": 1755539176,
+        "len": 4658
+      },
+      "node": {
+        "path": "./tests/cli_svg_and_queries.rs",
+        "items": [
+          {
+            "id": "file:./tests/cli_svg_and_queries.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "cli_svg_and_queries",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/cli_svg_and_queries.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:cli_build_svg_when_graphviz_available:10",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "cli_build_svg_when_graphviz_available",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_svg_and_queries.rs",
+              "line_start": 10,
+              "line_end": 10
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:top:24",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "top",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/cli_svg_and_queries.rs",
+              "line_start": 24,
+              "line_end": 24
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:cli_query_module_centrality_trait_impls_and_cycles:39",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "cli_query_module_centrality_trait_impls_and_cycles",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_svg_and_queries.rs",
+              "line_start": 39,
+              "line_end": 39
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:use_x:58",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "use_x",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/cli_svg_and_queries.rs",
+              "line_start": 58,
+              "line_end": 58
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:cli_query_path_and_function_usage:95",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "cli_query_path_and_function_usage",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_svg_and_queries.rs",
+              "line_start": 95,
+              "line_end": 95
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:foo:106",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "foo",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/cli_svg_and_queries.rs",
+              "line_start": 106,
+              "line_end": 106
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:bar:109",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "bar",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/cli_svg_and_queries.rs",
+              "line_start": 109,
+              "line_end": 109
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:write_file:138",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "write_file",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_svg_and_queries.rs",
+              "line_start": 138,
+              "line_end": 138
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:X:53",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "X",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/cli_svg_and_queries.rs",
+              "line_start": 53,
+              "line_end": 53
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "assert_cmd::prelude::*",
+            "alias": null
+          },
+          {
+            "path": "predicates::prelude::*",
+            "alias": null
+          },
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "std::io::Write",
+            "alias": null
+          },
+          {
+            "path": "std::path::PathBuf",
+            "alias": null
+          },
+          {
+            "path": "std::process::Command",
+            "alias": null
+          },
+          {
+            "path": "tempfile::tempdir",
+            "alias": null
+          },
+          {
+            "path": "m1::X",
+            "alias": null
+          },
+          {
+            "path": "crate::T",
+            "alias": null
+          },
+          {
+            "path": "crate::m1::X",
+            "alias": null
+          },
+          {
+            "path": "a::foo",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 10,
+          "import_count": 11
+        }
+      }
+    },
+    "./tests/cli_cache_modes.rs": {
+      "meta": {
+        "mtime": 1755526379,
+        "len": 1377
+      },
+      "node": {
+        "path": "./tests/cli_cache_modes.rs",
+        "items": [
+          {
+            "id": "file:./tests/cli_cache_modes.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "cli_cache_modes",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/cli_cache_modes.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:cli_build_cache_modes_succeed:9",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "cli_build_cache_modes_succeed",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_cache_modes.rs",
+              "line_start": 9,
+              "line_end": 9
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:f:17",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "f",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/cli_cache_modes.rs",
+              "line_start": 17,
+              "line_end": 17
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:write_file:48",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "write_file",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_cache_modes.rs",
+              "line_start": 48,
+              "line_end": 48
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "assert_cmd::prelude::*",
+            "alias": null
+          },
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "std::io::Write",
+            "alias": null
+          },
+          {
+            "path": "std::path::PathBuf",
+            "alias": null
+          },
+          {
+            "path": "std::process::Command",
+            "alias": null
+          },
+          {
+            "path": "tempfile::tempdir",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 4,
+          "import_count": 6
+        }
+      }
+    },
+    "./tests/visualization_dot.rs": {
+      "meta": {
+        "mtime": 1755526959,
+        "len": 2570
+      },
+      "node": {
+        "path": "./tests/visualization_dot.rs",
+        "items": [
+          {
+            "id": "file:./tests/visualization_dot.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "visualization_dot",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/visualization_dot.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:dot_generator_clusters_and_flat_themes:8",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "dot_generator_clusters_and_flat_themes",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/visualization_dot.rs",
+              "line_start": 8,
+              "line_end": 8
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:foo:21",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "foo",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/visualization_dot.rs",
+              "line_start": 21,
+              "line_end": 21
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:write_file:65",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "write_file",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/visualization_dot.rs",
+              "line_start": 65,
+              "line_end": 65
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:S:17",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "S",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/visualization_dot.rs",
+              "line_start": 17,
+              "line_end": 17
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "assert_cmd::prelude::*",
+            "alias": null
+          },
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "std::io::Write",
+            "alias": null
+          },
+          {
+            "path": "std::process::Command",
+            "alias": null
+          },
+          {
+            "path": "tempfile::tempdir",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 5,
+          "import_count": 5
+        }
+      }
+    },
+    "./src/utils/mod.rs": {
+      "meta": {
+        "mtime": 1755522009,
+        "len": 6668
+      },
+      "node": {
+        "path": "./src/utils/mod.rs",
+        "items": [
+          {
+            "id": "file:./src/utils/mod.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "mod",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:render:4",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "render",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 4,
+              "line_end": 4
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:sep:10",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "sep",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 10,
+              "line_end": 10
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:line:15",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "line",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 15,
+              "line_end": 15
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:default_config_path:74",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "default_config_path",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 74,
+              "line_end": 74
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:load_config_at:78",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "load_config_at",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 78,
+              "line_end": 78
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:load_config_near:83",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "load_config_near",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 83,
+              "line_end": 83
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:cache_path:120",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "cache_path",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 120,
+              "line_end": 120
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:load_cache:124",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "load_cache",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 124,
+              "line_end": 124
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:save_cache:130",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "save_cache",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 130,
+              "line_end": 130
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:clear_cache:137",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "clear_cache",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 137,
+              "line_end": 137
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:rust_files_with_options:146",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "rust_files_with_options",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 146,
+              "line_end": 146
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:rust_files:188",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "rust_files",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 188,
+              "line_end": 188
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:DotConfig:48",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "DotConfig",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 48,
+              "line_end": 48
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:SvgConfig:58",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "SvgConfig",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 58,
+              "line_end": 58
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:QueryConfig:63",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "QueryConfig",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 63,
+              "line_end": 63
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:Config:68",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "Config",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 68,
+              "line_end": 68
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:CacheEntryMeta:98",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "CacheEntryMeta",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 98,
+              "line_end": 98
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:CacheEntry:104",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "CacheEntry",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 104,
+              "line_end": 104
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:Cache:110",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "Cache",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 110,
+              "line_end": 110
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:CacheMode:115",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "CacheMode",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/utils/mod.rs",
+              "line_start": 115,
+              "line_end": 115
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "serde::Deserialize",
+            "alias": null
+          },
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "std::collections::HashMap",
+            "alias": null
+          },
+          {
+            "path": "crate::graph::FileNode",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 21,
+          "import_count": 4
+        }
+      }
+    },
+    "./tests/cli_more_coverage.rs": {
+      "meta": {
+        "mtime": 1755536474,
+        "len": 4988
+      },
+      "node": {
+        "path": "./tests/cli_more_coverage.rs",
+        "items": [
+          {
+            "id": "file:./tests/cli_more_coverage.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "cli_more_coverage",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/cli_more_coverage.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:write_file:8",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "write_file",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_more_coverage.rs",
+              "line_start": 8,
+              "line_end": 8
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:build_uses_config_overrides_and_save:16",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "build_uses_config_overrides_and_save",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_more_coverage.rs",
+              "line_start": 16,
+              "line_end": 16
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:queries_without_graph_build_from_path_and_text_formats:75",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "queries_without_graph_build_from_path_and_text_formats",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_more_coverage.rs",
+              "line_start": 75,
+              "line_end": 75
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:cycles_text_output_branch:131",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "cycles_text_output_branch",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_more_coverage.rs",
+              "line_start": 131,
+              "line_end": 131
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "assert_cmd::prelude::*",
+            "alias": null
+          },
+          {
+            "path": "predicates::prelude::*",
+            "alias": null
+          },
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "std::io::Write",
+            "alias": null
+          },
+          {
+            "path": "std::path::PathBuf",
+            "alias": null
+          },
+          {
+            "path": "std::process::Command",
+            "alias": null
+          },
+          {
+            "path": "tempfile::tempdir",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 5,
+          "import_count": 7
+        }
+      }
+    },
+    "./tests/query_additional.rs": {
+      "meta": {
+        "mtime": 1755535372,
+        "len": 3707
+      },
+      "node": {
+        "path": "./tests/query_additional.rs",
+        "items": [
+          {
+            "id": "file:./tests/query_additional.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "query_additional",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/query_additional.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:make_fn:4",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "make_fn",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/query_additional.rs",
+              "line_start": 4,
+              "line_end": 4
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:graph_chain:15",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "graph_chain",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/query_additional.rs",
+              "line_start": 15,
+              "line_end": 15
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:shortest_path_found_and_absent:42",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "shortest_path_found_and_absent",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/query_additional.rs",
+              "line_start": 42,
+              "line_end": 42
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:hubs_query_metrics_and_sorting:55",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "hubs_query_metrics_and_sorting",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/query_additional.rs",
+              "line_start": 55,
+              "line_end": 55
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:module_centrality_inter_module_edges:71",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "module_centrality_inter_module_edges",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/query_additional.rs",
+              "line_start": 71,
+              "line_end": 71
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "std::path::PathBuf",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 6,
+          "import_count": 1
+        }
+      }
+    },
+    "./tests/cache_modes.rs": {
+      "meta": {
+        "mtime": 1755519338,
+        "len": 3918
+      },
+      "node": {
+        "path": "./tests/cache_modes.rs",
+        "items": [
+          {
+            "id": "file:./tests/cache_modes.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "cache_modes",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/cache_modes.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:write_file:8",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "write_file",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cache_modes.rs",
+              "line_start": 8,
+              "line_end": 8
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:read_cache_meta_len:15",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "read_cache_meta_len",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cache_modes.rs",
+              "line_start": 15,
+              "line_end": 15
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:count_cache_entries:22",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "count_cache_entries",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cache_modes.rs",
+              "line_start": 22,
+              "line_end": 22
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:make_proj:26",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "make_proj",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cache_modes.rs",
+              "line_start": 26,
+              "line_end": 26
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:cache_mode_use_detects_changes_and_prunes_removed:36",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "cache_mode_use_detects_changes_and_prunes_removed",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cache_modes.rs",
+              "line_start": 36,
+              "line_end": 36
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:cache_mode_ignore_rebuilds_without_reuse:65",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "cache_mode_ignore_rebuilds_without_reuse",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cache_modes.rs",
+              "line_start": 65,
+              "line_end": 65
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:cache_mode_rebuild_clears_cache_file:88",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "cache_mode_rebuild_clears_cache_file",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cache_modes.rs",
+              "line_start": 88,
+              "line_end": 88
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "knowledge_rs::graph::KnowledgeGraph",
+            "alias": null
+          },
+          {
+            "path": "std::io::Write",
+            "alias": null
+          },
+          {
+            "path": "std::thread",
+            "alias": null
+          },
+          {
+            "path": "std::time::Duration",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 8,
+          "import_count": 4
+        }
+      }
+    },
+    "./src/errors.rs": {
+      "meta": {
+        "mtime": 1755506821,
+        "len": 648
+      },
+      "node": {
+        "path": "./src/errors.rs",
+        "items": [
+          {
+            "id": "file:./src/errors.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "errors",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./src/errors.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:ParseError:5",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "ParseError",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/errors.rs",
+              "line_start": 5,
+              "line_end": 5
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:KnowledgeGraphError:15",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "KnowledgeGraphError",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/errors.rs",
+              "line_start": 15,
+              "line_end": 15
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "std::path::PathBuf",
+            "alias": null
+          },
+          {
+            "path": "thiserror::Error",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 3,
+          "import_count": 2
+        }
+      }
+    },
+    "./tests/integration_queries.rs": {
+      "meta": {
+        "mtime": 1755525077,
+        "len": 2014
+      },
+      "node": {
+        "path": "./tests/integration_queries.rs",
+        "items": [
+          {
+            "id": "file:./tests/integration_queries.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "integration_queries",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/integration_queries.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:make_temp_project:6",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "make_temp_project",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/integration_queries.rs",
+              "line_start": 6,
+              "line_end": 6
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:integration_connected_files:20",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "integration_connected_files",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/integration_queries.rs",
+              "line_start": 20,
+              "line_end": 20
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:root:26",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "root",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/integration_queries.rs",
+              "line_start": 26,
+              "line_end": 26
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:foo:29",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "foo",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/integration_queries.rs",
+              "line_start": 29,
+              "line_end": 29
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:bar:32",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "bar",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/integration_queries.rs",
+              "line_start": 32,
+              "line_end": 32
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:integration_cycle_detection_simple:45",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "integration_cycle_detection_simple",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/integration_queries.rs",
+              "line_start": 45,
+              "line_end": 45
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:foo:52",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "foo",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/integration_queries.rs",
+              "line_start": 52,
+              "line_end": 52
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:bar:55",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "bar",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/integration_queries.rs",
+              "line_start": 55,
+              "line_end": 55
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "std::path::PathBuf",
+            "alias": null
+          },
+          {
+            "path": "knowledge_rs::graph::KnowledgeGraph",
+            "alias": null
+          },
+          {
+            "path": "crate::a::foo",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 9,
+          "import_count": 4
+        }
+      }
+    },
+    "./tests/cli_outputs.rs": {
+      "meta": {
+        "mtime": 1755524974,
+        "len": 1743
+      },
+      "node": {
+        "path": "./tests/cli_outputs.rs",
+        "items": [
+          {
+            "id": "file:./tests/cli_outputs.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "cli_outputs",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/cli_outputs.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:cli_build_produces_dot_and_json_and_hubs_query_works:10",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "cli_build_produces_dot_and_json_and_hubs_query_works",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_outputs.rs",
+              "line_start": 10,
+              "line_end": 10
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:top:19",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "top",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/cli_outputs.rs",
+              "line_start": 19,
+              "line_end": 19
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:child:23",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "child",
+            "visibility": "Public",
+            "location": {
+              "file": "./tests/cli_outputs.rs",
+              "line_start": 23,
+              "line_end": 23
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:write_file:51",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "write_file",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/cli_outputs.rs",
+              "line_start": 51,
+              "line_end": 51
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "assert_cmd::prelude::*",
+            "alias": null
+          },
+          {
+            "path": "predicates::prelude::*",
+            "alias": null
+          },
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "std::io::Write",
+            "alias": null
+          },
+          {
+            "path": "std::path::PathBuf",
+            "alias": null
+          },
+          {
+            "path": "std::process::Command",
+            "alias": null
+          },
+          {
+            "path": "tempfile::tempdir",
+            "alias": null
+          },
+          {
+            "path": "crate::top",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 5,
+          "import_count": 8
+        }
+      }
+    },
+    "./tests/config_loading.rs": {
+      "meta": {
+        "mtime": 1755519640,
+        "len": 1785
+      },
+      "node": {
+        "path": "./tests/config_loading.rs",
+        "items": [
+          {
+            "id": "file:./tests/config_loading.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "config_loading",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/config_loading.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:write:4",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "write",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/config_loading.rs",
+              "line_start": 4,
+              "line_end": 4
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:parses_full_config_file:11",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "parses_full_config_file",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/config_loading.rs",
+              "line_start": 11,
+              "line_end": 11
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:load_config_near_looks_for_default_name:44",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "load_config_near_looks_for_default_name",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/config_loading.rs",
+              "line_start": 44,
+              "line_end": 44
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "std::path::Path",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 4,
+          "import_count": 2
+        }
+      }
+    },
+    "./src/graph/mod.rs": {
+      "meta": {
+        "mtime": 1755545986,
+        "len": 31222
+      },
+      "node": {
+        "path": "./src/graph/mod.rs",
+        "items": [
+          {
+            "id": "file:./src/graph/mod.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "mod",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:build_from_directory_with_cache_opts:115",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "build_from_directory_with_cache_opts",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 115,
+              "line_end": 115
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:get_module_parent:270",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "get_module_parent",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 270,
+              "line_end": 270
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:get_module_children:273",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "get_module_children",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 273,
+              "line_end": 273
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:build_from_directory_with_cache:281",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "build_from_directory_with_cache",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 281,
+              "line_end": 281
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:build_from_directory:289",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "build_from_directory",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 289,
+              "line_end": 289
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:build_from_directory_opts:297",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "build_from_directory_opts",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 297,
+              "line_end": 297
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:save_json:300",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "save_json",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 300,
+              "line_end": 300
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:load_json:308",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "load_json",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 308,
+              "line_end": 308
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:analyze_relationships:321",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "analyze_relationships",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 321,
+              "line_end": 321
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:analyze_module_hierarchy:329",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "analyze_module_hierarchy",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 329,
+              "line_end": 329
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:analyze_import_uses:393",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "analyze_import_uses",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 393,
+              "line_end": 393
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:analyze_calls_heuristic:424",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "analyze_calls_heuristic",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 424,
+              "line_end": 424
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:module_hierarchy_basic:525",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "module_hierarchy_basic",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 525,
+              "line_end": 525
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:import_uses_edges_item_vs_module:561",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "import_uses_edges_item_vs_module",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 561,
+              "line_end": 561
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:calls_heuristic_and_path_and_macro_exclusion:636",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "calls_heuristic_and_path_and_macro_exclusion",
+            "visibility": "Private",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 636,
+              "line_end": 636
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:ItemId:10",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "ItemId",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 10,
+              "line_end": 10
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:Location:13",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "Location",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 13,
+              "line_end": 13
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:Item:43",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "Item",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 43,
+              "line_end": 43
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:Import:53",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "Import",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 53,
+              "line_end": 53
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:Relationship:68",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "Relationship",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 68,
+              "line_end": 68
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:FileMetrics:77",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "FileMetrics",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 77,
+              "line_end": 77
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:FileNode:83",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "FileNode",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 83,
+              "line_end": 83
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:GraphMetadata:91",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "GraphMetadata",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 91,
+              "line_end": 91
+            },
+            "attributes": []
+          },
+          {
+            "id": "struct:KnowledgeGraph:96",
+            "item_type": {
+              "Struct": {
+                "is_tuple": false
+              }
+            },
+            "name": "KnowledgeGraph",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 96,
+              "line_end": 96
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:ItemType:20",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "ItemType",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 20,
+              "line_end": 20
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:Visibility:34",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "Visibility",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 34,
+              "line_end": 34
+            },
+            "attributes": []
+          },
+          {
+            "id": "enum:RelationshipType:59",
+            "item_type": {
+              "Enum": {
+                "variant_count": 0
+              }
+            },
+            "name": "RelationshipType",
+            "visibility": "Public",
+            "location": {
+              "file": "./src/graph/mod.rs",
+              "line_start": 59,
+              "line_end": 59
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "std::collections::HashMap",
+            "alias": null
+          },
+          {
+            "path": "std::path::PathBuf",
+            "alias": null
+          },
+          {
+            "path": "regex::Regex",
+            "alias": null
+          },
+          {
+            "path": "rayon::prelude::*",
+            "alias": null
+          },
+          {
+            "path": "crate::utils::cache",
+            "alias": null
+          },
+          {
+            "path": "crate::parser::RustParser",
+            "alias": null
+          },
+          {
+            "path": "crate::utils::file_walker",
+            "alias": null
+          },
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "crate::errors::KnowledgeGraphError",
+            "alias": null
+          },
+          {
+            "path": "std::collections::HashSet",
+            "alias": null
+          },
+          {
+            "path": "super::*",
+            "alias": null
+          },
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "tempfile::tempdir",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 28,
+          "import_count": 13
+        }
+      }
+    },
+    "./examples/basic_build.rs": {
+      "meta": {
+        "mtime": 1755523313,
+        "len": 472
+      },
+      "node": {
+        "path": "./examples/basic_build.rs",
+        "items": [
+          {
+            "id": "file:./examples/basic_build.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "basic_build",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./examples/basic_build.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:main:3",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "main",
+            "visibility": "Private",
+            "location": {
+              "file": "./examples/basic_build.rs",
+              "line_start": 3,
+              "line_end": 3
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "knowledge_rs::graph::KnowledgeGraph",
+            "alias": null
+          },
+          {
+            "path": "knowledge_rs::utils::cache::CacheMode",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 2,
+          "import_count": 2
+        }
+      }
+    },
+    "./src/lib.rs": {
+      "meta": {
+        "mtime": 1755537133,
+        "len": 1345
+      },
+      "node": {
+        "path": "./src/lib.rs",
+        "items": [
+          {
+            "id": "file:./src/lib.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "lib",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./src/lib.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [],
+        "metrics": {
+          "item_count": 1,
+          "import_count": 0
+        }
+      }
+    },
+    "./tests/ignore_patterns.rs": {
+      "meta": {
+        "mtime": 1755539304,
+        "len": 3143
+      },
+      "node": {
+        "path": "./tests/ignore_patterns.rs",
+        "items": [
+          {
+            "id": "file:./tests/ignore_patterns.rs",
+            "item_type": {
+              "Module": {
+                "is_inline": false
+              }
+            },
+            "name": "ignore_patterns",
+            "visibility": "PubCrate",
+            "location": {
+              "file": "./tests/ignore_patterns.rs",
+              "line_start": 1,
+              "line_end": 1
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:make_temp_project:5",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "make_temp_project",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/ignore_patterns.rs",
+              "line_start": 5,
+              "line_end": 5
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:multiple_ignore_files_with_negations:23",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "multiple_ignore_files_with_negations",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/ignore_patterns.rs",
+              "line_start": 23,
+              "line_end": 23
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:ignores_files_listed_in_gitignore:41",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "ignores_files_listed_in_gitignore",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/ignore_patterns.rs",
+              "line_start": 41,
+              "line_end": 41
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:nested_ignore_file_in_subdir:59",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "nested_ignore_file_in_subdir",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/ignore_patterns.rs",
+              "line_start": 59,
+              "line_end": 59
+            },
+            "attributes": []
+          },
+          {
+            "id": "fn:gitignore_negation_pattern:74",
+            "item_type": {
+              "Function": {
+                "is_async": false,
+                "is_const": false
+              }
+            },
+            "name": "gitignore_negation_pattern",
+            "visibility": "Private",
+            "location": {
+              "file": "./tests/ignore_patterns.rs",
+              "line_start": 74,
+              "line_end": 74
+            },
+            "attributes": []
+          }
+        ],
+        "imports": [
+          {
+            "path": "std::fs",
+            "alias": null
+          },
+          {
+            "path": "std::path::PathBuf",
+            "alias": null
+          },
+          {
+            "path": "knowledge_rs::graph::KnowledgeGraph",
+            "alias": null
+          }
+        ],
+        "metrics": {
+          "item_count": 6,
+          "import_count": 3
+        }
+      }
+    }
+  }
+}

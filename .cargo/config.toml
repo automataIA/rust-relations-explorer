@@ -1,0 +1,8 @@
+[alias]
+clippy = "clippy -D warnings"
+fmt = "fmt"
+check = "check"
+
+[target."cfg(all())"]
+# Keep builds deterministic and fast for dev
+rustflags = ["-C", "debuginfo=2"]
