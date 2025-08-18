@@ -11,7 +11,10 @@ use std::path::PathBuf;
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 3 {
-        eprintln!("Usage: {} <root> <files>", args.get(0).map(String::as_str).unwrap_or("generate_synthetic"));
+        eprintln!(
+            "Usage: {} <root> <files>",
+            args.first().map(String::as_str).unwrap_or("generate_synthetic")
+        );
         std::process::exit(2);
     }
     let root = PathBuf::from(&args[1]);

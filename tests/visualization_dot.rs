@@ -24,14 +24,14 @@ fn dot_generator_clusters_and_flat_themes() {
     // Build a graph JSON then load it via CLI to ensure consistency
     let graph_json = root.join("graph.json");
     let mut build = Command::cargo_bin("knowledge-rs").unwrap();
-    build.arg("build").arg("--path").arg(&root).arg("--json").arg(&graph_json);
+    build.arg("build").arg("--path").arg(root).arg("--json").arg(&graph_json);
     build.assert().success();
 
     // Use the CLI to emit DOT with clusters + legend + dark theme
-    let dot_dark = root.join("dark.dot");
+    let dot_dark = graph_json.parent().unwrap().join("dark.dot");
     let mut build_dot_dark = Command::cargo_bin("knowledge-rs").unwrap();
     build_dot_dark
-        .arg("build").arg("--path").arg(&root)
+        .arg("build").arg("--path").arg(graph_json.parent().unwrap())
         .arg("--dot").arg(&dot_dark)
         .arg("--dot-clusters").arg("on")
         .arg("--dot-legend").arg("on")
@@ -49,10 +49,10 @@ fn dot_generator_clusters_and_flat_themes() {
     assert!(dot_dark_str.contains("label=\"Legend\""));  // legend enabled
 
     // Emit DOT without clusters, light theme defaults
-    let dot_light = root.join("light.dot");
+    let dot_light = graph_json.parent().unwrap().join("light.dot");
     let mut build_dot_light = Command::cargo_bin("knowledge-rs").unwrap();
     build_dot_light
-        .arg("build").arg("--path").arg(&root)
+        .arg("build").arg("--path").arg(graph_json.parent().unwrap())
         .arg("--dot").arg(&dot_light)
         .arg("--dot-clusters").arg("off")
         .arg("--dot-legend").arg("off");

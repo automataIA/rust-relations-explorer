@@ -1,14 +1,15 @@
 use knowledge_rs::graph::{KnowledgeGraph, FileNode, Item, ItemType, Relationship, RelationshipType, Visibility, Location, ItemId};
 use knowledge_rs::query::{ShortestPathQuery, HubsQuery, ModuleCentralityQuery, CentralityMetric, Query};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
+use std::sync::Arc;
 
-fn make_fn(path: &PathBuf, name: &str) -> Item {
+fn make_fn(path: &Path, name: &str) -> Item {
     Item {
         id: ItemId(format!("fn:{}:{}", name, path.display())),
         item_type: ItemType::Function { is_async: false, is_const: false },
-        name: name.to_string(),
+        name: Arc::from(name),
         visibility: Visibility::Public,
-        location: Location { file: path.clone(), line_start: 1, line_end: 1 },
+        location: Location { file: path.to_path_buf(), line_start: 1, line_end: 1 },
         attributes: vec![],
     }
 }

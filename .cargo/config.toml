@@ -1,6 +1,6 @@
 [alias]
-clippy = "clippy -D warnings"
-fmt = "fmt"
+lint = "clippy -- -W clippy::all -W clippy::pedantic -D warnings"
+fmt = "fmt" 
 check = "check"
 
 [target."cfg(all())"]

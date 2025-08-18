@@ -1,38 +1,45 @@
 // Utilities module placeholder per design
 pub mod table {
+    // Helper to render a separator line
+    fn sep(widths: &[usize]) -> String {
+        let mut s = String::from("+");
+        for w in widths { s.push_str(&"-".repeat(w + 2)); s.push('+'); }
+        s
+    }
+
+    // Helper to render a row line
+    fn line(cells: &[String], widths: &[usize]) -> String {
+        let mut s = String::from("|");
+        for (i, cell) in cells.iter().enumerate() {
+            let w = widths[i];
+            s.push(' ');
+            s.push_str(cell);
+            if cell.len() < w { s.push_str(&" ".repeat(w - cell.len())); }
+            s.push(' ');
+            s.push('|');
+        }
+        s
+    }
+
     // Render a simple ASCII table given headers and rows
     pub fn render(headers: &[&str], rows: &[Vec<String>]) -> String {
         let cols = headers.len();
         let mut widths: Vec<usize> = headers.iter().map(|h| h.len()).collect();
         for row in rows {
-            for c in 0..cols { widths[c] = widths[c].max(row.get(c).map(|s| s.len()).unwrap_or(0)); }
-        }
-        fn sep(widths: &[usize]) -> String {
-            let mut s = String::from("+");
-            for w in widths { s.push_str(&"-".repeat(w + 2)); s.push('+'); }
-            s
-        }
-        fn line(cells: Vec<String>, widths: &[usize]) -> String {
-            let mut s = String::from("|");
-            for (i, cell) in cells.into_iter().enumerate() {
-                let w = widths[i];
-                s.push(' ');
-                s.push_str(&cell);
-                if cell.len() < w { s.push_str(&" ".repeat(w - cell.len())); }
-                s.push(' ');
-                s.push('|');
+            for (c, w) in widths.iter_mut().enumerate().take(cols) {
+                *w = (*w).max(row.get(c).map_or(0, String::len));
             }
-            s
         }
 
         let mut out = String::new();
         out.push_str(&sep(&widths)); out.push('\n');
-        out.push_str(&line(headers.iter().map(|s| s.to_string()).collect(), &widths)); out.push('\n');
+        let header_cells: Vec<String> = headers.iter().map(|s| (*s).to_string()).collect();
+        out.push_str(&line(&header_cells, &widths)); out.push('\n');
         out.push_str(&sep(&widths)); out.push('\n');
         for row in rows {
             let mut cells = Vec::with_capacity(cols);
             for i in 0..cols { cells.push(row.get(i).cloned().unwrap_or_default()); }
-            out.push_str(&line(cells, &widths)); out.push('\n');
+            out.push_str(&line(&cells, &widths)); out.push('\n');
         }
         out.push_str(&sep(&widths));
         out
@@ -76,11 +83,13 @@ pub mod config {
         root.join("knowledge-rs.toml")
     }
 
+    #[must_use]
     pub fn load_config_at(path: &Path) -> Option<Config> {
         let data = fs::read_to_string(path).ok()?;
         toml::from_str::<Config>(&data).ok()
     }
 
+    #[must_use]
     pub fn load_config_near(root: &Path) -> Option<Config> {
         let p = default_config_path(root);
         if p.exists() { load_config_at(&p) } else { None }
@@ -122,6 +131,7 @@ pub mod cache {
         root.join(".knowledge_cache.json")
     }
 
+    #[must_use]
     pub fn load_cache(root: &Path) -> Option<Cache> {
         let path = cache_path(root);
         let data = std::fs::read_to_string(path).ok()?;
@@ -143,6 +153,7 @@ pub mod cache {
 
 pub mod file_walker {
     /// Discover Rust source files under `root`, with an option to bypass ignore rules.
+    #[must_use]
     pub fn rust_files_with_options(root: &str, no_ignore: bool) -> Vec<String> {
         let mut out = Vec::new();
         let mut walker = ignore::WalkBuilder::new(root);
@@ -166,17 +177,15 @@ pub mod file_walker {
             if ign.exists() { let _ = gi_builder.add(ign); }
             gi_builder.build().ok()
         };
-        for result in walker.build() {
-            if let Ok(entry) = result {
-                if entry.file_type().map(|t| t.is_file()).unwrap_or(false) {
-                    // Explicit filter using matcher (in addition to WalkBuilder's own filtering)
-                    if let Some(m) = &matcher {
-                        if m.matched(entry.path(), false).is_ignore() { continue; }
-                    }
-                    if entry.path().extension() == Some(std::ffi::OsStr::new("rs")) {
-                        if let Some(s) = entry.path().to_str() {
-                            out.push(s.to_string());
-                        }
+        for entry in walker.build().flatten() {
+            if entry.file_type().is_some_and(|t| t.is_file()) {
+                // Explicit filter using matcher (in addition to WalkBuilder's own filtering)
+                if let Some(m) = &matcher {
+                    if m.matched(entry.path(), false).is_ignore() { continue; }
+                }
+                if entry.path().extension() == Some(std::ffi::OsStr::new("rs")) {
+                    if let Some(s) = entry.path().to_str() {
+                        out.push(s.to_string());
                     }
                 }
             }
@@ -184,7 +193,8 @@ pub mod file_walker {
         out
     }
 
-    /// Backward-compatible helper that reads env var and delegates to rust_files_with_options.
+    /// Backward-compatible helper that reads env var and delegates to `rust_files_with_options`.
+    #[must_use]
     pub fn rust_files(root: &str) -> Vec<String> {
         let no_ignore = std::env::var("KNOWLEDGE_RS_NO_IGNORE")
             .map(|v| v == "1" || v.eq_ignore_ascii_case("true"))

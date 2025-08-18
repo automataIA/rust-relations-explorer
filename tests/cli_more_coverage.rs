@@ -47,7 +47,7 @@ default_format = "json"
     // run build with config and outputs and save
     let mut cmd = Command::cargo_bin("knowledge-rs").unwrap();
     cmd.arg("build")
-        .arg("--path").arg(&root)
+        .arg("--path").arg(root)
         .arg("--config").arg(&cfg_path)
         .arg("--dot").arg(&dot_out)
         .arg("--json").arg(&json_out)
@@ -85,7 +85,7 @@ fn queries_without_graph_build_from_path_and_text_formats() {
     // connected-files text output via table (no --graph)
     let mut cf = Command::cargo_bin("knowledge-rs").unwrap();
     cf.arg("query").arg("connected-files")
-        .arg("--path").arg(&root)
+        .arg("--path").arg(root)
         .arg("--file").arg(src.join("a.rs"))
         .arg("--format").arg("text");
     cf.assert().success().stdout(predicate::str::contains("#").and(predicate::str::contains("Path")));
@@ -93,7 +93,7 @@ fn queries_without_graph_build_from_path_and_text_formats() {
     // function-usage callees branch (no --graph)
     let mut fu = Command::cargo_bin("knowledge-rs").unwrap();
     fu.arg("query").arg("function-usage")
-        .arg("--path").arg(&root)
+        .arg("--path").arg(root)
         .arg("--function").arg("bar")
         .arg("--direction").arg("callees")
         .arg("--format").arg("text");
@@ -102,7 +102,7 @@ fn queries_without_graph_build_from_path_and_text_formats() {
     // hubs with metric in and text output
     let mut hubs = Command::cargo_bin("knowledge-rs").unwrap();
     hubs.arg("query").arg("hubs")
-        .arg("--path").arg(&root)
+        .arg("--path").arg(root)
         .arg("--metric").arg("in")
         .arg("--top").arg("5")
         .arg("--format").arg("text");
@@ -111,7 +111,7 @@ fn queries_without_graph_build_from_path_and_text_formats() {
     // module-centrality with metric out and text output
     let mut mc = Command::cargo_bin("knowledge-rs").unwrap();
     mc.arg("query").arg("module-centrality")
-        .arg("--path").arg(&root)
+        .arg("--path").arg(root)
         .arg("--metric").arg("out")
         .arg("--top").arg("5")
         .arg("--format").arg("text");
@@ -120,7 +120,7 @@ fn queries_without_graph_build_from_path_and_text_formats() {
     // path query no path branch should print <no path>
     let mut pathq = Command::cargo_bin("knowledge-rs").unwrap();
     pathq.arg("query").arg("path")
-        .arg("--path").arg(&root)
+        .arg("--path").arg(root)
         .arg("--from").arg(src.join("a.rs"))
         .arg("--to").arg(src.join("b.rs"))
         .arg("--format").arg("text");
@@ -141,7 +141,7 @@ fn cycles_text_output_branch() {
 
     let mut cy = Command::cargo_bin("knowledge-rs").unwrap();
     cy.arg("query").arg("cycles")
-        .arg("--path").arg(&root)
+        .arg("--path").arg(root)
         .arg("--format").arg("text");
     cy.assert().success();
 }

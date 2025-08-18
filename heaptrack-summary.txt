@@ -1,0 +1,1726 @@
+reading file "heaptrack.knowledge-rs.469342.gz" - please wait, this might take some time...
+Debuggee command was: target/release/knowledge-rs -- build --path /tmp/kr_synth_1k --json /tmp/kr_graph1k.json --no-cache
+finished reading file, now analyzing data:
+
+MOST CALLS TO ALLOCATION FUNCTIONS
+146 calls to allocation functions with 65.22K peak consumption from
+_ZN5alloc7raw_vec11finish_grow17hf9278f5a84e4459eE.llvm.6234074619728850883
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+2 calls with 256B peak consumption from:
+    alloc::raw_vec::RawVec$LT$T$C$A$GT$::grow_one::h8ba331dafcbc2861
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 4.80K peak consumption from:
+    alloc::raw_vec::RawVec$LT$T$C$A$GT$::grow_one::h30bc3cc517b468e7
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::arg_internal::h0a4c77f3e9c6074f
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 0B peak consumption from:
+    alloc::raw_vec::RawVec$LT$T$C$A$GT$::grow_one::h8ba331dafcbc2861
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::arg_group::ArgGroup::args::h0528c652c7c72087
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 128B peak consumption from:
+    alloc::raw_vec::RawVec$LT$T$C$A$GT$::grow_one::h8ba331dafcbc2861
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::arg_group::ArgGroup::args::h0528c652c7c72087
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 384B peak consumption from:
+    alloc::raw_vec::RawVec$LT$T$C$A$GT$::grow_one::hc1d48bca0d5b9cbe
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+  and 140 from 140 other places
+
+62 calls to allocation functions with 976B peak consumption from
+_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..spec_from_iter..SpecFromIter$LT$T$C$I$GT$$GT$::from_iter::h2656a484517f7720
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+  and 57 from 57 other places
+
+28 calls to allocation functions with 432B peak consumption from
+_$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+  and 23 from 23 other places
+
+14 calls to allocation functions with 336B peak consumption from
+clap_builder::builder::arg::Arg::value_parser::h5a6358dbf50a80f3
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 24B peak consumption from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 24B peak consumption from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 24B peak consumption from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 24B peak consumption from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 24B peak consumption from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+  and 9 from 9 other places
+
+14 calls to allocation functions with 2.02K peak consumption from
+_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..spec_from_iter..SpecFromIter$LT$T$C$I$GT$$GT$::from_iter::h72be66af6744cfb1
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 144B peak consumption from:
+    clap_builder::builder::arg::Arg::value_parser::h5a6358dbf50a80f3
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 144B peak consumption from:
+    clap_builder::builder::arg::Arg::value_parser::h5a6358dbf50a80f3
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 144B peak consumption from:
+    clap_builder::builder::arg::Arg::value_parser::h5a6358dbf50a80f3
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 144B peak consumption from:
+    clap_builder::builder::arg::Arg::value_parser::h5a6358dbf50a80f3
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 144B peak consumption from:
+    clap_builder::builder::arg::Arg::value_parser::h5a6358dbf50a80f3
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+  and 9 from 9 other places
+
+11 calls to allocation functions with 176B peak consumption from
+_$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 16B peak consumption from:
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+  and 6 from 6 other places
+
+10 calls to allocation functions with 50B peak consumption from
+_ZN3std4sync6poison4once4Once15call_once_force28_$u7b$$u7b$closure$u7d$$u7d$17h1c6129fe610a60ccE.llvm.16446639236271493350
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 5B peak consumption from:
+    std::sys::sync::once::futex::Once::call::hdd1957641c9bc0ce
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sync::once_lock::OnceLock$LT$T$GT$::initialize::h25a922395704b5f9
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 5B peak consumption from:
+    std::sys::sync::once::futex::Once::call::hdd1957641c9bc0ce
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sync::once_lock::OnceLock$LT$T$GT$::initialize::h929390849cf90b43
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 5B peak consumption from:
+    std::sys::sync::once::futex::Once::call::hdd1957641c9bc0ce
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sync::once_lock::OnceLock$LT$T$GT$::initialize::h0cdf54d4dc2f6eba
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 5B peak consumption from:
+    std::sys::sync::once::futex::Once::call::hdd1957641c9bc0ce
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sync::once_lock::OnceLock$LT$T$GT$::initialize::h9c4524da529b840f
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 5B peak consumption from:
+    std::sys::sync::once::futex::Once::call::hdd1957641c9bc0ce
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sync::once_lock::OnceLock$LT$T$GT$::initialize::h6fe67861728cead2
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+  and 5 from 5 other places
+
+9 calls to allocation functions with 92B peak consumption from
+std::env::args_os::h3d68537b00a04164
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+8 calls with 92B peak consumption from:
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 0B peak consumption from:
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+
+3 calls to allocation functions with 72B peak consumption from
+clap_builder::builder::arg::Arg::value_parser::h7e2b0ec554b998c1
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 24B peak consumption from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 24B peak consumption from:
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 24B peak consumption from:
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+
+3 calls to allocation functions with 648B peak consumption from
+_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..spec_from_iter..SpecFromIter$LT$T$C$I$GT$$GT$::from_iter::h228b70d7b36af3c6
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 216B peak consumption from:
+    clap_builder::builder::arg::Arg::value_parser::h7e2b0ec554b998c1
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 216B peak consumption from:
+    clap_builder::builder::arg::Arg::value_parser::h7e2b0ec554b998c1
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 calls with 216B peak consumption from:
+    clap_builder::builder::arg::Arg::value_parser::h7e2b0ec554b998c1
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+
+
+PEAK MEMORY CONSUMERS
+73.73K peak memory consumed over 1 calls from
+0x7ffa8363a38e
+  in /lib/x86_64-linux-gnu/libstdc++.so.6
+73.73K consumed over 1 calls from:
+    0x7ffa83a7d71e
+      in /lib64/ld-linux-x86-64.so.2
+    0x7ffa83a7d823
+      in /lib64/ld-linux-x86-64.so.2
+    0x7ffa83a9759f
+      in /lib64/ld-linux-x86-64.so.2
+
+65.22K peak memory consumed over 146 calls from
+_ZN5alloc7raw_vec11finish_grow17hf9278f5a84e4459eE.llvm.6234074619728850883
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+9.60K consumed over 1 calls from:
+    alloc::raw_vec::RawVec$LT$T$C$A$GT$::grow_one::h30bc3cc517b468e7
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::arg_internal::h0a4c77f3e9c6074f
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+5.70K consumed over 1 calls from:
+    alloc::raw_vec::RawVec$LT$T$C$A$GT$::grow_one::hd5a4084fd311f6ab
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::subcommand_internal::h0baf704768e8cc55
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+4.80K consumed over 1 calls from:
+    alloc::raw_vec::RawVec$LT$T$C$A$GT$::grow_one::h30bc3cc517b468e7
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::arg_internal::h0a4c77f3e9c6074f
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+4.80K consumed over 1 calls from:
+    alloc::raw_vec::RawVec$LT$T$C$A$GT$::grow_one::h30bc3cc517b468e7
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::arg_internal::h0a4c77f3e9c6074f
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+4.80K consumed over 1 calls from:
+    alloc::raw_vec::RawVec$LT$T$C$A$GT$::grow_one::h30bc3cc517b468e7
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::arg_internal::h0a4c77f3e9c6074f
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+  and 35.53K from 140 other places
+
+2.02K peak memory consumed over 14 calls from
+_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..spec_from_iter..SpecFromIter$LT$T$C$I$GT$$GT$::from_iter::h72be66af6744cfb1
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+144B consumed over 1 calls from:
+    clap_builder::builder::arg::Arg::value_parser::h5a6358dbf50a80f3
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+144B consumed over 1 calls from:
+    clap_builder::builder::arg::Arg::value_parser::h5a6358dbf50a80f3
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+144B consumed over 1 calls from:
+    clap_builder::builder::arg::Arg::value_parser::h5a6358dbf50a80f3
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+144B consumed over 1 calls from:
+    clap_builder::builder::arg::Arg::value_parser::h5a6358dbf50a80f3
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+144B consumed over 1 calls from:
+    clap_builder::builder::arg::Arg::value_parser::h5a6358dbf50a80f3
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+  and 1.30K from 9 other places
+
+976B peak memory consumed over 62 calls from
+_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..spec_from_iter..SpecFromIter$LT$T$C$I$GT$$GT$::from_iter::h2656a484517f7720
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+16B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+16B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+16B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+16B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+16B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+  and 896B from 57 other places
+
+648B peak memory consumed over 3 calls from
+_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..spec_from_iter..SpecFromIter$LT$T$C$I$GT$$GT$::from_iter::h228b70d7b36af3c6
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+216B consumed over 1 calls from:
+    clap_builder::builder::arg::Arg::value_parser::h7e2b0ec554b998c1
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+216B consumed over 1 calls from:
+    clap_builder::builder::arg::Arg::value_parser::h7e2b0ec554b998c1
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+216B consumed over 1 calls from:
+    clap_builder::builder::arg::Arg::value_parser::h7e2b0ec554b998c1
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+
+456B peak memory consumed over 1 calls from
+std::sys::pal::unix::stack_overflow::thread_info::set_current_info::hd6513519b8d03a1d
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+456B consumed over 1 calls from:
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+
+432B peak memory consumed over 28 calls from
+_$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+16B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+16B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+16B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+16B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+16B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+  and 352B from 23 other places
+
+336B peak memory consumed over 14 calls from
+clap_builder::builder::arg::Arg::value_parser::h5a6358dbf50a80f3
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+24B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+24B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+24B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+24B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+24B consumed over 1 calls from:
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+  and 216B from 9 other places
+
+280B peak memory consumed over 2 calls from
+clap_builder::error::Error$LT$F$GT$::unnecessary_double_dash::hcdfe8dc32d10fc5d
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+256B consumed over 1 calls from:
+    clap_builder::parser::parser::Parser::match_arg_error::h6a2961e155cea2ea
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::parser::parser::Parser::get_matches_with::h8db2b810ac12e971
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::_do_parse::hcc2e02c681fb9af1
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::get_matches_from::ha84dad14b5f53443
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+24B consumed over 1 calls from:
+    clap_builder::parser::parser::Parser::match_arg_error::h6a2961e155cea2ea
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::parser::parser::Parser::get_matches_with::h8db2b810ac12e971
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::_do_parse::hcc2e02c681fb9af1
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::get_matches_from::ha84dad14b5f53443
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+
+192B peak memory consumed over 1 calls from
+_$LT$alloc..vec..Vec$LT$T$GT$$u20$as$u20$alloc..vec..spec_from_iter..SpecFromIter$LT$T$C$I$GT$$GT$::from_iter::h7a2ca82ca03447b8
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+192B consumed over 1 calls from:
+    clap_builder::builder::command::Command::get_matches_from::ha84dad14b5f53443
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+
+
+MOST TEMPORARY ALLOCATIONS
+21 temporary allocations of 146 allocations in total (14.38%) from
+_ZN5alloc7raw_vec11finish_grow17hf9278f5a84e4459eE.llvm.6234074619728850883
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 temporary allocations of 1 allocations in total (100.00%) from:
+    alloc::raw_vec::RawVecInner$LT$A$GT$::reserve::do_reserve_and_handle::h10dc6102fa5dd4a7
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$clap_builder..builder..styled_str..StyledStr$u20$as$u20$core..fmt..Write$GT$::write_str::h5b40e1ff7334f475
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    core::fmt::write::h23be9617f50201fc
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::error::Error$LT$F$GT$::unnecessary_double_dash::hcdfe8dc32d10fc5d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::parser::parser::Parser::match_arg_error::h6a2961e155cea2ea
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::parser::parser::Parser::get_matches_with::h8db2b810ac12e971
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::_do_parse::hcc2e02c681fb9af1
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::get_matches_from::ha84dad14b5f53443
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 temporary allocations of 1 allocations in total (100.00%) from:
+    alloc::raw_vec::RawVecInner$LT$A$GT$::reserve::do_reserve_and_handle::h10dc6102fa5dd4a7
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$clap_builder..builder..styled_str..StyledStr$u20$as$u20$core..fmt..Write$GT$::write_str::h5b40e1ff7334f475
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    anstyle::style::Style::fmt_to::h449272716bf5ac4b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    core::fmt::write::h23be9617f50201fc
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::output::usage::Usage::create_usage_with_title::h4b09abdedcd361aa
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::parser::parser::Parser::match_arg_error::h6a2961e155cea2ea
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::parser::parser::Parser::get_matches_with::h8db2b810ac12e971
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::_do_parse::hcc2e02c681fb9af1
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::get_matches_from::ha84dad14b5f53443
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 temporary allocations of 1 allocations in total (100.00%) from:
+    alloc::raw_vec::RawVecInner$LT$A$GT$::reserve::do_reserve_and_handle::h10dc6102fa5dd4a7
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$clap_builder..builder..styled_str..StyledStr$u20$as$u20$core..fmt..Write$GT$::write_str::h5b40e1ff7334f475
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    core::fmt::write::h23be9617f50201fc
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::output::usage::Usage::create_usage_with_title::h4b09abdedcd361aa
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::parser::parser::Parser::match_arg_error::h6a2961e155cea2ea
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::parser::parser::Parser::get_matches_with::h8db2b810ac12e971
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::_do_parse::hcc2e02c681fb9af1
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::get_matches_from::ha84dad14b5f53443
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 temporary allocations of 1 allocations in total (100.00%) from:
+    alloc::raw_vec::RawVecInner$LT$A$GT$::reserve::do_reserve_and_handle::h10dc6102fa5dd4a7
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$clap_builder..builder..styled_str..StyledStr$u20$as$u20$core..fmt..Write$GT$::write_str::h5b40e1ff7334f475
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    core::fmt::write::h23be9617f50201fc
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::output::usage::Usage::create_usage_with_title::h4b09abdedcd361aa
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::parser::parser::Parser::match_arg_error::h6a2961e155cea2ea
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::parser::parser::Parser::get_matches_with::h8db2b810ac12e971
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::_do_parse::hcc2e02c681fb9af1
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::get_matches_from::ha84dad14b5f53443
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 temporary allocations of 1 allocations in total (100.00%) from:
+    alloc::raw_vec::RawVec$LT$T$C$A$GT$::grow_one::h8ba331dafcbc2861
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::arg_group::ArgGroup::args::h0528c652c7c72087
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..QueryCommands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hbdac215b54b8c80b
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Commands$u20$as$u20$clap_builder..derive..Subcommand$GT$::augment_subcommands::hed624fd106207f9e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _$LT$knowledge_rs..cli..Cli$u20$as$u20$clap_builder..derive..Args$GT$::augment_args::h4c293ad6ac649059
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+  and 16B from 140 other places
+
+1 temporary allocations of 1 allocations in total (100.00%) from
+clap_builder::builder::command::Command::required_graph::h967e87fa9cb2f96f
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 temporary allocations of 1 allocations in total (100.00%) from:
+    clap_builder::output::usage::Usage::write_arg_usage::h9b5e6ea0e72f74cb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _ZN12clap_builder6output5usage5Usage20write_usage_no_title17h87cd7ff69ef2d8a1E.llvm.15788466055322105632
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::output::usage::Usage::create_usage_with_title::h4b09abdedcd361aa
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::parser::parser::Parser::match_arg_error::h6a2961e155cea2ea
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::parser::parser::Parser::get_matches_with::h8db2b810ac12e971
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::_do_parse::hcc2e02c681fb9af1
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::get_matches_from::ha84dad14b5f53443
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+
+1 temporary allocations of 1 allocations in total (100.00%) from
+0x7ffa8363a38e
+  in /lib/x86_64-linux-gnu/libstdc++.so.6
+1 temporary allocations of 1 allocations in total (100.00%) from:
+    0x7ffa83a7d71e
+      in /lib64/ld-linux-x86-64.so.2
+    0x7ffa83a7d823
+      in /lib64/ld-linux-x86-64.so.2
+    0x7ffa83a9759f
+      in /lib64/ld-linux-x86-64.so.2
+
+1 temporary allocations of 1 allocations in total (100.00%) from
+std::sys::env::unix::getenv::_$u7b$$u7b$closure$u7d$$u7d$::h1f9d1f93292d17b5
+  in /home/dio/knowledge-rs/target/release/knowledge-rs
+1 temporary allocations of 1 allocations in total (100.00%) from:
+    std::env::_var_os::h3069c49868dbca64
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    anstream::auto::choice::h392157e0e03ef67e
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _ZN8anstream4auto19AutoStream$LT$S$GT$3new17h087cd327ba881a6cE.llvm.16794337407798347942
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::output::fmt::Colorizer::print::h313c663a7e529a6a
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    _ZN12clap_builder5error14Error$LT$F$GT$5print17h597ab16e0c4ab728E.llvm.10660689680855272312
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::error::Error$LT$F$GT$::exit::h6571b30b5d090d1a
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    clap_builder::builder::command::Command::get_matches_from::ha84dad14b5f53443
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::cli::parse::h9a52026b55277deb
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    knowledge_rs::main::hcff366fadec643ef
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::sys::backtrace::__rust_begin_short_backtrace::h4811fedff14f2e33
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h74fa9159d77ec80d
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+
+1 temporary allocations of 2 allocations in total (50.00%) from
+__getdelim
+  in /lib/x86_64-linux-gnu/libc.so.6
+1 temporary allocations of 1 allocations in total (100.00%) from:
+    pthread_getattr_np
+      in /lib/x86_64-linux-gnu/libc.so.6
+    std::rt::lang_start_internal::hc01c32084feb4118
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+    main
+      in /home/dio/knowledge-rs/target/release/knowledge-rs
+
+
+total runtime: 0.00s.
+calls to allocation functions: 321 (107000/s)
+temporary memory allocations: 25 (8333/s)
+peak heap memory consumption: 144.77K
+peak RSS (including heaptrack overhead): 7.33M
+total memory leaked: 1.08K

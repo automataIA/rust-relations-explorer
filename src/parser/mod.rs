@@ -1,5 +1,6 @@
 use crate::errors::ParseError;
 use crate::graph::{FileMetrics, FileNode, Import, Item, ItemId, ItemType, Location, Visibility};
+use std::sync::Arc;
 use regex::Regex;
 use std::path::Path;
 
@@ -18,6 +19,11 @@ pub struct RegexPatterns {
 }
 
 impl RegexPatterns {
+    /// Compiles regex patterns used by the Rust parser.
+    ///
+    /// # Panics
+    /// Panics if any of the regular expressions fail to compile (should not happen in normal builds).
+    #[must_use]
     pub fn compile() -> Self {
         // Simple, conservative regexes to avoid catastrophic backtracking
         let fn_sig = Regex::new(r"(?m)^\s*(?P<vis>pub(?:\([^)]*\))?\s+)?(?:async\s+)?(?:const\s+)?fn\s+(?P<name>[a-zA-Z_][a-zA-Z0-9_]*)\s*\(").unwrap();
@@ -34,10 +40,15 @@ impl Default for RegexPatterns {
 }
 
 impl RustParser {
+    #[must_use]
     pub fn new() -> Self {
         Self { patterns: RegexPatterns::compile() }
     }
 
+    /// Parse a Rust source file contents into a `FileNode` with items and imports.
+    ///
+    /// # Errors
+    /// Returns `ParseError` when the input cannot be parsed due to invalid UTF-8 or other parser failures.
     pub fn parse_file(&self, content: &str, path: &Path) -> Result<FileNode, ParseError> {
         let items = self.extract_items(content, path);
         let imports = self.extract_imports(content);
@@ -53,14 +64,14 @@ impl RustParser {
         let mut out = Vec::with_capacity(fn_count + struct_count + enum_count);
 
         for cap in self.patterns.fn_sig.captures_iter(content) {
-            let name = cap.name("name").map(|m| m.as_str()).unwrap_or("").to_string();
-            let vis = cap.name("vis").map(|m| m.as_str().trim()).unwrap_or("");
+            let name = Arc::from(cap.name("name").map_or("", |m| m.as_str()));
+            let vis = cap.name("vis").map_or("", |m| m.as_str().trim());
             let visibility = parse_visibility(&self.patterns.vis_pub_in, vis);
             let m0 = cap.get(0).unwrap();
             let line = line_number_for(content, m0.start());
             let span = m0.as_str();
             out.push(Item {
-                id: ItemId(format!("fn:{}:{}", name, line)),
+                id: ItemId(format!("fn:{name}:{line}")),
                 item_type: ItemType::Function { is_async: span.contains("async "), is_const: span.contains("const ") },
                 name,
                 visibility,
@@ -70,12 +81,12 @@ impl RustParser {
         }
 
         for cap in self.patterns.struct_def.captures_iter(content) {
-            let name = cap.name("name").map(|m| m.as_str()).unwrap_or("").to_string();
-            let vis = cap.name("vis").map(|m| m.as_str().trim()).unwrap_or("");
+            let name = Arc::from(cap.name("name").map_or("", |m| m.as_str()));
+            let vis = cap.name("vis").map_or("", |m| m.as_str().trim());
             let visibility = parse_visibility(&self.patterns.vis_pub_in, vis);
-            let line = line_number_for(content, cap.get(0).map(|m| m.start()).unwrap_or(0));
+            let line = line_number_for(content, cap.get(0).map_or(0, |m| m.start()));
             out.push(Item {
-                id: ItemId(format!("struct:{}:{}", name, line)),
+                id: ItemId(format!("struct:{name}:{line}")),
                 item_type: ItemType::Struct { is_tuple: false },
                 name,
                 visibility,
@@ -85,12 +96,12 @@ impl RustParser {
         }
 
         for cap in self.patterns.enum_def.captures_iter(content) {
-            let name = cap.name("name").map(|m| m.as_str()).unwrap_or("").to_string();
-            let vis = cap.name("vis").map(|m| m.as_str().trim()).unwrap_or("");
+            let name = Arc::from(cap.name("name").map_or("", |m| m.as_str()));
+            let vis = cap.name("vis").map_or("", |m| m.as_str().trim());
             let visibility = parse_visibility(&self.patterns.vis_pub_in, vis);
-            let line = line_number_for(content, cap.get(0).map(|m| m.start()).unwrap_or(0));
+            let line = line_number_for(content, cap.get(0).map_or(0, |m| m.start()));
             out.push(Item {
-                id: ItemId(format!("enum:{}:{}", name, line)),
+                id: ItemId(format!("enum:{name}:{line}")),
                 item_type: ItemType::Enum { variant_count: 0 },
                 name,
                 visibility,
@@ -106,8 +117,8 @@ impl RustParser {
         let import_count = self.patterns.import_stmt.captures_iter(content).count();
         let mut out = Vec::with_capacity(import_count);
         for cap in self.patterns.import_stmt.captures_iter(content) {
-            let path = cap.get(1).map(|m| m.as_str().trim()).unwrap_or("").to_string();
-            let alias = cap.get(2).map(|m| m.as_str().to_string());
+            let path = Arc::from(cap.get(1).map_or("", |m| m.as_str().trim()));
+            let alias = cap.get(2).map(|m| Arc::from(m.as_str()));
             out.push(Import { path, alias });
         }
         out
@@ -121,7 +132,7 @@ fn parse_visibility(vis_pub_in: &Regex, vis: &str) -> Visibility {
     if v == "pub(crate)" { return Visibility::PubCrate; }
     if v == "pub(super)" { return Visibility::PubSuper; }
     if let Some(c) = vis_pub_in.captures(v) {
-        return Visibility::PubIn(c.name("sc").map(|m| m.as_str().to_string()).unwrap_or_default());
+        return Visibility::PubIn(Arc::from(c.name("sc").map_or("", |m| m.as_str())));
     }
     Visibility::Private
 }
@@ -149,7 +160,7 @@ mod tests {
         // items: 2 fn + 1 struct + 1 enum
         assert_eq!(node.items.len(), 4);
         // check visibility parsing
-        let mut names: Vec<(String, Visibility)> = node.items.iter().map(|i| (i.name.clone(), i.visibility.clone())).collect();
+        let mut names: Vec<(String, Visibility)> = node.items.iter().map(|i| (i.name.to_string(), i.visibility.clone())).collect();
         names.sort_by(|a,b| a.0.cmp(&b.0));
         assert!(names.iter().any(|(n,v)| n == "top" && matches!(v, Visibility::Public)));
         assert!(names.iter().any(|(n,v)| n == "hidden" && matches!(v, Visibility::Private)));
@@ -180,14 +191,14 @@ mod tests {
         "#;
         let parser = RustParser::new();
         let node = parser.parse_file(src, std::path::Path::new("/y.rs")).unwrap();
-        let names: Vec<_> = node.items.iter().map(|i| i.name.as_str()).collect();
+        let names: Vec<_> = node.items.iter().map(|i| i.name.as_ref()).collect();
         assert!(names.contains(&"af"));
         assert!(names.contains(&"cf"));
         assert!(names.contains(&"TS"));
         // Ensure vis pub(in ..) patterns are accepted and mapped
-        let scoped = node.items.iter().find(|i| i.name == "scoped").expect("scoped present");
+        let scoped = node.items.iter().find(|i| i.name.as_ref() == "scoped").expect("scoped present");
         match scoped.visibility {
-            Visibility::PubIn(ref s) => assert_eq!(s, "self"),
+            Visibility::PubIn(ref s) => assert_eq!(s.as_ref(), "self"),
             _ => panic!("expected Visibility::PubIn('self') for scoped"),
         }
         // Sanity: counts align (2 fns + 1 tuple struct + 1 scoped fn)

@@ -233,6 +233,7 @@ pub enum QueryCommands {
     },
 }
 
+#[must_use]
 pub fn parse() -> Cli {
     Cli::parse()
 }

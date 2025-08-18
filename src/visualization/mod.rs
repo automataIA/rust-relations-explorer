@@ -1,5 +1,6 @@
 use crate::errors::KnowledgeGraphError;
 use crate::graph::{ItemType, KnowledgeGraph, RelationshipType};
+use std::fmt::Write as _;
 use std::collections::HashSet;
 
 #[derive(Debug, Clone, Copy)]
@@ -41,8 +42,14 @@ impl Default for SvgOptions {
 pub struct SvgGenerator;
 
 impl SvgGenerator {
+    #[must_use]
     pub fn new() -> Self { Self {} }
 
+    /// Generate an SVG rendering using Graphviz.
+    ///
+    /// # Errors
+    /// Returns `KnowledgeGraphError::Visualization` if invoking Graphviz fails,
+    /// if the process exits with a non-success status, or if its output is not valid UTF-8.
     pub fn generate_svg_with_options(&self, graph: &KnowledgeGraph, opts: SvgOptions) -> Result<String, KnowledgeGraphError> {
         let dot = DotGenerator::new().generate_dot_with_options(graph, opts.dot)?;
         // Render with Graphviz `dot -Tsvg`
@@ -58,11 +65,11 @@ impl SvgGenerator {
                 }
                 child.wait_with_output()
             })
-            .map_err(|e| KnowledgeGraphError::Visualization(format!("Failed to run graphviz 'dot': {}", e)))?;
+            .map_err(|e| KnowledgeGraphError::Visualization(format!("Failed to run graphviz 'dot': {e}")))?;
         if !output.status.success() {
             return Err(KnowledgeGraphError::Visualization(format!("Graphviz 'dot' failed with code {:?}", output.status.code())));
         }
-        let mut svg = String::from_utf8(output.stdout).map_err(|e| KnowledgeGraphError::Visualization(format!("Invalid UTF-8 from dot: {}", e)))?;
+        let mut svg = String::from_utf8(output.stdout).map_err(|e| KnowledgeGraphError::Visualization(format!("Invalid UTF-8 from dot: {e}")))?;
         if opts.interactive {
             svg = enhance_svg(&svg);
         }
@@ -72,7 +79,7 @@ impl SvgGenerator {
 
 fn enhance_svg(svg: &str) -> String {
     // Inject minimal CSS/JS for hover highlight and clickable nodes
-    let injection = r#"
+    let injection = r"
 <style>
 svg .node:hover ellipse, svg .node:hover polygon, svg .node:hover path, svg .node:hover rect { filter: brightness(1.15); stroke-width: 2; }
 svg .edge:hover path { stroke-width: 2.2; }
@@ -88,7 +95,7 @@ svg .edge:hover path { stroke-width: 2.2; }
   });
 })();
 ]]></script>
-"#;
+";
     if let Some(pos) = svg.rfind("</svg>") {
         let mut out = String::with_capacity(svg.len() + injection.len());
         out.push_str(&svg[..pos]);
@@ -106,19 +113,32 @@ svg .edge:hover path { stroke-width: 2.2; }
 pub struct DotGenerator;
 
 impl DotGenerator {
+    #[must_use]
     pub fn new() -> Self { Self {} }
 
+    /// Generate DOT with default options.
+    ///
+    /// # Errors
+    /// Returns a `KnowledgeGraphError` if DOT generation fails for any reason.
     pub fn generate_dot(&self, graph: &KnowledgeGraph) -> Result<String, KnowledgeGraphError> {
         self.generate_dot_with_options(graph, DotOptions::default())
     }
 
+    /// Generate DOT with the given `opts`.
+    ///
+    /// # Errors
+    /// Returns a `KnowledgeGraphError` if DOT generation fails for any reason.
     pub fn generate_dot_with_options(&self, graph: &KnowledgeGraph, opts: DotOptions) -> Result<String, KnowledgeGraphError> {
         let mut s = String::new();
-        s.push_str("digraph KnowledgeRS {\n");
+        s.push_str("digraph KnowledgeRS\n{");
+        s.push('\n');
         let rank = match opts.rankdir { RankDir::LR => "LR", RankDir::TB => "TB" };
         let splines = match opts.splines { EdgeStyle::Curved => "curved", EdgeStyle::Ortho => "ortho", EdgeStyle::Polyline => "polyline" };
         let node_style = if opts.rounded { "filled,rounded" } else { "filled" };
-        s.push_str(&format!("  rankdir={};\n  graph [fontname=Helvetica, splines={}] ;\n  node [shape=box, fontsize=10, style={}] ;\n  edge [fontname=Helvetica, fontsize=9];\n", rank, splines, node_style));
+        let _ = write!(
+            s,
+            "  rankdir={rank};\n  graph [fontname=Helvetica, splines={splines}] ;\n  node [shape=box, fontsize=10, style={node_style}] ;\n  edge [fontname=Helvetica, fontsize=9];\n"
+        );
 
         if opts.clusters {
             // Build hierarchical clusters from module roots
@@ -127,7 +147,7 @@ impl DotGenerator {
             let mut roots: Vec<_> = graph
                 .files
                 .keys()
-                .filter(|p| graph.get_module_parent(*p).is_none())
+                .filter(|p| graph.get_module_parent(p).is_none())
                 .cloned()
                 .collect();
             // Stable order for determinism
@@ -144,17 +164,13 @@ impl DotGenerator {
                     for item in &file.items {
                         let node_id = sanitize_id(&item.id.0);
                         let (fill, shape) = style_for_item_with_theme(&item.item_type, opts.theme);
-                        let url = format!("item://{}", node_id);
+                        let url = format!("item://{node_id}");
                         let tooltip = escape_label(&item.name);
-                        s.push_str(&format!(
-                            "  \"{}\" [label=\"{}\", fillcolor=\"{}\", shape=\"{}\", URL=\"{}\", tooltip=\"{}\"];\n",
-                            node_id,
-                            escape_label(&item.name),
-                            fill,
-                            shape,
-                            url,
-                            tooltip
-                        ));
+                        let _ = writeln!(
+                            s,
+                            "  \"{node_id}\" [label=\"{}\", fillcolor=\"{fill}\", shape=\"{shape}\", URL=\"{url}\", tooltip=\"{tooltip}\"];",
+                            escape_label(&item.name)
+                        );
                     }
                 }
             }
@@ -165,22 +181,18 @@ impl DotGenerator {
             let from = sanitize_id(&rel.from_item.0);
             let to = sanitize_id(&rel.to_item.0);
             let (label, color, style) = match &rel.relationship_type {
-                RelationshipType::Uses { import_type } => (format!("uses:{}", import_type), "#1f77b4", "dashed"),
-                RelationshipType::Implements { trait_name } => (format!("impl:{}", trait_name), "#2ca02c", "dotted"),
-                RelationshipType::Contains { containment_type } => (format!("contains:{}", containment_type), "#7f7f7f", "solid"),
-                RelationshipType::Extends { extension_type } => (format!("extends:{}", extension_type), "#9467bd", "dashed"),
-                RelationshipType::Calls { call_type } => (format!("calls:{}", call_type), "#d62728", "solid"),
+                RelationshipType::Uses { import_type } => (format!("uses:{import_type}"), "#1f77b4", "dashed"),
+                RelationshipType::Implements { trait_name } => (format!("impl:{trait_name}"), "#2ca02c", "dotted"),
+                RelationshipType::Contains { containment_type } => (format!("contains:{containment_type}"), "#7f7f7f", "solid"),
+                RelationshipType::Extends { extension_type } => (format!("extends:{extension_type}"), "#9467bd", "dashed"),
+                RelationshipType::Calls { call_type } => (format!("calls:{call_type}"), "#d62728", "solid"),
             };
             let penwidth = 0.8_f64.max(rel.strength).min(3.0);
-            s.push_str(&format!(
-                "  \"{}\" -> \"{}\" [label=\"{}\", color=\"{}\", style=\"{}\", penwidth={}];\n",
-                from,
-                to,
-                escape_label(&label),
-                color,
-                style,
-                penwidth
-            ));
+            let _ = writeln!(
+                s,
+                "  \"{from}\" -> \"{to}\" [label=\"{}\", color=\"{color}\", style=\"{style}\", penwidth={penwidth}];",
+                escape_label(&label)
+            );
         }
 
         if opts.legend {
@@ -195,8 +207,8 @@ impl DotGenerator {
             ];
             for (name, t) in legend_items {
                 let (fill, shape) = style_for_item_with_theme(&t, opts.theme);
-                let id = sanitize_id(&format!("legend_{}", name));
-                s.push_str(&format!("    \"{}\" [label=\"{}\", fillcolor=\"{}\", shape=\"{}\"];\n", id, name, fill, shape));
+                let id = sanitize_id(&format!("legend_{name}"));
+                let _ = writeln!(s, "    \"{id}\" [label=\"{name}\", fillcolor=\"{fill}\", shape=\"{shape}\"]; ");
             }
             s.push_str("  }\n");
         }
@@ -205,6 +217,7 @@ impl DotGenerator {
         Ok(s)
     }
 
+    #[allow(clippy::only_used_in_recursion)]
     fn write_module_cluster(
         &self,
         graph: &KnowledgeGraph,
@@ -219,28 +232,24 @@ impl DotGenerator {
         }
         let cluster_id = format!("cluster_{}", sanitize_id(&key));
         let label = path.file_name().and_then(|p| p.to_str()).unwrap_or("");
-        out.push_str(&format!("  subgraph \"{}\" {{\n    label=\"{}\";\n    color=lightgrey;\n", cluster_id, escape_label(label)));
+        let _ = write!(out, "  subgraph \"{cluster_id}\" {{\n    label=\"{}\";\n    color=lightgrey;\n", escape_label(label));
 
         if let Some(file) = graph.files.get(path) {
             for item in &file.items {
                 let node_id = sanitize_id(&item.id.0);
                 let (fill, shape) = style_for_item_with_theme(&item.item_type, theme);
-                let url = format!("item://{}", node_id);
+                let url = format!("item://{node_id}");
                 let tooltip = escape_label(&item.name);
-                out.push_str(&format!(
-                    "    \"{}\" [label=\"{}\", fillcolor=\"{}\", shape=\"{}\", URL=\"{}\", tooltip=\"{}\"];\n",
-                    node_id,
-                    escape_label(&item.name),
-                    fill,
-                    shape,
-                    url,
-                    tooltip
-                ));
+                let _ = writeln!(
+                    out,
+                    "    \"{node_id}\" [label=\"{}\", fillcolor=\"{fill}\", shape=\"{shape}\", URL=\"{url}\", tooltip=\"{tooltip}\"];",
+                    escape_label(&item.name)
+                );
             }
         }
 
         // Children
-        for child in graph.get_module_children(path).iter() {
+        for child in graph.get_module_children(path) {
             self.write_module_cluster(graph, child, out, visited, theme);
         }
         out.push_str("  }\n");

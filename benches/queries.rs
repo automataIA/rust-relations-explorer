@@ -1,6 +1,8 @@
 use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};
 use knowledge_rs::graph::KnowledgeGraph;
-use knowledge_rs::query::{CentralityMetric, ConnectedFilesQuery, HubsQuery, Query, ShortestPathQuery};
+use knowledge_rs::query::{
+    CentralityMetric, ConnectedFilesQuery, HubsQuery, Query, ShortestPathQuery,
+};
 use knowledge_rs::utils::cache::CacheMode;
 use std::path::Path;
 
@@ -19,18 +21,24 @@ fn bench_queries(c: &mut Criterion) {
     // Heuristic pick: pick two files from the repo for path & connected benchmarks
     let mut files: Vec<_> = graph.files.keys().cloned().collect();
     files.sort();
-    let from = files.get(0).cloned();
+    let from = files.first().cloned();
     let to = files.get(1).cloned();
 
     // Connected files
     if let Some(sample) = from.clone() {
-        group.bench_function(BenchmarkId::new("connected_files", sample.file_name().and_then(|s| s.to_str()).unwrap_or("sample")), |b| {
-            b.iter(|| {
-                let q = ConnectedFilesQuery { file: sample.clone() };
-                let res = q.run(black_box(&graph));
-                black_box(res.len())
-            })
-        });
+        group.bench_function(
+            BenchmarkId::new(
+                "connected_files",
+                sample.file_name().and_then(|s| s.to_str()).unwrap_or("sample"),
+            ),
+            |b| {
+                b.iter(|| {
+                    let q = ConnectedFilesQuery { file: sample.clone() };
+                    let res = q.run(black_box(&graph));
+                    black_box(res.len())
+                })
+            },
+        );
     }
 
     // Hubs (top 10 by total degree)

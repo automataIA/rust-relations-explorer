@@ -1,2 +1,7 @@
-# Treat all warnings as errors in CI contexts; locally we can override via flags if needed
-warns = ["clippy::all", "clippy::pedantic"]
+# Clippy configuration file
+# Note: Lint levels (warn/deny/allow) are NOT configured here. Use cargo flags or attributes instead.
+# See: @web https://doc.rust-lang.org/clippy/configuration.html and usage: `cargo clippy -- -W clippy::all -W clippy::pedantic -D warnings`
+
+# Example valid options (uncomment to use):
+# msrv = "1.78.0"               # Minimum supported Rust version (optional; otherwise read from Cargo.toml rust-version)
+# disallowed-names = ["foo", ".."]  # Extend default disallowed names using ".."

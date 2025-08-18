@@ -22,26 +22,22 @@ fn main() {
     for (path, node) in &graph.files {
         for it in &node.items {
             owner.insert(it.id.clone(), path.clone());
+            }
         }
-    }
 
     // List files that have direct relationships with any item in the target file
     let mut related = std::collections::BTreeSet::new();
     for rel in &graph.relationships {
         let from_file = owner.get(&rel.from_item);
         let to_file = owner.get(&rel.to_item);
-        match (from_file, to_file) {
-            (Some(f), Some(t)) => {
-                if f == file && t != file {
-                    related.insert(t.clone());
-                } else if t == file && f != file {
-                    related.insert(f.clone());
-                }
+        if let (Some(f), Some(t)) = (from_file, to_file) {
+            if f == file && t != file {
+                related.insert(t.clone());
+            } else if t == file && f != file {
+                related.insert(f.clone());
             }
-            _ => {}
         }
     }
-
     println!("Connected files to {}:", file.display());
     for f in related {
         println!("- {}", f.display());
