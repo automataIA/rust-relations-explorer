@@ -7,7 +7,9 @@ use std::thread;
 use std::time::Duration;
 
 fn write_file(path: &Path, content: &str) {
-    if let Some(parent) = path.parent() { let _ = fs::create_dir_all(parent); }
+    if let Some(parent) = path.parent() {
+        let _ = fs::create_dir_all(parent);
+    }
     let mut f = File::create(path).unwrap();
     f.write_all(content.as_bytes()).unwrap();
     f.flush().unwrap();

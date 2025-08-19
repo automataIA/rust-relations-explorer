@@ -12,10 +12,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
       - name: Cache cargo
         uses: Swatinem/rust-cache@v2
         with:
           save-if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
+      - name: Install Graphviz for SVG tests
+        run: sudo apt-get update && sudo apt-get install -y graphviz
       - name: Format check
         run: cargo fmt --all -- --check
       - name: Clippy

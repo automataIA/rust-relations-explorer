@@ -1,6 +1,8 @@
 use rust_relations_explorer::graph::KnowledgeGraph;
 use rust_relations_explorer::utils::cache::CacheMode;
-use rust_relations_explorer::visualization::{DotGenerator, DotOptions, EdgeStyle, RankDir, SvgGenerator, SvgOptions, DotTheme};
+use rust_relations_explorer::visualization::{
+    DotGenerator, DotOptions, DotTheme, EdgeStyle, RankDir, SvgGenerator, SvgOptions,
+};
 
 fn main() {
     let root = std::path::Path::new(".");
@@ -8,7 +10,14 @@ fn main() {
         .expect("build graph");
 
     // Generate DOT with options
-    let dot_opts = DotOptions { clusters: true, legend: true, theme: DotTheme::Light, rankdir: RankDir::LR, splines: EdgeStyle::Curved, rounded: true };
+    let dot_opts = DotOptions {
+        clusters: true,
+        legend: true,
+        theme: DotTheme::Light,
+        rankdir: RankDir::LR,
+        splines: EdgeStyle::Curved,
+        rounded: true,
+    };
     let dot = DotGenerator::new().generate_dot_with_options(&graph, dot_opts).expect("dot");
     std::fs::write("graph.dot", dot).expect("write dot");
 
@@ -20,7 +29,10 @@ fn main() {
             println!("Wrote graph.svg");
         }
         Err(e) => {
-            eprintln!("SVG generation failed: {}\nHint: ensure Graphviz 'dot' is installed and on PATH.", e);
+            eprintln!(
+                "SVG generation failed: {}\nHint: ensure Graphviz 'dot' is installed and on PATH.",
+                e
+            );
         }
     }
 }

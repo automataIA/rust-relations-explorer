@@ -29,7 +29,8 @@ fn file_walker_respects_ignore_and_no_ignore() {
 
     // Default: should not see hidden.rs
     let files = file_walker::rust_files(root.to_str().unwrap());
-    let listed: Vec<_> = files.iter().map(|s| s.ends_with("lib.rs") || s.ends_with("hidden.rs")).collect();
+    let listed: Vec<_> =
+        files.iter().map(|s| s.ends_with("lib.rs") || s.ends_with("hidden.rs")).collect();
     assert!(listed.iter().any(|&b| b));
     assert!(!files.iter().any(|s| s.ends_with("hidden.rs")));
 

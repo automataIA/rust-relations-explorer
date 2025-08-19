@@ -14,21 +14,30 @@ fn cli_build_produces_dot_and_json_and_hubs_query_works() {
     let src = root.join("src");
     fs::create_dir_all(&src).unwrap();
 
-    write_file(&src.join("lib.rs"), r#"
+    write_file(
+        &src.join("lib.rs"),
+        r#"
         pub mod a;
         pub fn top() {}
-    "#);
-    write_file(&src.join("a.rs"), r#"
+    "#,
+    );
+    write_file(
+        &src.join("a.rs"),
+        r#"
         use crate::top;
         pub fn child() { top(); }
-    "#);
+    "#,
+    );
 
     // Act: run build with dot and json outputs
     let mut cmd = Command::cargo_bin("rust-relations-explorer").unwrap();
     cmd.arg("build")
-        .arg("--path").arg(root)
-        .arg("--json").arg(root.join("graph.json"))
-        .arg("--dot").arg(root.join("graph.dot"));
+        .arg("--path")
+        .arg(root)
+        .arg("--json")
+        .arg(root.join("graph.json"))
+        .arg("--dot")
+        .arg(root.join("graph.dot"));
     cmd.assert().success();
 
     // Assert: outputs exist and are non-empty
@@ -41,11 +50,16 @@ fn cli_build_produces_dot_and_json_and_hubs_query_works() {
 
     // Act: run hubs query on saved graph
     let mut q = Command::cargo_bin("rust-relations-explorer").unwrap();
-    q.arg("query").arg("hubs")
-        .arg("--graph").arg(&json_path)
-        .arg("--metric").arg("total")
-        .arg("--top").arg("5")
-        .arg("--format").arg("json");
+    q.arg("query")
+        .arg("hubs")
+        .arg("--graph")
+        .arg(&json_path)
+        .arg("--metric")
+        .arg("total")
+        .arg("--top")
+        .arg("5")
+        .arg("--format")
+        .arg("json");
     q.assert().success().stdout(predicate::str::contains("["));
 }
 

@@ -8,6 +8,8 @@ license = "MIT OR Apache-2.0"
 keywords = ["rust", "graph", "relations", "analysis", "cli"]
 categories = ["command-line-utilities", "development-tools"]
 documentation = "https://docs.rs/rust-relations-explorer"
+repository = "https://github.com/automataIA/rust-relations-explorer"
+homepage = "https://github.com/automataIA/rust-relations-explorer"
 
 [lib]
 name = "rust_relations_explorer"

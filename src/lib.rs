@@ -28,11 +28,11 @@
 //!
 //! # Ignore Behavior
 //! Pass `--no-ignore` in CLI to include ignored files. Env `KNOWLEDGE_RS_NO_IGNORE` remains supported for compatibility.
+pub mod app;
+pub mod cli;
+pub mod errors;
 pub mod graph;
 pub mod parser;
-pub mod visualization;
-pub mod cli;
-pub mod utils;
-pub mod errors;
 pub mod query;
-pub mod app;
+pub mod utils;
+pub mod visualization;

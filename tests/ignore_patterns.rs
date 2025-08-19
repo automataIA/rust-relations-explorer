@@ -4,16 +4,17 @@ use std::path::PathBuf;
 use rust_relations_explorer::graph::KnowledgeGraph;
 
 fn make_temp_project(entries: Vec<(&str, &str)>) -> PathBuf {
-    let base = std::env::temp_dir()
-        .join(format!(
-            "knowledge_rs_ignore_{}_{}",
-            std::process::id(),
-            std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_nanos()
-        ));
+    let base = std::env::temp_dir().join(format!(
+        "knowledge_rs_ignore_{}_{}",
+        std::process::id(),
+        std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_nanos()
+    ));
     fs::create_dir_all(base.join("src")).unwrap();
     for (rel, body) in entries {
         let p = base.join(rel);
-        if let Some(par) = p.parent() { fs::create_dir_all(par).unwrap(); }
+        if let Some(par) = p.parent() {
+            fs::create_dir_all(par).unwrap();
+        }
         fs::write(p, body).unwrap();
     }
     base

@@ -13,35 +13,30 @@ fn cli_build_cache_modes_succeed() {
     fs::create_dir_all(&src).unwrap();
 
     // Minimal crate
-    write_file(&src.join("lib.rs"), r#"
+    write_file(
+        &src.join("lib.rs"),
+        r#"
         pub fn f() {}
-    "#);
+    "#,
+    );
 
     let json = root.join("graph.json");
 
     // Default (Use cache)
     let mut use_cache = Command::cargo_bin("rust-relations-explorer").unwrap();
-    use_cache.arg("build")
-        .arg("--path").arg(root)
-        .arg("--json").arg(&json);
+    use_cache.arg("build").arg("--path").arg(root).arg("--json").arg(&json);
     use_cache.assert().success();
     assert!(json.exists());
 
     // Rebuild
     let mut rebuild = Command::cargo_bin("rust-relations-explorer").unwrap();
-    rebuild.arg("build")
-        .arg("--path").arg(root)
-        .arg("--json").arg(&json)
-        .arg("--rebuild");
+    rebuild.arg("build").arg("--path").arg(root).arg("--json").arg(&json).arg("--rebuild");
     rebuild.assert().success();
     assert!(json.exists());
 
     // No-cache
     let mut no_cache = Command::cargo_bin("rust-relations-explorer").unwrap();
-    no_cache.arg("build")
-        .arg("--path").arg(root)
-        .arg("--json").arg(&json)
-        .arg("--no-cache");
+    no_cache.arg("build").arg("--path").arg(root).arg("--json").arg(&json).arg("--no-cache");
     no_cache.assert().success();
     assert!(json.exists());
 }

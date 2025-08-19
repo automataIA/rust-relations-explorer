@@ -18,12 +18,13 @@ fn main() {
     };
 
     // Build an index from ItemId -> owning file
-    let mut owner: std::collections::HashMap<ItemId, std::path::PathBuf> = std::collections::HashMap::new();
+    let mut owner: std::collections::HashMap<ItemId, std::path::PathBuf> =
+        std::collections::HashMap::new();
     for (path, node) in &graph.files {
         for it in &node.items {
             owner.insert(it.id.clone(), path.clone());
-            }
         }
+    }
 
     // List files that have direct relationships with any item in the target file
     let mut related = std::collections::BTreeSet::new();

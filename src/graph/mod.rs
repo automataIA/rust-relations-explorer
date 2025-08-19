@@ -1,9 +1,9 @@
+use crate::utils::cache;
+use rayon::prelude::*;
+use regex::Regex;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::path::PathBuf;
-use regex::Regex;
-use rayon::prelude::*;
-use crate::utils::cache;
 use std::sync::{Arc, Mutex};
 
 pub mod resolver;
@@ -108,10 +108,10 @@ pub struct KnowledgeGraph {
     pub module_parent: HashMap<PathBuf, PathBuf>,
     pub module_children: HashMap<PathBuf, Vec<PathBuf>>,
     // Cached module path segments per file (relative to src/), to avoid recomputation
-    pub module_segments: HashMap<PathBuf, Vec<String>>, 
+    pub module_segments: HashMap<PathBuf, Vec<String>>,
     // Precomputed import segments per file: Vec of (segments, alias), using Arc<str> pool for deduplication
     #[serde(skip, default)]
-    pub import_segments: HashMap<PathBuf, ImportSegments>, 
+    pub import_segments: HashMap<PathBuf, ImportSegments>,
     // Global string pool for interning hot strings across phases (serde-skipped)
     #[serde(skip, default)]
     pub string_pool: std::sync::Arc<Mutex<HashMap<String, Arc<str>>>>,
@@ -136,12 +136,13 @@ impl KnowledgeGraph {
         mode: cache::CacheMode,
         no_ignore: bool,
     ) -> Result<Self, crate::errors::KnowledgeGraphError> {
+        use crate::errors::KnowledgeGraphError;
         use crate::parser::RustParser;
         use crate::utils::file_walker;
         use std::fs;
-        use crate::errors::KnowledgeGraphError;
 
-        let files = file_walker::rust_files_with_options(path.to_string_lossy().as_ref(), no_ignore);
+        let files =
+            file_walker::rust_files_with_options(path.to_string_lossy().as_ref(), no_ignore);
 
         // Load or ignore cache based on mode
         let root_dir = path.to_path_buf();
@@ -168,13 +169,10 @@ impl KnowledgeGraph {
         // Prune cache entries for files that no longer exist in the walk
         if matches!(mode, cache::CacheMode::Use) {
             use std::collections::HashSet;
-            let present: HashSet<PathBuf> = files.iter().map(|f| std::path::Path::new(f).to_path_buf()).collect();
+            let present: HashSet<PathBuf> =
+                files.iter().map(|f| std::path::Path::new(f).to_path_buf()).collect();
             cache_state.entries.retain(|k, _| present.contains(k));
         }
-
-    
-
-    
 
         // Reuse from cache when metadata matches (only in Use mode)
         let mut reused: Vec<(PathBuf, FileNode, Vec<Relationship>)> = Vec::new();
@@ -192,7 +190,9 @@ impl KnowledgeGraph {
                             edges.push(Relationship {
                                 from_item: file_id.clone(),
                                 to_item: it.id.clone(),
-                                relationship_type: RelationshipType::Contains { containment_type: "file_contains".to_string() },
+                                relationship_type: RelationshipType::Contains {
+                                    containment_type: "file_contains".to_string(),
+                                },
                                 strength: 1.0,
                                 context: "auto".to_string(),
                             });
@@ -212,21 +212,18 @@ impl KnowledgeGraph {
                 let p = std::path::Path::new(&file);
                 let content = fs::read_to_string(p)?;
                 let p = std::path::Path::new(&file).to_path_buf();
-                let mut node = RustParser::new()
-                    .parse_file(&content, &p)
-                    .map_err(|source| KnowledgeGraphError::ParseError { file: p.clone(), source })?;
+                let mut node = RustParser::new().parse_file(&content, &p).map_err(|source| {
+                    KnowledgeGraphError::ParseError { file: p.clone(), source }
+                })?;
 
                 // Create a synthetic file-level module item
                 let file_id = ItemId(format!("file:{}", node.path.display()));
                 let file_item = Item {
                     id: file_id.clone(),
                     item_type: ItemType::Module { is_inline: false },
-                    name: Arc::from(node
-                        .path
-                        .file_stem()
-                        .and_then(|s| s.to_str())
-                        .unwrap_or("(file)")
-                        ),
+                    name: Arc::from(
+                        node.path.file_stem().and_then(|s| s.to_str()).unwrap_or("(file)"),
+                    ),
                     visibility: Visibility::PubCrate,
                     location: Location { file: node.path.clone(), line_start: 1, line_end: 1 },
                     attributes: vec![],
@@ -245,7 +242,9 @@ impl KnowledgeGraph {
                     contains_edges.push(Relationship {
                         from_item: file_id.clone(),
                         to_item: it.id.clone(),
-                        relationship_type: RelationshipType::Contains { containment_type: "file_contains".to_string() },
+                        relationship_type: RelationshipType::Contains {
+                            containment_type: "file_contains".to_string(),
+                        },
                         strength: 1.0,
                         context: "auto".to_string(),
                     });
@@ -279,15 +278,20 @@ impl KnowledgeGraph {
                 let mut src_idx: Option<usize> = None;
                 for (i, c) in comps.iter().enumerate() {
                     if let std::path::Component::Normal(os) = c {
-                        if os.to_str() == Some("src") { src_idx = Some(i); break; }
+                        if os.to_str() == Some("src") {
+                            src_idx = Some(i);
+                            break;
+                        }
                     }
                 }
                 let mut segs: Vec<String> = Vec::new();
                 if let Some(i) = src_idx {
                     // Directories after src up to (but excluding) the file name
-                    for c in &comps[i+1..comps.len().saturating_sub(1)] {
+                    for c in &comps[i + 1..comps.len().saturating_sub(1)] {
                         if let std::path::Component::Normal(os) = c {
-                            if let Some(s) = os.to_str() { segs.push(s.to_string()); }
+                            if let Some(s) = os.to_str() {
+                                segs.push(s.to_string());
+                            }
                         }
                     }
                     // File as module: include file stem unless mod.rs/lib.rs
@@ -309,23 +313,28 @@ impl KnowledgeGraph {
         graph.import_segments = {
             let mut pool: HashMap<String, Arc<str>> = HashMap::new();
             let mut intern = |s: &str| -> Arc<str> {
-                if let Some(a) = pool.get(s) { return a.clone(); }
+                if let Some(a) = pool.get(s) {
+                    return a.clone();
+                }
                 let a: Arc<str> = Arc::from(s);
                 pool.insert(s.to_string(), a.clone());
                 a
             };
-            let mut map: HashMap<PathBuf, ImportSegments> = HashMap::with_capacity(graph.files.len());
+            let mut map: HashMap<PathBuf, ImportSegments> =
+                HashMap::with_capacity(graph.files.len());
             for (p, f) in &graph.files {
-                if f.imports.is_empty() { continue; }
+                if f.imports.is_empty() {
+                    continue;
+                }
                 let mut vecs: ImportSegments = Vec::with_capacity(f.imports.len());
                 for imp in &f.imports {
-                    let parts: Vec<Arc<str>> = imp
-                        .path
-                        .split("::")
-                        .filter(|s| !s.is_empty())
-                        .map(&mut intern)
-                        .collect();
-                    let alias_arc: Option<Arc<str>> = imp.alias.as_deref().filter(|a| !a.is_empty() && *a != "_").map(&mut intern);
+                    let parts: Vec<Arc<str>> =
+                        imp.path.split("::").filter(|s| !s.is_empty()).map(&mut intern).collect();
+                    let alias_arc: Option<Arc<str>> = imp
+                        .alias
+                        .as_deref()
+                        .filter(|a| !a.is_empty() && *a != "_")
+                        .map(&mut intern);
                     vecs.push((parts, alias_arc));
                 }
                 map.insert(p.clone(), vecs);
@@ -334,12 +343,11 @@ impl KnowledgeGraph {
         };
 
         // Set generation timestamp (seconds since epoch) without extra deps
-        graph.metadata.generated_at = match std::time::SystemTime::now()
-            .duration_since(std::time::UNIX_EPOCH)
-        {
-            Ok(d) => format!("{}", d.as_secs()),
-            Err(_) => "0".to_string(),
-        };
+        graph.metadata.generated_at =
+            match std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH) {
+                Ok(d) => format!("{}", d.as_secs()),
+                Err(_) => "0".to_string(),
+            };
         // Analyze relationships beyond file containment
         graph.analyze_relationships();
 
@@ -365,7 +373,10 @@ impl KnowledgeGraph {
     ///
     /// # Errors
     /// Returns `KnowledgeGraphError` when directory walking, file I/O, or parsing fails during build.
-    pub fn build_from_directory_with_cache(path: &std::path::Path, mode: cache::CacheMode) -> Result<Self, crate::errors::KnowledgeGraphError> {
+    pub fn build_from_directory_with_cache(
+        path: &std::path::Path,
+        mode: cache::CacheMode,
+    ) -> Result<Self, crate::errors::KnowledgeGraphError> {
         let no_ignore = std::env::var("KNOWLEDGE_RS_NO_IGNORE")
             .map(|v| v == "1" || v.eq_ignore_ascii_case("true"))
             .unwrap_or(false);
@@ -376,7 +387,9 @@ impl KnowledgeGraph {
     ///
     /// # Errors
     /// Returns `KnowledgeGraphError` on I/O or parsing failures during build.
-    pub fn build_from_directory(path: &std::path::Path) -> Result<Self, crate::errors::KnowledgeGraphError> {
+    pub fn build_from_directory(
+        path: &std::path::Path,
+    ) -> Result<Self, crate::errors::KnowledgeGraphError> {
         let no_ignore = std::env::var("KNOWLEDGE_RS_NO_IGNORE")
             .map(|v| v == "1" || v.eq_ignore_ascii_case("true"))
             .unwrap_or(false);
@@ -387,7 +400,10 @@ impl KnowledgeGraph {
     ///
     /// # Errors
     /// Returns `KnowledgeGraphError` on I/O or parsing failures during build.
-    pub fn build_from_directory_opts(path: &std::path::Path, no_ignore: bool) -> Result<Self, crate::errors::KnowledgeGraphError> {
+    pub fn build_from_directory_opts(
+        path: &std::path::Path,
+        no_ignore: bool,
+    ) -> Result<Self, crate::errors::KnowledgeGraphError> {
         Self::build_from_directory_with_cache_opts(path, cache::CacheMode::Use, no_ignore)
     }
 
@@ -395,7 +411,10 @@ impl KnowledgeGraph {
     ///
     /// # Errors
     /// Returns `KnowledgeGraphError::Io` if serialization or writing the file fails.
-    pub fn save_json(&self, path: &std::path::Path) -> Result<(), crate::errors::KnowledgeGraphError> {
+    pub fn save_json(
+        &self,
+        path: &std::path::Path,
+    ) -> Result<(), crate::errors::KnowledgeGraphError> {
         let data = serde_json::to_string_pretty(self).map_err(|e| {
             crate::errors::KnowledgeGraphError::Io(std::io::Error::other(e.to_string()))
         })?;
@@ -414,8 +433,6 @@ impl KnowledgeGraph {
         })?;
         Ok(graph)
     }
-
-    
 }
 
 impl KnowledgeGraph {
@@ -440,16 +457,23 @@ impl KnowledgeGraph {
         }
         // Build reverse map to avoid repeated scans to resolve parent path by id
         let mut id_to_path: HashMap<ItemId, PathBuf> = HashMap::with_capacity(file_level_id.len());
-        for (p, id) in &file_level_id { id_to_path.insert(id.clone(), p.clone()); }
+        for (p, id) in &file_level_id {
+            id_to_path.insert(id.clone(), p.clone());
+        }
 
         // For each file, determine its parent module file and add Contains edge
         let all_paths: Vec<PathBuf> = self.files.keys().cloned().collect();
         for path in all_paths {
             // Skip if we can't find this file's synthetic id
-            let Some(child_id) = file_level_id.get(&path) else { continue; };
+            let Some(child_id) = file_level_id.get(&path) else {
+                continue;
+            };
 
             // Determine parent file candidate based on path structure
-            let parent_dir = match path.parent() { Some(d) => d.to_path_buf(), None => continue };
+            let parent_dir = match path.parent() {
+                Some(d) => d.to_path_buf(),
+                None => continue,
+            };
             let file_name = path.file_name().and_then(|s| s.to_str()).unwrap_or("");
 
             // If current file is mod.rs or lib.rs, parent is parent's parent dir's mod.rs or lib.rs
@@ -457,18 +481,26 @@ impl KnowledgeGraph {
             if file_name == "mod.rs" || file_name == "lib.rs" {
                 if let Some(g) = parent_dir.parent() {
                     let p1 = g.join("mod.rs");
-                    if let Some(pid) = file_level_id.get(&p1) { parent_id_opt = Some(pid.clone()); }
+                    if let Some(pid) = file_level_id.get(&p1) {
+                        parent_id_opt = Some(pid.clone());
+                    }
                     if parent_id_opt.is_none() {
                         let p2 = g.join("lib.rs");
-                        if let Some(pid) = file_level_id.get(&p2) { parent_id_opt = Some(pid.clone()); }
+                        if let Some(pid) = file_level_id.get(&p2) {
+                            parent_id_opt = Some(pid.clone());
+                        }
                     }
                 }
             } else {
                 let p1 = parent_dir.join("mod.rs");
-                if let Some(pid) = file_level_id.get(&p1) { parent_id_opt = Some(pid.clone()); }
+                if let Some(pid) = file_level_id.get(&p1) {
+                    parent_id_opt = Some(pid.clone());
+                }
                 if parent_id_opt.is_none() {
                     let p2 = parent_dir.join("lib.rs");
-                    if let Some(pid) = file_level_id.get(&p2) { parent_id_opt = Some(pid.clone()); }
+                    if let Some(pid) = file_level_id.get(&p2) {
+                        parent_id_opt = Some(pid.clone());
+                    }
                 }
             }
 
@@ -478,7 +510,9 @@ impl KnowledgeGraph {
                     self.relationships.push(Relationship {
                         from_item: parent_id.clone(),
                         to_item: child_id.clone(),
-                        relationship_type: RelationshipType::Contains { containment_type: "module_contains".to_string() },
+                        relationship_type: RelationshipType::Contains {
+                            containment_type: "module_contains".to_string(),
+                        },
                         strength: 1.0,
                         context: "fs".to_string(),
                     });
@@ -500,18 +534,30 @@ impl KnowledgeGraph {
             .par_iter()
             .map(|(path, file)| {
                 let mut edges: Vec<Relationship> = Vec::with_capacity(file.imports.len());
-                if file.items.is_empty() { return edges; }
+                if file.items.is_empty() {
+                    return edges;
+                }
                 let file_id = file.items[0].id.clone();
                 for imp in &file.imports {
                     let targets = res.resolve_import(path, &imp.path);
-                    if targets.is_empty() { continue; }
+                    if targets.is_empty() {
+                        continue;
+                    }
                     for to in targets {
-                        if to == file_id { continue; }
-                        let import_type = if res.is_file_level_module(&to) { "import-module" } else { "import-item" };
+                        if to == file_id {
+                            continue;
+                        }
+                        let import_type = if res.is_file_level_module(&to) {
+                            "import-module"
+                        } else {
+                            "import-item"
+                        };
                         edges.push(Relationship {
                             from_item: file_id.clone(),
                             to_item: to,
-                            relationship_type: RelationshipType::Uses { import_type: import_type.to_string() },
+                            relationship_type: RelationshipType::Uses {
+                                import_type: import_type.to_string(),
+                            },
                             strength: if import_type == "import-item" { 1.0 } else { 0.8 },
                             context: imp.path.to_string(),
                         });
@@ -519,13 +565,17 @@ impl KnowledgeGraph {
                 }
                 edges
             })
-            .reduce(Vec::new, |mut a, mut b| { a.append(&mut b); a });
+            .reduce(Vec::new, |mut a, mut b| {
+                a.append(&mut b);
+                a
+            });
         self.relationships.extend(produced);
     }
 
     fn analyze_calls_heuristic(&mut self) {
         // Regex for fully qualified paths like a::b::foo(...)
-        let path_call_re = Regex::new(r"\b([A-Za-z_][A-Za-z0-9_]*(?:::[A-Za-z_][A-Za-z0-9_]*)+)\s*\(").unwrap();
+        let path_call_re =
+            Regex::new(r"\b([A-Za-z_][A-Za-z0-9_]*(?:::[A-Za-z_][A-Za-z0-9_]*)+)\s*\(").unwrap();
         // Regex for simple names: foo(...)
         let simple_call_re = Regex::new(r"\b([A-Za-z_][A-Za-z0-9_]*)\s*\(").unwrap();
 
@@ -533,7 +583,11 @@ impl KnowledgeGraph {
         // First, estimate capacity
         let mut func_count = 0usize;
         for file in self.files.values() {
-            for item in &file.items { if matches!(item.item_type, ItemType::Function { .. }) { func_count += 1; } }
+            for item in &file.items {
+                if matches!(item.item_type, ItemType::Function { .. }) {
+                    func_count += 1;
+                }
+            }
         }
         let mut func_index: HashMap<String, Vec<ItemId>> = HashMap::with_capacity(func_count);
         for file in self.files.values() {
@@ -550,9 +604,12 @@ impl KnowledgeGraph {
             .files
             .par_iter()
             .map(|(path, file)| {
-                let mut seen_local: std::collections::HashSet<(String, String)> = std::collections::HashSet::new();
+                let mut seen_local: std::collections::HashSet<(String, String)> =
+                    std::collections::HashSet::new();
                 let mut edges: Vec<Relationship> = Vec::with_capacity(16);
-                if file.items.is_empty() { return edges; }
+                if file.items.is_empty() {
+                    return edges;
+                }
                 let file_id = file.items[0].id.clone();
                 if let Ok(content) = std::fs::read_to_string(path) {
                     // 1) Resolve fully qualified calls via Resolver (more precise)
@@ -572,7 +629,9 @@ impl KnowledgeGraph {
                                 edges.push(Relationship {
                                     from_item: file_id.clone(),
                                     to_item: to.clone(),
-                                    relationship_type: RelationshipType::Calls { call_type: "path".to_string() },
+                                    relationship_type: RelationshipType::Calls {
+                                        call_type: "path".to_string(),
+                                    },
                                     strength: 0.7,
                                     context: full.to_string(),
                                 });
@@ -586,12 +645,18 @@ impl KnowledgeGraph {
                         let name = cap.get(1).map_or("", |m| m.as_str());
                         let start = m.start();
                         let prefix = &content[start.saturating_sub(8)..start];
-                        if prefix.contains("fn ") || prefix.contains("struct ") || prefix.contains("enum ") || prefix.contains("trait ") {
+                        if prefix.contains("fn ")
+                            || prefix.contains("struct ")
+                            || prefix.contains("enum ")
+                            || prefix.contains("trait ")
+                        {
                             continue;
                         }
                         if start > 0 {
                             let prev = content[..start].chars().rev().find(|c| !c.is_whitespace());
-                            if let Some('!') = prev { continue; }
+                            if let Some('!') = prev {
+                                continue;
+                            }
                         }
                         if let Some(targets) = func_index.get(name) {
                             for to in targets {
@@ -600,7 +665,9 @@ impl KnowledgeGraph {
                                     edges.push(Relationship {
                                         from_item: file_id.clone(),
                                         to_item: to.clone(),
-                                        relationship_type: RelationshipType::Calls { call_type: "heuristic".to_string() },
+                                        relationship_type: RelationshipType::Calls {
+                                            call_type: "heuristic".to_string(),
+                                        },
                                         strength: 0.5,
                                         context: name.to_string(),
                                     });
@@ -611,7 +678,10 @@ impl KnowledgeGraph {
                 }
                 edges
             })
-            .reduce(Vec::new, |mut a, mut b| { a.append(&mut b); a });
+            .reduce(Vec::new, |mut a, mut b| {
+                a.append(&mut b);
+                a
+            });
         self.relationships.extend(produced);
     }
 }
@@ -639,9 +709,33 @@ mod tests {
             attributes: vec![],
         };
 
-        g.files.insert(lib.clone(), FileNode { path: lib.clone(), items: vec![make_file_item(&lib)], imports: vec![], metrics: Default::default() });
-        g.files.insert(a_mod.clone(), FileNode { path: a_mod.clone(), items: vec![make_file_item(&a_mod)], imports: vec![], metrics: Default::default() });
-        g.files.insert(a_foo.clone(), FileNode { path: a_foo.clone(), items: vec![make_file_item(&a_foo)], imports: vec![], metrics: Default::default() });
+        g.files.insert(
+            lib.clone(),
+            FileNode {
+                path: lib.clone(),
+                items: vec![make_file_item(&lib)],
+                imports: vec![],
+                metrics: Default::default(),
+            },
+        );
+        g.files.insert(
+            a_mod.clone(),
+            FileNode {
+                path: a_mod.clone(),
+                items: vec![make_file_item(&a_mod)],
+                imports: vec![],
+                metrics: Default::default(),
+            },
+        );
+        g.files.insert(
+            a_foo.clone(),
+            FileNode {
+                path: a_foo.clone(),
+                items: vec![make_file_item(&a_foo)],
+                imports: vec![],
+                metrics: Default::default(),
+            },
+        );
 
         // Build hierarchy
         g.analyze_module_hierarchy();
@@ -702,11 +796,8 @@ mod tests {
         };
 
         // modx.rs is a module (no inner items needed)
-        let modx_node = FileNode {
-            path: f2.clone(),
-            items: vec![mk_file_item(&f2)],
-            ..Default::default()
-        };
+        let modx_node =
+            FileNode { path: f2.clone(), items: vec![mk_file_item(&f2)], ..Default::default() };
 
         // b.rs defines function foo
         let b_node = FileNode {
@@ -730,8 +821,12 @@ mod tests {
         for r in &g.relationships {
             if r.from_item == a_file_id {
                 if let RelationshipType::Uses { import_type } = &r.relationship_type {
-                    if import_type == "import-item" { saw_item = true; }
-                    if import_type == "import-module" { saw_module = true; }
+                    if import_type == "import-item" {
+                        saw_item = true;
+                    }
+                    if import_type == "import-module" {
+                        saw_module = true;
+                    }
                 }
             }
         }
@@ -805,7 +900,9 @@ mod tests {
         let mut saw_baz = false;
         let saw_macro = false;
         for r in &g.relationships {
-            if r.from_item != caller_file_id { continue; }
+            if r.from_item != caller_file_id {
+                continue;
+            }
             if let RelationshipType::Calls { call_type } = &r.relationship_type {
                 // Identify target by id suffix
                 if r.to_item.0.starts_with("fn:foo:") {

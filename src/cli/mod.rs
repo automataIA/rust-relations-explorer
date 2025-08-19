@@ -6,7 +6,7 @@ use clap::{Parser, Subcommand};
     version,
     about = "Rust Knowledge Graph System",
     long_about = "Parse Rust projects into a knowledge graph and run queries. File discovery respects .gitignore and .ignore with parent traversal. Global git excludes are disabled for determinism. Use --no-ignore to bypass ignore rules."
-)] 
+)]
 pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
@@ -17,13 +17,17 @@ pub enum Commands {
     /// Build the knowledge graph from a source directory
     Build {
         /// Path to the Rust project root (directory containing src/)
-        #[arg(short, long, default_value = ".")] 
+        #[arg(short, long, default_value = ".")]
         path: String,
         /// Path to a TOML configuration file
         #[arg(long)]
         config: Option<String>,
         /// Bypass ignore rules (.gitignore/.ignore) when discovering files
-        #[arg(long, default_value_t = false, help = "Include files even if matched by .gitignore/.ignore. Global git excludes are always disabled for determinism.")]
+        #[arg(
+            long,
+            default_value_t = false,
+            help = "Include files even if matched by .gitignore/.ignore. Global git excludes are always disabled for determinism."
+        )]
         no_ignore: bool,
         /// Ignore cache when building (do not reuse cached files)
         #[arg(long, default_value_t = false)]
@@ -70,7 +74,6 @@ pub enum Commands {
         #[command(subcommand)]
         query: QueryCommands,
     },
-    
 }
 
 #[derive(Debug, Subcommand)]
@@ -78,13 +81,17 @@ pub enum QueryCommands {
     /// List files connected to the given file via relationships
     ConnectedFiles {
         /// Path to project root (directory containing src/)
-        #[arg(short, long, default_value = ".")] 
+        #[arg(short, long, default_value = ".")]
         path: String,
         /// Path to a TOML configuration file
         #[arg(long)]
         config: Option<String>,
         /// Bypass ignore rules (.gitignore/.ignore) when discovering files
-        #[arg(long, default_value_t = false, help = "Include files even if matched by .gitignore/.ignore. Global git excludes are always disabled for determinism.")]
+        #[arg(
+            long,
+            default_value_t = false,
+            help = "Include files even if matched by .gitignore/.ignore. Global git excludes are always disabled for determinism."
+        )]
         no_ignore: bool,
         /// The file to analyze (absolute or relative)
         #[arg(long)]
@@ -99,7 +106,7 @@ pub enum QueryCommands {
     /// Show a single item's definition and relations by ItemId
     ItemInfo {
         /// Path to project root (directory containing src/)
-        #[arg(short, long, default_value = ".")] 
+        #[arg(short, long, default_value = ".")]
         path: String,
         /// Path to a TOML configuration file
         #[arg(long)]
@@ -123,7 +130,7 @@ pub enum QueryCommands {
     /// List files that call or are called by a given function name
     FunctionUsage {
         /// Path to project root (directory containing src/)
-        #[arg(short, long, default_value = ".")] 
+        #[arg(short, long, default_value = ".")]
         path: String,
         /// Path to a TOML configuration file
         #[arg(long)]
@@ -147,7 +154,7 @@ pub enum QueryCommands {
     /// Detect cycles between files
     Cycles {
         /// Path to project root (directory containing src/)
-        #[arg(short, long, default_value = ".")] 
+        #[arg(short, long, default_value = ".")]
         path: String,
         /// Path to a TOML configuration file
         #[arg(long)]
@@ -165,7 +172,7 @@ pub enum QueryCommands {
     /// Compute shortest path between two files
     Path {
         /// Path to project root (directory containing src/)
-        #[arg(short, long, default_value = ".")] 
+        #[arg(short, long, default_value = ".")]
         path: String,
         /// Path to a TOML configuration file
         #[arg(long)]
@@ -189,7 +196,7 @@ pub enum QueryCommands {
     /// List top-N hub files by degree centrality
     Hubs {
         /// Path to project root (directory containing src/)
-        #[arg(short, long, default_value = ".")] 
+        #[arg(short, long, default_value = ".")]
         path: String,
         /// Path to a TOML configuration file
         #[arg(long)]
@@ -213,7 +220,7 @@ pub enum QueryCommands {
     /// List top-N modules (directories) by degree centrality
     ModuleCentrality {
         /// Path to project root (directory containing src/)
-        #[arg(short, long, default_value = ".")] 
+        #[arg(short, long, default_value = ".")]
         path: String,
         /// Path to a TOML configuration file
         #[arg(long)]
@@ -237,7 +244,7 @@ pub enum QueryCommands {
     /// List types implementing a trait
     TraitImpls {
         /// Path to project root (directory containing src/)
-        #[arg(short, long, default_value = ".")] 
+        #[arg(short, long, default_value = ".")]
         path: String,
         /// Path to a TOML configuration file
         #[arg(long)]
@@ -258,7 +265,7 @@ pub enum QueryCommands {
     /// List items with no inbound usage edges (potentially dead code)
     UnreferencedItems {
         /// Path to project root (directory containing src/)
-        #[arg(short, long, default_value = ".")] 
+        #[arg(short, long, default_value = ".")]
         path: String,
         /// Path to a TOML configuration file
         #[arg(long)]

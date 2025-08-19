@@ -7,7 +7,9 @@ use std::process::Command;
 use tempfile::tempdir;
 
 fn write_file(path: &PathBuf, content: &str) {
-    if let Some(parent) = path.parent() { let _ = fs::create_dir_all(parent); }
+    if let Some(parent) = path.parent() {
+        let _ = fs::create_dir_all(parent);
+    }
     let mut f = fs::File::create(path).unwrap();
     f.write_all(content.as_bytes()).unwrap();
 }
@@ -24,7 +26,9 @@ fn build_uses_config_overrides_and_save() {
 
     // config file overriding DOT and SVG options + query defaults
     let cfg_path = root.join("rust-relations-explorer.toml");
-    write_file(&cfg_path, r#"
+    write_file(
+        &cfg_path,
+        r#"
 [dot]
 clusters = true
 legend = true
@@ -38,7 +42,8 @@ interactive = true
 
 [query]
 default_format = "json"
-"#);
+"#,
+    );
 
     let dot_out = root.join("graph.dot");
     let svg_out = root.join("graph.svg");
@@ -47,11 +52,16 @@ default_format = "json"
     // run build with config and outputs and save
     let mut cmd = Command::cargo_bin("rust-relations-explorer").unwrap();
     cmd.arg("build")
-        .arg("--path").arg(root)
-        .arg("--config").arg(&cfg_path)
-        .arg("--dot").arg(&dot_out)
-        .arg("--json").arg(&json_out)
-        .arg("--save").arg(root.join("saved.json"));
+        .arg("--path")
+        .arg(root)
+        .arg("--config")
+        .arg(&cfg_path)
+        .arg("--dot")
+        .arg(&dot_out)
+        .arg("--json")
+        .arg(&json_out)
+        .arg("--save")
+        .arg(root.join("saved.json"));
     // Append svg flag only if graphviz dot is present
     let dot_available = Command::new("dot").arg("-V").output().is_ok();
     if dot_available {
@@ -84,46 +94,77 @@ fn queries_without_graph_build_from_path_and_text_formats() {
 
     // connected-files text output via table (no --graph)
     let mut cf = Command::cargo_bin("rust-relations-explorer").unwrap();
-    cf.arg("query").arg("connected-files")
-        .arg("--path").arg(root)
-        .arg("--file").arg(src.join("a.rs"))
-        .arg("--format").arg("text");
-    cf.assert().success().stdout(predicate::str::contains("#").and(predicate::str::contains("Path")));
+    cf.arg("query")
+        .arg("connected-files")
+        .arg("--path")
+        .arg(root)
+        .arg("--file")
+        .arg(src.join("a.rs"))
+        .arg("--format")
+        .arg("text");
+    cf.assert()
+        .success()
+        .stdout(predicate::str::contains("#").and(predicate::str::contains("Path")));
 
     // function-usage callees branch (no --graph)
     let mut fu = Command::cargo_bin("rust-relations-explorer").unwrap();
-    fu.arg("query").arg("function-usage")
-        .arg("--path").arg(root)
-        .arg("--function").arg("bar")
-        .arg("--direction").arg("callees")
-        .arg("--format").arg("text");
+    fu.arg("query")
+        .arg("function-usage")
+        .arg("--path")
+        .arg(root)
+        .arg("--function")
+        .arg("bar")
+        .arg("--direction")
+        .arg("callees")
+        .arg("--format")
+        .arg("text");
     fu.assert().success();
 
     // hubs with metric in and text output
     let mut hubs = Command::cargo_bin("rust-relations-explorer").unwrap();
-    hubs.arg("query").arg("hubs")
-        .arg("--path").arg(root)
-        .arg("--metric").arg("in")
-        .arg("--top").arg("5")
-        .arg("--format").arg("text");
-    hubs.assert().success().stdout(predicate::str::contains("In").and(predicate::str::contains("Out")));
+    hubs.arg("query")
+        .arg("hubs")
+        .arg("--path")
+        .arg(root)
+        .arg("--metric")
+        .arg("in")
+        .arg("--top")
+        .arg("5")
+        .arg("--format")
+        .arg("text");
+    hubs.assert()
+        .success()
+        .stdout(predicate::str::contains("In").and(predicate::str::contains("Out")));
 
     // module-centrality with metric out and text output
     let mut mc = Command::cargo_bin("rust-relations-explorer").unwrap();
-    mc.arg("query").arg("module-centrality")
-        .arg("--path").arg(root)
-        .arg("--metric").arg("out")
-        .arg("--top").arg("5")
-        .arg("--format").arg("text");
-    mc.assert().success().stdout(predicate::str::contains("Module").and(predicate::str::contains("Total")));
+    mc.arg("query")
+        .arg("module-centrality")
+        .arg("--path")
+        .arg(root)
+        .arg("--metric")
+        .arg("out")
+        .arg("--top")
+        .arg("5")
+        .arg("--format")
+        .arg("text");
+    mc.assert()
+        .success()
+        .stdout(predicate::str::contains("Module").and(predicate::str::contains("Total")));
 
     // path query no path branch should print <no path>
     let mut pathq = Command::cargo_bin("rust-relations-explorer").unwrap();
-    pathq.arg("query").arg("path")
-        .arg("--path").arg(root)
-        .arg("--from").arg(src.join("a.rs"))
-        .arg("--to").arg(src.join("b.rs"))
-        .arg("--format").arg("text");
+    pathq
+        .arg("query")
+        .arg("path")
+        .arg("--path")
+        .arg(root)
+        .arg("--from")
+        .arg(src.join("a.rs"))
+        .arg("--to")
+        .arg(src.join("b.rs"))
+        .arg("--format")
+        .arg("text");
     pathq.assert().success().stdout(predicate::str::contains("<no path>"));
 }
 
@@ -140,8 +181,6 @@ fn cycles_text_output_branch() {
     write_file(&src.join("b.rs"), "pub fn fb() { }\n");
 
     let mut cy = Command::cargo_bin("rust-relations-explorer").unwrap();
-    cy.arg("query").arg("cycles")
-        .arg("--path").arg(root)
-        .arg("--format").arg("text");
+    cy.arg("query").arg("cycles").arg("--path").arg(root).arg("--format").arg("text");
     cy.assert().success();
 }

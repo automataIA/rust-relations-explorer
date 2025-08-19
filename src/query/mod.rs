@@ -1,7 +1,7 @@
-use std::collections::{HashMap, HashSet};
-use std::path::{Path, PathBuf};
 use regex::Regex;
 use serde::Serialize;
+use std::collections::{HashMap, HashSet};
+use std::path::{Path, PathBuf};
 
 use crate::graph::{ItemId, KnowledgeGraph};
 
@@ -22,7 +22,9 @@ pub struct TraitImplsQuery {
 impl TraitImplsQuery {
     /// Create a new query for the provided trait name (e.g., "Display").
     #[must_use]
-    pub fn new(trait_name: &str) -> Self { Self { trait_name: trait_name.to_string() } }
+    pub fn new(trait_name: &str) -> Self {
+        Self { trait_name: trait_name.to_string() }
+    }
 }
 
 // Returns Vec of (file_path, type_name)
@@ -31,7 +33,9 @@ impl Query<Vec<(PathBuf, String)>> for TraitImplsQuery {
         let mut out: Vec<(PathBuf, String)> = Vec::new();
         for (path, file) in &graph.files {
             for it in &file.items {
-                if let crate::graph::ItemType::Impl { trait_name: Some(tn), type_name } = &it.item_type {
+                if let crate::graph::ItemType::Impl { trait_name: Some(tn), type_name } =
+                    &it.item_type
+                {
                     if tn.as_ref() == self.trait_name {
                         out.push((path.clone(), type_name.to_string()));
                     }
@@ -75,7 +79,9 @@ impl Query<Vec<PathBuf>> for ConnectedFilesQuery {
             return Vec::new();
         };
 
-        let Some(target_items) = file_to_items.get(target_path) else { return Vec::new(); };
+        let Some(target_items) = file_to_items.get(target_path) else {
+            return Vec::new();
+        };
         let target_set: HashSet<ItemId> = target_items.iter().cloned().collect();
 
         let mut out: HashSet<PathBuf> = HashSet::new();
@@ -104,7 +110,10 @@ impl Query<Vec<PathBuf>> for ConnectedFilesQuery {
 }
 
 /// Direction for `FunctionUsageQuery`.
-pub enum UsageDirection { Callers, Callees }
+pub enum UsageDirection {
+    Callers,
+    Callees,
+}
 
 /// Find callers or callees for a given function name, returning unique file paths.
 pub struct FunctionUsageQuery {
@@ -115,10 +124,14 @@ pub struct FunctionUsageQuery {
 impl FunctionUsageQuery {
     /// Query files containing callers of the specified function name.
     #[must_use]
-    pub fn callers(function: &str) -> Self { Self { function: function.to_string(), direction: UsageDirection::Callers } }
+    pub fn callers(function: &str) -> Self {
+        Self { function: function.to_string(), direction: UsageDirection::Callers }
+    }
     /// Query files containing callees called by the specified function name.
     #[must_use]
-    pub fn callees(function: &str) -> Self { Self { function: function.to_string(), direction: UsageDirection::Callees } }
+    pub fn callees(function: &str) -> Self {
+        Self { function: function.to_string(), direction: UsageDirection::Callees }
+    }
 }
 
 impl Query<Vec<PathBuf>> for FunctionUsageQuery {
@@ -131,12 +144,17 @@ impl Query<Vec<PathBuf>> for FunctionUsageQuery {
                 item_to_file.insert(item.id.clone(), path.clone());
                 // crude: function ids contain prefix "fn:"; but better match by type and name
                 if let crate::graph::ItemType::Function { .. } = item.item_type {
-                    func_name_to_ids.entry(item.name.to_string()).or_default().push(item.id.clone());
+                    func_name_to_ids
+                        .entry(item.name.to_string())
+                        .or_default()
+                        .push(item.id.clone());
                 }
             }
         }
 
-        let Some(target_ids) = func_name_to_ids.get(&self.function) else { return Vec::new(); };
+        let Some(target_ids) = func_name_to_ids.get(&self.function) else {
+            return Vec::new();
+        };
         let target_set: HashSet<ItemId> = target_ids.iter().cloned().collect();
 
         let mut out: HashSet<PathBuf> = HashSet::new();
@@ -144,12 +162,16 @@ impl Query<Vec<PathBuf>> for FunctionUsageQuery {
             match self.direction {
                 UsageDirection::Callers => {
                     if target_set.contains(&rel.to_item) {
-                        if let Some(fp) = item_to_file.get(&rel.from_item) { out.insert(fp.clone()); }
+                        if let Some(fp) = item_to_file.get(&rel.from_item) {
+                            out.insert(fp.clone());
+                        }
                     }
                 }
                 UsageDirection::Callees => {
                     if target_set.contains(&rel.from_item) {
-                        if let Some(fp) = item_to_file.get(&rel.to_item) { out.insert(fp.clone()); }
+                        if let Some(fp) = item_to_file.get(&rel.to_item) {
+                            out.insert(fp.clone());
+                        }
                     }
                 }
             }
@@ -167,15 +189,27 @@ pub struct CycleDetectionQuery;
 impl CycleDetectionQuery {
     /// Construct a cycle detection query.
     #[must_use]
-    pub fn new() -> Self { Self }
+    pub fn new() -> Self {
+        Self
+    }
 }
 
 impl Default for CycleDetectionQuery {
-    fn default() -> Self { Self }
+    fn default() -> Self {
+        Self
+    }
 }
 
 // Helper for DFS used by `CycleDetectionQuery::run`
-fn dfs(u: usize, adj: &Vec<Vec<usize>>, visited: &mut [bool], stack: &mut [bool], path: &mut Vec<usize>, out: &mut Vec<Vec<PathBuf>>, names: &Vec<PathBuf>) {
+fn dfs(
+    u: usize,
+    adj: &Vec<Vec<usize>>,
+    visited: &mut [bool],
+    stack: &mut [bool],
+    path: &mut Vec<usize>,
+    out: &mut Vec<Vec<PathBuf>>,
+    names: &Vec<PathBuf>,
+) {
     visited[u] = true;
     stack[u] = true;
     path.push(u);
@@ -199,7 +233,8 @@ impl Query<Vec<Vec<PathBuf>>> for CycleDetectionQuery {
         // Build file-level adjacency ignoring self loops
         let mut file_ids: Vec<PathBuf> = graph.files.keys().cloned().collect();
         file_ids.sort();
-        let index: HashMap<PathBuf, usize> = file_ids.iter().cloned().enumerate().map(|(i, p)| (p, i)).collect();
+        let index: HashMap<PathBuf, usize> =
+            file_ids.iter().cloned().enumerate().map(|(i, p)| (p, i)).collect();
 
         // Map each relationship to file->file edge
         let mut adj: Vec<Vec<usize>> = vec![Vec::new(); file_ids.len()];
@@ -207,14 +242,22 @@ impl Query<Vec<Vec<PathBuf>>> for CycleDetectionQuery {
         let mut item_to_file: HashMap<ItemId, usize> = HashMap::new();
         for (path, file) in &graph.files {
             if let Some(&i) = index.get(path) {
-                for it in &file.items { item_to_file.insert(it.id.clone(), i); }
+                for it in &file.items {
+                    item_to_file.insert(it.id.clone(), i);
+                }
             }
         }
         for rel in &graph.relationships {
             // Only consider call edges for cycle detection call-graph
-            if !matches!(rel.relationship_type, crate::graph::RelationshipType::Calls { .. }) { continue; }
-            if let (Some(&u), Some(&v)) = (item_to_file.get(&rel.from_item), item_to_file.get(&rel.to_item)) {
-                if u != v { adj[u].push(v); }
+            if !matches!(rel.relationship_type, crate::graph::RelationshipType::Calls { .. }) {
+                continue;
+            }
+            if let (Some(&u), Some(&v)) =
+                (item_to_file.get(&rel.from_item), item_to_file.get(&rel.to_item))
+            {
+                if u != v {
+                    adj[u].push(v);
+                }
             }
         }
 
@@ -231,7 +274,9 @@ impl Query<Vec<Vec<PathBuf>>> for CycleDetectionQuery {
         let mut cycles: Vec<Vec<PathBuf>> = Vec::new();
 
         for u in 0..file_ids.len() {
-            if !visited[u] { dfs(u, &adj, &mut visited, &mut stack, &mut path, &mut cycles, &file_ids); }
+            if !visited[u] {
+                dfs(u, &adj, &mut visited, &mut stack, &mut path, &mut cycles, &file_ids);
+            }
         }
 
         cycles
@@ -257,21 +302,30 @@ impl Query<Vec<PathBuf>> for ShortestPathQuery {
         // Map files to indices
         let mut files: Vec<PathBuf> = graph.files.keys().cloned().collect();
         files.sort();
-        let idx: HashMap<PathBuf, usize> = files.iter().cloned().enumerate().map(|(i, p)| (p, i)).collect();
+        let idx: HashMap<PathBuf, usize> =
+            files.iter().cloned().enumerate().map(|(i, p)| (p, i)).collect();
 
-        let (Some(&src), Some(&dst)) = (idx.get(&self.from), idx.get(&self.to)) else { return Vec::new(); };
+        let (Some(&src), Some(&dst)) = (idx.get(&self.from), idx.get(&self.to)) else {
+            return Vec::new();
+        };
 
         // Build item->file index and adjacency list
         let mut item_to_file: HashMap<ItemId, usize> = HashMap::new();
         for (path, file) in &graph.files {
             if let Some(&i) = idx.get(path) {
-                for it in &file.items { item_to_file.insert(it.id.clone(), i); }
+                for it in &file.items {
+                    item_to_file.insert(it.id.clone(), i);
+                }
             }
         }
         let mut adj: Vec<Vec<usize>> = vec![Vec::new(); files.len()];
         for rel in &graph.relationships {
-            if let (Some(&u), Some(&v)) = (item_to_file.get(&rel.from_item), item_to_file.get(&rel.to_item)) {
-                if u != v { adj[u].push(v); }
+            if let (Some(&u), Some(&v)) =
+                (item_to_file.get(&rel.from_item), item_to_file.get(&rel.to_item))
+            {
+                if u != v {
+                    adj[u].push(v);
+                }
             }
         }
 
@@ -282,7 +336,9 @@ impl Query<Vec<PathBuf>> for ShortestPathQuery {
         visited[src] = true;
         q.push_back(src);
         while let Some(u) = q.pop_front() {
-            if u == dst { break; }
+            if u == dst {
+                break;
+            }
             for &v in &adj[u] {
                 if !visited[v] {
                     visited[v] = true;
@@ -292,7 +348,9 @@ impl Query<Vec<PathBuf>> for ShortestPathQuery {
             }
         }
 
-        if !visited[dst] { return Vec::new(); }
+        if !visited[dst] {
+            return Vec::new();
+        }
 
         // Reconstruct path
         let mut path_indices: Vec<usize> = Vec::new();
@@ -309,7 +367,11 @@ impl Query<Vec<PathBuf>> for ShortestPathQuery {
 }
 
 /// Metric for degree centrality used by `HubsQuery` and `ModuleCentralityQuery`.
-pub enum CentralityMetric { In, Out, Total }
+pub enum CentralityMetric {
+    In,
+    Out,
+    Total,
+}
 
 /// Compute top-N files by degree centrality.
 pub struct HubsQuery {
@@ -320,7 +382,9 @@ pub struct HubsQuery {
 impl HubsQuery {
     /// Create a hubs query for the given metric and number of results.
     #[must_use]
-    pub fn new(metric: CentralityMetric, top: usize) -> Self { Self { metric, top } }
+    pub fn new(metric: CentralityMetric, top: usize) -> Self {
+        Self { metric, top }
+    }
 }
 
 impl Query<Vec<(PathBuf, usize, usize)>> for HubsQuery {
@@ -328,13 +392,16 @@ impl Query<Vec<(PathBuf, usize, usize)>> for HubsQuery {
         // Map files to indices
         let mut files: Vec<PathBuf> = graph.files.keys().cloned().collect();
         files.sort();
-        let idx: HashMap<PathBuf, usize> = files.iter().cloned().enumerate().map(|(i, p)| (p, i)).collect();
+        let idx: HashMap<PathBuf, usize> =
+            files.iter().cloned().enumerate().map(|(i, p)| (p, i)).collect();
 
         // Build item->file index and degree counters
         let mut item_to_file: HashMap<ItemId, usize> = HashMap::new();
         for (path, file) in &graph.files {
             if let Some(&i) = idx.get(path) {
-                for it in &file.items { item_to_file.insert(it.id.clone(), i); }
+                for it in &file.items {
+                    item_to_file.insert(it.id.clone(), i);
+                }
             }
         }
         let n = files.len();
@@ -343,7 +410,9 @@ impl Query<Vec<(PathBuf, usize, usize)>> for HubsQuery {
 
         // Count edges at file level; ignore self-loops
         for rel in &graph.relationships {
-            if let (Some(&u), Some(&v)) = (item_to_file.get(&rel.from_item), item_to_file.get(&rel.to_item)) {
+            if let (Some(&u), Some(&v)) =
+                (item_to_file.get(&rel.from_item), item_to_file.get(&rel.to_item))
+            {
                 if u != v {
                     outdeg[u] += 1;
                     indeg[v] += 1;
@@ -351,16 +420,23 @@ impl Query<Vec<(PathBuf, usize, usize)>> for HubsQuery {
             }
         }
 
-        let mut rows: Vec<(PathBuf, usize, usize)> = (0..n)
-            .map(|i| (files[i].clone(), indeg[i], outdeg[i]))
-            .collect();
+        let mut rows: Vec<(PathBuf, usize, usize)> =
+            (0..n).map(|i| (files[i].clone(), indeg[i], outdeg[i])).collect();
 
         // Sort by chosen metric desc, then by path asc for stability
         rows.sort_by(|a, b| {
             let (ai, ao) = (a.1, a.2);
             let (bi, bo) = (b.1, b.2);
-            let ak = match self.metric { CentralityMetric::In => ai, CentralityMetric::Out => ao, CentralityMetric::Total => ai + ao };
-            let bk = match self.metric { CentralityMetric::In => bi, CentralityMetric::Out => bo, CentralityMetric::Total => bi + bo };
+            let ak = match self.metric {
+                CentralityMetric::In => ai,
+                CentralityMetric::Out => ao,
+                CentralityMetric::Total => ai + ao,
+            };
+            let bk = match self.metric {
+                CentralityMetric::In => bi,
+                CentralityMetric::Out => bo,
+                CentralityMetric::Total => bi + bo,
+            };
             bk.cmp(&ak).then_with(|| a.0.cmp(&b.0))
         });
 
@@ -381,7 +457,9 @@ pub struct UnreferencedItemsQuery {
 
 impl UnreferencedItemsQuery {
     #[must_use]
-    pub fn new(include_public: bool, exclude: Option<Regex>) -> Self { Self { include_public, exclude } }
+    pub fn new(include_public: bool, exclude: Option<Regex>) -> Self {
+        Self { include_public, exclude }
+    }
 }
 
 impl Query<Vec<(PathBuf, String, String, String, String)>> for UnreferencedItemsQuery {
@@ -400,14 +478,22 @@ impl Query<Vec<(PathBuf, String, String, String, String)>> for UnreferencedItems
         let mut out: Vec<(PathBuf, String, String, String, String)> = Vec::new();
         for (path, file) in &graph.files {
             if let Some(re) = &self.exclude {
-                if re.is_match(&path.display().to_string()) { continue; }
+                if re.is_match(&path.display().to_string()) {
+                    continue;
+                }
             }
             for (idx, item) in file.items.iter().enumerate() {
-                if idx == 0 { continue; }
-                if !self.include_public {
-                    if let Visibility::Public = item.visibility { continue; }
+                if idx == 0 {
+                    continue;
                 }
-                if used.contains(&item.id) { continue; }
+                if !self.include_public {
+                    if let Visibility::Public = item.visibility {
+                        continue;
+                    }
+                }
+                if used.contains(&item.id) {
+                    continue;
+                }
 
                 let kind = match &item.item_type {
                     ItemType::Module { .. } => "Module",
@@ -428,7 +514,13 @@ impl Query<Vec<(PathBuf, String, String, String, String)>> for UnreferencedItems
                     Visibility::PubSuper => "pub(super)",
                     Visibility::PubIn(_) => "pub(in)",
                 };
-                out.push((path.clone(), item.id.0.clone(), item.name.to_string(), kind.to_string(), vis.to_string()));
+                out.push((
+                    path.clone(),
+                    item.id.0.clone(),
+                    item.name.to_string(),
+                    kind.to_string(),
+                    vis.to_string(),
+                ));
             }
         }
         out
@@ -466,16 +558,21 @@ pub struct ItemInfoQuery {
 
 impl ItemInfoQuery {
     #[must_use]
-    pub fn new(item_id: crate::graph::ItemId, show_code: bool) -> Self { Self { item_id, show_code } }
+    pub fn new(item_id: crate::graph::ItemId, show_code: bool) -> Self {
+        Self { item_id, show_code }
+    }
 }
 
 impl Query<Option<ItemInfoResult>> for ItemInfoQuery {
     fn run(&self, graph: &KnowledgeGraph) -> Option<ItemInfoResult> {
         use crate::graph::{ItemType, Visibility};
         // Build an index of ItemId -> (path, &Item)
-        let mut idx: HashMap<&crate::graph::ItemId, (&PathBuf, &crate::graph::Item)> = HashMap::new();
+        let mut idx: HashMap<&crate::graph::ItemId, (&PathBuf, &crate::graph::Item)> =
+            HashMap::new();
         for (p, f) in &graph.files {
-            for it in &f.items { idx.insert(&it.id, (p, it)); }
+            for it in &f.items {
+                idx.insert(&it.id, (p, it));
+            }
         }
         let (path, item) = idx.get(&self.item_id)?.to_owned();
 
@@ -490,7 +587,8 @@ impl Query<Option<ItemInfoResult>> for ItemInfoQuery {
             ItemType::Static { .. } => "Static",
             ItemType::Type => "Type",
             ItemType::Macro => "Macro",
-        }.to_string();
+        }
+        .to_string();
         let visibility = match &item.visibility {
             Visibility::Public => "public".to_string(),
             Visibility::Private => "private".to_string(),
@@ -504,22 +602,42 @@ impl Query<Option<ItemInfoResult>> for ItemInfoQuery {
         let mut outbound: Vec<ItemInfoRelationEntry> = Vec::new();
         let rel_to_string = |r: &crate::graph::RelationshipType| -> String {
             match r {
-                crate::graph::RelationshipType::Uses { import_type } => format!("Uses:{import_type}"),
-                crate::graph::RelationshipType::Implements { trait_name } => format!("Implements:{trait_name}"),
-                crate::graph::RelationshipType::Contains { containment_type } => format!("Contains:{containment_type}"),
-                crate::graph::RelationshipType::Extends { extension_type } => format!("Extends:{extension_type}"),
+                crate::graph::RelationshipType::Uses { import_type } => {
+                    format!("Uses:{import_type}")
+                }
+                crate::graph::RelationshipType::Implements { trait_name } => {
+                    format!("Implements:{trait_name}")
+                }
+                crate::graph::RelationshipType::Contains { containment_type } => {
+                    format!("Contains:{containment_type}")
+                }
+                crate::graph::RelationshipType::Extends { extension_type } => {
+                    format!("Extends:{extension_type}")
+                }
                 crate::graph::RelationshipType::Calls { call_type } => format!("Calls:{call_type}"),
             }
         };
         for r in &graph.relationships {
             if r.to_item == item.id {
                 if let Some((pp, it)) = idx.get(&r.from_item) {
-                    inbound.push(ItemInfoRelationEntry { id: r.from_item.0.clone(), name: it.name.to_string(), path: pp.display().to_string(), relation: rel_to_string(&r.relationship_type), context: r.context.clone() });
+                    inbound.push(ItemInfoRelationEntry {
+                        id: r.from_item.0.clone(),
+                        name: it.name.to_string(),
+                        path: pp.display().to_string(),
+                        relation: rel_to_string(&r.relationship_type),
+                        context: r.context.clone(),
+                    });
                 }
             }
             if r.from_item == item.id {
                 if let Some((pp, it)) = idx.get(&r.to_item) {
-                    outbound.push(ItemInfoRelationEntry { id: r.to_item.0.clone(), name: it.name.to_string(), path: pp.display().to_string(), relation: rel_to_string(&r.relationship_type), context: r.context.clone() });
+                    outbound.push(ItemInfoRelationEntry {
+                        id: r.to_item.0.clone(),
+                        name: it.name.to_string(),
+                        path: pp.display().to_string(),
+                        relation: rel_to_string(&r.relationship_type),
+                        context: r.context.clone(),
+                    });
                 }
             }
         }
@@ -531,7 +649,9 @@ impl Query<Option<ItemInfoResult>> for ItemInfoQuery {
                 let lines: Vec<&str> = content.lines().collect();
                 let s = item.location.line_start.saturating_sub(1);
                 let e = item.location.line_end.min(lines.len());
-                if s < e { code = Some(lines[s..e].join("\n")); }
+                if s < e {
+                    code = Some(lines[s..e].join("\n"));
+                }
             }
         }
 
@@ -559,7 +679,9 @@ pub struct ModuleCentralityQuery {
 impl ModuleCentralityQuery {
     /// Create a module centrality query for the given metric and number of results.
     #[must_use]
-    pub fn new(metric: CentralityMetric, top: usize) -> Self { Self { metric, top } }
+    pub fn new(metric: CentralityMetric, top: usize) -> Self {
+        Self { metric, top }
+    }
 }
 
 impl Query<Vec<(PathBuf, usize, usize)>> for ModuleCentralityQuery {
@@ -575,14 +697,17 @@ impl Query<Vec<(PathBuf, usize, usize)>> for ModuleCentralityQuery {
 
         let mut mods: Vec<PathBuf> = modules.into_iter().collect();
         mods.sort();
-        let midx: HashMap<PathBuf, usize> = mods.iter().cloned().enumerate().map(|(i, p)| (p, i)).collect();
+        let midx: HashMap<PathBuf, usize> =
+            mods.iter().cloned().enumerate().map(|(i, p)| (p, i)).collect();
 
         // Map items to module index
         let mut item_to_mod: HashMap<ItemId, usize> = HashMap::new();
         for (path, file) in &graph.files {
             let Some(module_path) = file_to_module.get(path) else { continue };
             if let Some(&mi) = midx.get(module_path) {
-                for it in &file.items { item_to_mod.insert(it.id.clone(), mi); }
+                for it in &file.items {
+                    item_to_mod.insert(it.id.clone(), mi);
+                }
             }
         }
 
@@ -592,20 +717,32 @@ impl Query<Vec<(PathBuf, usize, usize)>> for ModuleCentralityQuery {
 
         // Count inter-module edges
         for rel in &graph.relationships {
-            if let (Some(&u), Some(&v)) = (item_to_mod.get(&rel.from_item), item_to_mod.get(&rel.to_item)) {
-                if u != v { outdeg[u] += 1; indeg[v] += 1; }
+            if let (Some(&u), Some(&v)) =
+                (item_to_mod.get(&rel.from_item), item_to_mod.get(&rel.to_item))
+            {
+                if u != v {
+                    outdeg[u] += 1;
+                    indeg[v] += 1;
+                }
             }
         }
 
-        let mut rows: Vec<(PathBuf, usize, usize)> = (0..n)
-            .map(|i| (mods[i].clone(), indeg[i], outdeg[i]))
-            .collect();
+        let mut rows: Vec<(PathBuf, usize, usize)> =
+            (0..n).map(|i| (mods[i].clone(), indeg[i], outdeg[i])).collect();
 
         rows.sort_by(|a, b| {
             let (ai, ao) = (a.1, a.2);
             let (bi, bo) = (b.1, b.2);
-            let ak = match self.metric { CentralityMetric::In => ai, CentralityMetric::Out => ao, CentralityMetric::Total => ai + ao };
-            let bk = match self.metric { CentralityMetric::In => bi, CentralityMetric::Out => bo, CentralityMetric::Total => bi + bo };
+            let ak = match self.metric {
+                CentralityMetric::In => ai,
+                CentralityMetric::Out => ao,
+                CentralityMetric::Total => ai + ao,
+            };
+            let bk = match self.metric {
+                CentralityMetric::In => bi,
+                CentralityMetric::Out => bo,
+                CentralityMetric::Total => bi + bo,
+            };
             bk.cmp(&ak).then_with(|| a.0.cmp(&b.0))
         });
 
@@ -626,7 +763,11 @@ mod tests {
             item_type: ItemType::Function { is_async: false, is_const: false },
             name: Arc::from(name),
             visibility: crate::graph::Visibility::Public,
-            location: crate::graph::Location { file: path.to_path_buf(), line_start: 1, line_end: 1 },
+            location: crate::graph::Location {
+                file: path.to_path_buf(),
+                line_start: 1,
+                line_end: 1,
+            },
             attributes: vec![],
         }
     }
@@ -647,15 +788,30 @@ mod tests {
 
         g.files.insert(
             a_path.clone(),
-            FileNode { path: a_path.clone(), items: vec![a_item.clone()], imports: vec![], metrics: Default::default() },
+            FileNode {
+                path: a_path.clone(),
+                items: vec![a_item.clone()],
+                imports: vec![],
+                metrics: Default::default(),
+            },
         );
         g.files.insert(
             b_path.clone(),
-            FileNode { path: b_path.clone(), items: vec![b_item.clone()], imports: vec![], metrics: Default::default() },
+            FileNode {
+                path: b_path.clone(),
+                items: vec![b_item.clone()],
+                imports: vec![],
+                metrics: Default::default(),
+            },
         );
         g.files.insert(
             c_path.clone(),
-            FileNode { path: c_path.clone(), items: vec![c_item.clone()], imports: vec![], metrics: Default::default() },
+            FileNode {
+                path: c_path.clone(),
+                items: vec![c_item.clone()],
+                imports: vec![],
+                metrics: Default::default(),
+            },
         );
 
         g.relationships.push(Relationship {
@@ -718,9 +874,9 @@ mod tests {
         assert!(cycles.iter().any(|cyc| {
             // convert to set for containment check
             let names: std::collections::HashSet<_> = cyc.iter().cloned().collect();
-            names.contains(&PathBuf::from("src/a.rs")) &&
-            names.contains(&PathBuf::from("src/b.rs")) &&
-            names.contains(&PathBuf::from("src/c.rs"))
+            names.contains(&PathBuf::from("src/a.rs"))
+                && names.contains(&PathBuf::from("src/b.rs"))
+                && names.contains(&PathBuf::from("src/c.rs"))
         }));
     }
 
@@ -730,13 +886,24 @@ mod tests {
         let p = PathBuf::from("src/x.rs");
         let impl_item = Item {
             id: ItemId("impl:X:Display".to_string()),
-            item_type: ItemType::Impl { trait_name: Some(Arc::from("Display")), type_name: Arc::from("X") },
+            item_type: ItemType::Impl {
+                trait_name: Some(Arc::from("Display")),
+                type_name: Arc::from("X"),
+            },
             name: Arc::from("impl Display for X"),
             visibility: crate::graph::Visibility::PubCrate,
             location: crate::graph::Location { file: p.clone(), line_start: 1, line_end: 1 },
             attributes: vec![],
         };
-        g.files.insert(p.clone(), FileNode { path: p.clone(), items: vec![impl_item], imports: vec![], metrics: Default::default() });
+        g.files.insert(
+            p.clone(),
+            FileNode {
+                path: p.clone(),
+                items: vec![impl_item],
+                imports: vec![],
+                metrics: Default::default(),
+            },
+        );
 
         let q = TraitImplsQuery::new("Display");
         let rows = q.run(&g);

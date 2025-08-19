@@ -3,7 +3,9 @@ use std::fs;
 use std::path::Path;
 
 fn write(path: &Path, content: &str) {
-    if let Some(parent) = path.parent() { let _ = fs::create_dir_all(parent); }
+    if let Some(parent) = path.parent() {
+        let _ = fs::create_dir_all(parent);
+    }
     fs::write(path, content).unwrap();
 }
 
@@ -33,11 +35,17 @@ default_format = "json"
     assert_eq!(cfg.dot.as_ref().and_then(|d| d.legend), Some(false));
     assert_eq!(cfg.dot.as_ref().and_then(|d| d.theme.as_ref()).map(|s| s.as_str()), Some("dark"));
     assert_eq!(cfg.dot.as_ref().and_then(|d| d.rankdir.as_ref()).map(|s| s.as_str()), Some("TB"));
-    assert_eq!(cfg.dot.as_ref().and_then(|d| d.splines.as_ref()).map(|s| s.as_str()), Some("ortho"));
+    assert_eq!(
+        cfg.dot.as_ref().and_then(|d| d.splines.as_ref()).map(|s| s.as_str()),
+        Some("ortho")
+    );
     assert_eq!(cfg.dot.as_ref().and_then(|d| d.rounded), Some(true));
 
     assert_eq!(cfg.svg.as_ref().and_then(|s| s.interactive), Some(true));
-    assert_eq!(cfg.query.as_ref().and_then(|q| q.default_format.as_ref()).map(|s| s.as_str()), Some("json"));
+    assert_eq!(
+        cfg.query.as_ref().and_then(|q| q.default_format.as_ref()).map(|s| s.as_str()),
+        Some("json")
+    );
 }
 
 #[test]

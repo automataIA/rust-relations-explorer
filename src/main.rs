@@ -2,10 +2,12 @@ fn main() {
     use rust_relations_explorer::cli::parse;
     let cli = parse();
     let code = rust_relations_explorer::app::run_cli(cli);
-    if code != 0 { std::process::exit(code); }
+    if code != 0 {
+        std::process::exit(code);
+    }
 }
 /*
-    
+
                         let res = match KnowledgeGraph::build_from_directory_opts(std::path::Path::new(&path), no_ignore) {
                             Ok(g) => g,
                             Err(e) => { eprintln!("Build failed: {}", e); std::process::exit(1); }

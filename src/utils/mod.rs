@@ -3,7 +3,10 @@ pub mod table {
     // Helper to render a separator line
     fn sep(widths: &[usize]) -> String {
         let mut s = String::from("+");
-        for w in widths { s.push_str(&"-".repeat(w + 2)); s.push('+'); }
+        for w in widths {
+            s.push_str(&"-".repeat(w + 2));
+            s.push('+');
+        }
         s
     }
 
@@ -14,7 +17,9 @@ pub mod table {
             let w = widths[i];
             s.push(' ');
             s.push_str(cell);
-            if cell.len() < w { s.push_str(&" ".repeat(w - cell.len())); }
+            if cell.len() < w {
+                s.push_str(&" ".repeat(w - cell.len()));
+            }
             s.push(' ');
             s.push('|');
         }
@@ -32,14 +37,20 @@ pub mod table {
         }
 
         let mut out = String::new();
-        out.push_str(&sep(&widths)); out.push('\n');
+        out.push_str(&sep(&widths));
+        out.push('\n');
         let header_cells: Vec<String> = headers.iter().map(|s| (*s).to_string()).collect();
-        out.push_str(&line(&header_cells, &widths)); out.push('\n');
-        out.push_str(&sep(&widths)); out.push('\n');
+        out.push_str(&line(&header_cells, &widths));
+        out.push('\n');
+        out.push_str(&sep(&widths));
+        out.push('\n');
         for row in rows {
             let mut cells = Vec::with_capacity(cols);
-            for i in 0..cols { cells.push(row.get(i).cloned().unwrap_or_default()); }
-            out.push_str(&line(&cells, &widths)); out.push('\n');
+            for i in 0..cols {
+                cells.push(row.get(i).cloned().unwrap_or_default());
+            }
+            out.push_str(&line(&cells, &widths));
+            out.push('\n');
         }
         out.push_str(&sep(&widths));
         out
@@ -55,9 +66,9 @@ pub mod config {
     pub struct DotConfig {
         pub clusters: Option<bool>,
         pub legend: Option<bool>,
-        pub theme: Option<String>,     // "light" | "dark"
-        pub rankdir: Option<String>,   // "LR" | "TB"
-        pub splines: Option<String>,   // "curved" | "ortho" | "polyline"
+        pub theme: Option<String>,   // "light" | "dark"
+        pub rankdir: Option<String>, // "LR" | "TB"
+        pub splines: Option<String>, // "curved" | "ortho" | "polyline"
         pub rounded: Option<bool>,
     }
 
@@ -97,7 +108,11 @@ pub mod config {
             return load_config_at(&p_new);
         }
         let p_old = root.join("knowledge-rs.toml");
-        if p_old.exists() { load_config_at(&p_old) } else { None }
+        if p_old.exists() {
+            load_config_at(&p_old)
+        } else {
+            None
+        }
     }
 }
 
@@ -177,16 +192,22 @@ pub mod file_walker {
         } else {
             let mut gi_builder = ignore::gitignore::GitignoreBuilder::new(root_path);
             let gi = root_path.join(".gitignore");
-            if gi.exists() { let _ = gi_builder.add(gi); }
+            if gi.exists() {
+                let _ = gi_builder.add(gi);
+            }
             let ign = root_path.join(".ignore");
-            if ign.exists() { let _ = gi_builder.add(ign); }
+            if ign.exists() {
+                let _ = gi_builder.add(ign);
+            }
             gi_builder.build().ok()
         };
         for entry in walker.build().flatten() {
             if entry.file_type().is_some_and(|t| t.is_file()) {
                 // Explicit filter using matcher (in addition to WalkBuilder's own filtering)
                 if let Some(m) = &matcher {
-                    if m.matched(entry.path(), false).is_ignore() { continue; }
+                    if m.matched(entry.path(), false).is_ignore() {
+                        continue;
+                    }
                 }
                 if entry.path().extension() == Some(std::ffi::OsStr::new("rs")) {
                     if let Some(s) = entry.path().to_str() {

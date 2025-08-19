@@ -1,8 +1,8 @@
 use crate::errors::ParseError;
 use crate::graph::{FileMetrics, FileNode, Import, Item, ItemId, ItemType, Location, Visibility};
-use std::sync::Arc;
 use regex::Regex;
 use std::path::Path;
+use std::sync::Arc;
 
 #[derive(Debug, Default)]
 pub struct RustParser {
@@ -27,16 +27,27 @@ impl RegexPatterns {
     pub fn compile() -> Self {
         // Simple, conservative regexes to avoid catastrophic backtracking
         let fn_sig = Regex::new(r"(?m)^\s*(?P<vis>pub(?:\([^)]*\))?\s+)?(?:async\s+)?(?:const\s+)?fn\s+(?P<name>[a-zA-Z_][a-zA-Z0-9_]*)\s*\(").unwrap();
-        let struct_def = Regex::new(r"(?m)^\s*(?P<vis>pub(?:\([^)]*\))?\s+)?struct\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)").unwrap();
-        let enum_def = Regex::new(r"(?m)^\s*(?P<vis>pub(?:\([^)]*\))?\s+)?enum\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)").unwrap();
+        let struct_def = Regex::new(
+            r"(?m)^\s*(?P<vis>pub(?:\([^)]*\))?\s+)?struct\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)",
+        )
+        .unwrap();
+        let enum_def = Regex::new(
+            r"(?m)^\s*(?P<vis>pub(?:\([^)]*\))?\s+)?enum\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)",
+        )
+        .unwrap();
         let vis_pub_in = Regex::new(r"^pub\((?P<sc>[^)]+)\)$").unwrap();
-        let import_stmt = Regex::new(r"(?m)^\s*(?:pub\s+)?use\s+([^;{]+?)(?:\s+as\s+([A-Za-z_][A-Za-z0-9_]*))?\s*;\s*$").unwrap();
+        let import_stmt = Regex::new(
+            r"(?m)^\s*(?:pub\s+)?use\s+([^;{]+?)(?:\s+as\s+([A-Za-z_][A-Za-z0-9_]*))?\s*;\s*$",
+        )
+        .unwrap();
         Self { fn_sig, struct_def, enum_def, vis_pub_in, import_stmt }
     }
 }
 
 impl Default for RegexPatterns {
-    fn default() -> Self { Self::compile() }
+    fn default() -> Self {
+        Self::compile()
+    }
 }
 
 impl RustParser {
@@ -72,7 +83,10 @@ impl RustParser {
             let span = m0.as_str();
             out.push(Item {
                 id: ItemId(format!("fn:{name}:{line}")),
-                item_type: ItemType::Function { is_async: span.contains("async "), is_const: span.contains("const ") },
+                item_type: ItemType::Function {
+                    is_async: span.contains("async "),
+                    is_const: span.contains("const "),
+                },
                 name,
                 visibility,
                 location: Location { file: path.to_path_buf(), line_start: line, line_end: line },
@@ -127,10 +141,18 @@ impl RustParser {
 
 fn parse_visibility(vis_pub_in: &Regex, vis: &str) -> Visibility {
     let v = vis.trim();
-    if v.is_empty() { return Visibility::Private; }
-    if v == "pub" { return Visibility::Public; }
-    if v == "pub(crate)" { return Visibility::PubCrate; }
-    if v == "pub(super)" { return Visibility::PubSuper; }
+    if v.is_empty() {
+        return Visibility::Private;
+    }
+    if v == "pub" {
+        return Visibility::Public;
+    }
+    if v == "pub(crate)" {
+        return Visibility::PubCrate;
+    }
+    if v == "pub(super)" {
+        return Visibility::PubSuper;
+    }
     if let Some(c) = vis_pub_in.captures(v) {
         return Visibility::PubIn(Arc::from(c.name("sc").map_or("", |m| m.as_str())));
     }
@@ -145,7 +167,7 @@ fn line_number_for(content: &str, byte_idx: usize) -> usize {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_extract_fn_struct_enum_and_visibility() {
         let src = r#"
@@ -160,12 +182,13 @@ mod tests {
         // items: 2 fn + 1 struct + 1 enum
         assert_eq!(node.items.len(), 4);
         // check visibility parsing
-        let mut names: Vec<(String, Visibility)> = node.items.iter().map(|i| (i.name.to_string(), i.visibility.clone())).collect();
-        names.sort_by(|a,b| a.0.cmp(&b.0));
-        assert!(names.iter().any(|(n,v)| n == "top" && matches!(v, Visibility::Public)));
-        assert!(names.iter().any(|(n,v)| n == "hidden" && matches!(v, Visibility::Private)));
-        assert!(names.iter().any(|(n,v)| n == "S" && matches!(v, Visibility::PubCrate)));
-        assert!(names.iter().any(|(n,v)| n == "E" && matches!(v, Visibility::PubSuper)));
+        let mut names: Vec<(String, Visibility)> =
+            node.items.iter().map(|i| (i.name.to_string(), i.visibility.clone())).collect();
+        names.sort_by(|a, b| a.0.cmp(&b.0));
+        assert!(names.iter().any(|(n, v)| n == "top" && matches!(v, Visibility::Public)));
+        assert!(names.iter().any(|(n, v)| n == "hidden" && matches!(v, Visibility::Private)));
+        assert!(names.iter().any(|(n, v)| n == "S" && matches!(v, Visibility::PubCrate)));
+        assert!(names.iter().any(|(n, v)| n == "E" && matches!(v, Visibility::PubSuper)));
     }
 
     #[test]
@@ -177,8 +200,15 @@ mod tests {
         let parser = RustParser::new();
         let node = parser.parse_file(src, std::path::Path::new("/x.rs")).unwrap();
         assert_eq!(node.imports.len(), 2);
-        assert!(node.imports.iter().any(|im| im.path.contains("std::collections::HashMap") && im.alias.is_none()));
-        assert!(node.imports.iter().any(|im| im.path.contains("crate::module::Thing") && im.alias.as_deref() == Some("Alias")));
+        assert!(node
+            .imports
+            .iter()
+            .any(|im| im.path.contains("std::collections::HashMap") && im.alias.is_none()));
+        assert!(node
+            .imports
+            .iter()
+            .any(|im| im.path.contains("crate::module::Thing")
+                && im.alias.as_deref() == Some("Alias")));
     }
 
     #[test]
@@ -196,7 +226,8 @@ mod tests {
         assert!(names.contains(&"cf"));
         assert!(names.contains(&"TS"));
         // Ensure vis pub(in ..) patterns are accepted and mapped
-        let scoped = node.items.iter().find(|i| i.name.as_ref() == "scoped").expect("scoped present");
+        let scoped =
+            node.items.iter().find(|i| i.name.as_ref() == "scoped").expect("scoped present");
         match scoped.visibility {
             Visibility::PubIn(ref s) => assert_eq!(s.as_ref(), "self"),
             _ => panic!("expected Visibility::PubIn('self') for scoped"),

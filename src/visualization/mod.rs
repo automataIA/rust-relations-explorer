@@ -1,16 +1,26 @@
 use crate::errors::KnowledgeGraphError;
 use crate::graph::{ItemType, KnowledgeGraph, RelationshipType};
-use std::fmt::Write as _;
 use std::collections::HashSet;
+use std::fmt::Write as _;
 
 #[derive(Debug, Clone, Copy)]
-pub enum DotTheme { Light, Dark }
+pub enum DotTheme {
+    Light,
+    Dark,
+}
 
 #[derive(Debug, Clone, Copy)]
-pub enum RankDir { LR, TB }
+pub enum RankDir {
+    LR,
+    TB,
+}
 
 #[derive(Debug, Clone, Copy)]
-pub enum EdgeStyle { Curved, Ortho, Polyline }
+pub enum EdgeStyle {
+    Curved,
+    Ortho,
+    Polyline,
+}
 
 #[derive(Debug, Clone, Copy)]
 pub struct DotOptions {
@@ -24,7 +34,14 @@ pub struct DotOptions {
 
 impl Default for DotOptions {
     fn default() -> Self {
-        Self { clusters: true, legend: true, theme: DotTheme::Light, rankdir: RankDir::LR, splines: EdgeStyle::Polyline, rounded: true }
+        Self {
+            clusters: true,
+            legend: true,
+            theme: DotTheme::Light,
+            rankdir: RankDir::LR,
+            splines: EdgeStyle::Polyline,
+            rounded: true,
+        }
     }
 }
 
@@ -35,7 +52,9 @@ pub struct SvgOptions {
 }
 
 impl Default for SvgOptions {
-    fn default() -> Self { Self { dot: DotOptions::default(), interactive: true } }
+    fn default() -> Self {
+        Self { dot: DotOptions::default(), interactive: true }
+    }
 }
 
 #[derive(Debug, Default)]
@@ -43,14 +62,20 @@ pub struct SvgGenerator;
 
 impl SvgGenerator {
     #[must_use]
-    pub fn new() -> Self { Self {} }
+    pub fn new() -> Self {
+        Self {}
+    }
 
     /// Generate an SVG rendering using Graphviz.
     ///
     /// # Errors
     /// Returns `KnowledgeGraphError::Visualization` if invoking Graphviz fails,
     /// if the process exits with a non-success status, or if its output is not valid UTF-8.
-    pub fn generate_svg_with_options(&self, graph: &KnowledgeGraph, opts: SvgOptions) -> Result<String, KnowledgeGraphError> {
+    pub fn generate_svg_with_options(
+        &self,
+        graph: &KnowledgeGraph,
+        opts: SvgOptions,
+    ) -> Result<String, KnowledgeGraphError> {
         let dot = DotGenerator::new().generate_dot_with_options(graph, opts.dot)?;
         // Render with Graphviz `dot -Tsvg`
         let output = std::process::Command::new("dot")
@@ -65,11 +90,18 @@ impl SvgGenerator {
                 }
                 child.wait_with_output()
             })
-            .map_err(|e| KnowledgeGraphError::Visualization(format!("Failed to run graphviz 'dot': {e}")))?;
+            .map_err(|e| {
+                KnowledgeGraphError::Visualization(format!("Failed to run graphviz 'dot': {e}"))
+            })?;
         if !output.status.success() {
-            return Err(KnowledgeGraphError::Visualization(format!("Graphviz 'dot' failed with code {:?}", output.status.code())));
+            return Err(KnowledgeGraphError::Visualization(format!(
+                "Graphviz 'dot' failed with code {:?}",
+                output.status.code()
+            )));
         }
-        let mut svg = String::from_utf8(output.stdout).map_err(|e| KnowledgeGraphError::Visualization(format!("Invalid UTF-8 from dot: {e}")))?;
+        let mut svg = String::from_utf8(output.stdout).map_err(|e| {
+            KnowledgeGraphError::Visualization(format!("Invalid UTF-8 from dot: {e}"))
+        })?;
         if opts.interactive {
             svg = enhance_svg(&svg);
         }
@@ -114,7 +146,9 @@ pub struct DotGenerator;
 
 impl DotGenerator {
     #[must_use]
-    pub fn new() -> Self { Self {} }
+    pub fn new() -> Self {
+        Self {}
+    }
 
     /// Generate DOT with default options.
     ///
@@ -128,12 +162,23 @@ impl DotGenerator {
     ///
     /// # Errors
     /// Returns a `KnowledgeGraphError` if DOT generation fails for any reason.
-    pub fn generate_dot_with_options(&self, graph: &KnowledgeGraph, opts: DotOptions) -> Result<String, KnowledgeGraphError> {
+    pub fn generate_dot_with_options(
+        &self,
+        graph: &KnowledgeGraph,
+        opts: DotOptions,
+    ) -> Result<String, KnowledgeGraphError> {
         let mut s = String::new();
         s.push_str("digraph KnowledgeRS\n{");
         s.push('\n');
-        let rank = match opts.rankdir { RankDir::LR => "LR", RankDir::TB => "TB" };
-        let splines = match opts.splines { EdgeStyle::Curved => "curved", EdgeStyle::Ortho => "ortho", EdgeStyle::Polyline => "polyline" };
+        let rank = match opts.rankdir {
+            RankDir::LR => "LR",
+            RankDir::TB => "TB",
+        };
+        let splines = match opts.splines {
+            EdgeStyle::Curved => "curved",
+            EdgeStyle::Ortho => "ortho",
+            EdgeStyle::Polyline => "polyline",
+        };
         let node_style = if opts.rounded { "filled,rounded" } else { "filled" };
         let _ = write!(
             s,
@@ -181,11 +226,21 @@ impl DotGenerator {
             let from = sanitize_id(&rel.from_item.0);
             let to = sanitize_id(&rel.to_item.0);
             let (label, color, style) = match &rel.relationship_type {
-                RelationshipType::Uses { import_type } => (format!("uses:{import_type}"), "#1f77b4", "dashed"),
-                RelationshipType::Implements { trait_name } => (format!("impl:{trait_name}"), "#2ca02c", "dotted"),
-                RelationshipType::Contains { containment_type } => (format!("contains:{containment_type}"), "#7f7f7f", "solid"),
-                RelationshipType::Extends { extension_type } => (format!("extends:{extension_type}"), "#9467bd", "dashed"),
-                RelationshipType::Calls { call_type } => (format!("calls:{call_type}"), "#d62728", "solid"),
+                RelationshipType::Uses { import_type } => {
+                    (format!("uses:{import_type}"), "#1f77b4", "dashed")
+                }
+                RelationshipType::Implements { trait_name } => {
+                    (format!("impl:{trait_name}"), "#2ca02c", "dotted")
+                }
+                RelationshipType::Contains { containment_type } => {
+                    (format!("contains:{containment_type}"), "#7f7f7f", "solid")
+                }
+                RelationshipType::Extends { extension_type } => {
+                    (format!("extends:{extension_type}"), "#9467bd", "dashed")
+                }
+                RelationshipType::Calls { call_type } => {
+                    (format!("calls:{call_type}"), "#d62728", "solid")
+                }
             };
             let penwidth = 0.8_f64.max(rel.strength).min(3.0);
             let _ = writeln!(
@@ -208,7 +263,10 @@ impl DotGenerator {
             for (name, t) in legend_items {
                 let (fill, shape) = style_for_item_with_theme(&t, opts.theme);
                 let id = sanitize_id(&format!("legend_{name}"));
-                let _ = writeln!(s, "    \"{id}\" [label=\"{name}\", fillcolor=\"{fill}\", shape=\"{shape}\"]; ");
+                let _ = writeln!(
+                    s,
+                    "    \"{id}\" [label=\"{name}\", fillcolor=\"{fill}\", shape=\"{shape}\"]; "
+                );
             }
             s.push_str("  }\n");
         }
@@ -232,7 +290,11 @@ impl DotGenerator {
         }
         let cluster_id = format!("cluster_{}", sanitize_id(&key));
         let label = path.file_name().and_then(|p| p.to_str()).unwrap_or("");
-        let _ = write!(out, "  subgraph \"{cluster_id}\" {{\n    label=\"{}\";\n    color=lightgrey;\n", escape_label(label));
+        let _ = write!(
+            out,
+            "  subgraph \"{cluster_id}\" {{\n    label=\"{}\";\n    color=lightgrey;\n",
+            escape_label(label)
+        );
 
         if let Some(file) = graph.files.get(path) {
             for item in &file.items {

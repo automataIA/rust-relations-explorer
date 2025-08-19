@@ -13,15 +13,22 @@ fn bench_build_graph(c: &mut Criterion) {
             CacheMode::Use => "use_cache",
             CacheMode::Ignore => "ignore_cache",
         };
-        group.bench_function(BenchmarkId::new("build_from_directory_with_cache_opts", label), |b| {
-            b.iter(|| {
-                let root = Path::new(".");
-                let graph = KnowledgeGraph::build_from_directory_with_cache_opts(black_box(root), mode, false)
+        group.bench_function(
+            BenchmarkId::new("build_from_directory_with_cache_opts", label),
+            |b| {
+                b.iter(|| {
+                    let root = Path::new(".");
+                    let graph = KnowledgeGraph::build_from_directory_with_cache_opts(
+                        black_box(root),
+                        mode,
+                        false,
+                    )
                     .expect("build graph");
-                // prevent optimizer from discarding
-                black_box(graph.files.len())
-            })
-        });
+                    // prevent optimizer from discarding
+                    black_box(graph.files.len())
+                })
+            },
+        );
     }
 
     group.finish();

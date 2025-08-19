@@ -72,11 +72,11 @@ impl<'a> Resolver<'a> {
 
         // Global string interner via graph.string_pool to deduplicate hot strings
         let intern_str = |s: &str| -> Arc<str> {
-            let mut pool = graph
-                .string_pool
-                .lock()
-                .unwrap_or_else(std::sync::PoisonError::into_inner);
-            if let Some(a) = pool.get(s) { return a.clone(); }
+            let mut pool =
+                graph.string_pool.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+            if let Some(a) = pool.get(s) {
+                return a.clone();
+            }
             let a: Arc<str> = Arc::from(s);
             pool.insert(s.to_string(), a.clone());
             a
@@ -127,12 +127,8 @@ impl<'a> Resolver<'a> {
                 }
             } else {
                 for imp in &file.imports {
-                    let segments: Vec<Arc<str>> = imp
-                        .path
-                        .split("::")
-                        .filter(|s| !s.is_empty())
-                        .map(intern_str)
-                        .collect();
+                    let segments: Vec<Arc<str>> =
+                        imp.path.split("::").filter(|s| !s.is_empty()).map(intern_str).collect();
                     if let Some(alias) = &imp.alias {
                         // Ignore underscore imports: `use path as _;` doesn't bind a name
                         if alias.as_ref() == "_" {
@@ -217,7 +213,9 @@ impl<'a> Resolver<'a> {
         }
 
         // Fallback: Try exact item name match on the last segment
-        let Some(last) = parts.last() else { return Vec::new(); };
+        let Some(last) = parts.last() else {
+            return Vec::new();
+        };
         if let Some(ids) = self.name_index.get(last) {
             return ids.clone();
         }

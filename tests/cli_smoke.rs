@@ -16,20 +16,24 @@ fn cli_build_and_connected_files_smoke() {
     fs::create_dir_all(&src).unwrap();
 
     // Create lib.rs and a.rs
-    write_file(&src.join("lib.rs"), r#"
+    write_file(
+        &src.join("lib.rs"),
+        r#"
         pub mod a;
         pub fn top() {}
-    "#);
-    write_file(&src.join("a.rs"), r#"
+    "#,
+    );
+    write_file(
+        &src.join("a.rs"),
+        r#"
         use crate::top;
         pub fn child() { top(); }
-    "#);
+    "#,
+    );
 
     // Act: run build command
     let mut cmd = Command::cargo_bin("rust-relations-explorer").unwrap();
-    cmd.arg("build")
-        .arg("--path").arg(root)
-        .arg("--json").arg(root.join("graph.json"));
+    cmd.arg("build").arg("--path").arg(root).arg("--json").arg(root.join("graph.json"));
     cmd.assert().success();
 
     // Assert: graph file exists and contains the module
@@ -40,10 +44,14 @@ fn cli_build_and_connected_files_smoke() {
 
     // Act: run query connected-files
     let mut cmd2 = Command::cargo_bin("rust-relations-explorer").unwrap();
-    cmd2.arg("query").arg("connected-files")
-        .arg("--path").arg(root)
-        .arg("--file").arg(src.join("a.rs"))
-        .arg("--format").arg("json");
+    cmd2.arg("query")
+        .arg("connected-files")
+        .arg("--path")
+        .arg(root)
+        .arg("--file")
+        .arg(src.join("a.rs"))
+        .arg("--format")
+        .arg("json");
     cmd2.assert().success().stdout(predicate::str::contains("lib.rs"));
 }
 
