@@ -1,5 +1,5 @@
-use knowledge_rs::graph::{KnowledgeGraph, FileNode, Item, ItemType, Relationship, RelationshipType, Visibility, Location, ItemId};
-use knowledge_rs::query::{ShortestPathQuery, HubsQuery, ModuleCentralityQuery, CentralityMetric, Query};
+use rust_relations_explorer::graph::{KnowledgeGraph, FileNode, Item, ItemType, Relationship, RelationshipType, Visibility, Location, ItemId};
+use rust_relations_explorer::query::{ShortestPathQuery, HubsQuery, ModuleCentralityQuery, CentralityMetric, Query};
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
 

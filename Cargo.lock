@@ -456,26 +456,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "knowledge-rs"
-version = "0.1.0"
-dependencies = [
- "assert_cmd",
- "clap",
- "criterion",
- "ignore",
- "predicates",
- "proptest",
- "rayon",
- "regex",
- "serde",
- "serde_json",
- "tempfile",
- "thiserror",
- "toml",
- "walkdir",
-]
-
-[[package]]
 name = "lazy_static"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -741,6 +721,26 @@ name = "regex-syntax"
 version = "0.8.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2b15c43186be67a4fd63bee50d0303afffcef381492ebe2c5d87f324e1b8815c"
+
+[[package]]
+name = "rust-relations-explorer"
+version = "0.1.0"
+dependencies = [
+ "assert_cmd",
+ "clap",
+ "criterion",
+ "ignore",
+ "predicates",
+ "proptest",
+ "rayon",
+ "regex",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror",
+ "toml",
+ "walkdir",
+]
 
 [[package]]
 name = "rustix"

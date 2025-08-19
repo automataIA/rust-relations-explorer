@@ -24,7 +24,7 @@ fn cli_build_produces_dot_and_json_and_hubs_query_works() {
     "#);
 
     // Act: run build with dot and json outputs
-    let mut cmd = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut cmd = Command::cargo_bin("rust-relations-explorer").unwrap();
     cmd.arg("build")
         .arg("--path").arg(root)
         .arg("--json").arg(root.join("graph.json"))
@@ -40,7 +40,7 @@ fn cli_build_produces_dot_and_json_and_hubs_query_works() {
     assert!(fs::metadata(&dot_path).unwrap().len() > 0);
 
     // Act: run hubs query on saved graph
-    let mut q = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut q = Command::cargo_bin("rust-relations-explorer").unwrap();
     q.arg("query").arg("hubs")
         .arg("--graph").arg(&json_path)
         .arg("--metric").arg("total")

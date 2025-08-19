@@ -270,6 +270,87 @@ pub fn run_cli(cli: Cli) -> i32 {
                 }
                 0
             }
+            QueryCommands::UnreferencedItems { path, config, no_ignore, include_public, exclude, graph: graph_path, format } => {
+                use crate::query::UnreferencedItemsQuery;
+                let graph = if let Some(p) = graph_path {
+                    match KnowledgeGraph::load_json(std::path::Path::new(&p)) { Ok(g) => g, Err(e) => { eprintln!("Load graph failed: {e}"); return 1; } }
+                } else {
+                    if no_ignore { std::env::set_var("KNOWLEDGE_RS_NO_IGNORE", "1"); }
+                    let res = match KnowledgeGraph::build_from_directory(std::path::Path::new(&path)) { Ok(g) => g, Err(e) => { eprintln!("Build failed: {e}"); if no_ignore { std::env::remove_var("KNOWLEDGE_RS_NO_IGNORE"); } return 1; } };
+                    if no_ignore { std::env::remove_var("KNOWLEDGE_RS_NO_IGNORE"); }
+                    res
+                };
+                let exclude_re = if let Some(pat) = exclude.as_ref() {
+                    match regex::Regex::new(pat) { Ok(r) => Some(r), Err(e) => { eprintln!("Invalid --exclude regex: {e}"); return 1; } }
+                } else { None };
+                let q = UnreferencedItemsQuery::new(include_public, exclude_re);
+                let rows = q.run(&graph);
+                let fmt = if let Some(cfg_path) = config.as_ref() {
+                    if let Some(cfg) = crate::utils::config::load_config_at(std::path::Path::new(cfg_path)) { cfg.query.and_then(|q| q.default_format).unwrap_or(format.clone()) } else { format.clone() }
+                } else { format.clone() };
+                if fmt == "json" {
+                    #[derive(serde::Serialize)]
+                    struct Row { path: String, id: String, name: String, kind: String, visibility: String }
+                    let out: Vec<Row> = rows.into_iter().map(|(p,id,name,kind,vis)| Row {
+                        path: p.display().to_string(), id, name, kind, visibility: vis
+                    }).collect();
+                    match serde_json::to_string_pretty(&out) { Ok(s) => println!("{s}"), Err(e) => { eprintln!("JSON encode error: {e}"); return 1; } }
+                } else if rows.is_empty() { println!("<no unreferenced items>"); } else {
+                    let body: Vec<Vec<String>> = rows.into_iter().map(|(p,id,name,kind,vis)| vec![p.display().to_string(), id, name, kind, vis]).collect();
+                    let table = crate::utils::table::render(&["Path", "ItemId", "Name", "Kind", "Vis"], &body);
+                    println!("{table}");
+                }
+                0
+            }
+            QueryCommands::ItemInfo { path, config, no_ignore, item_id, graph: graph_path, show_code, format } => {
+                use crate::query::ItemInfoQuery;
+                let graph = if let Some(p) = graph_path {
+                    match KnowledgeGraph::load_json(std::path::Path::new(&p)) { Ok(g) => g, Err(e) => { eprintln!("Load graph failed: {e}"); return 1; } }
+                } else {
+                    if no_ignore { std::env::set_var("KNOWLEDGE_RS_NO_IGNORE", "1"); }
+                    let res = match KnowledgeGraph::build_from_directory(std::path::Path::new(&path)) { Ok(g) => g, Err(e) => { eprintln!("Build failed: {e}"); if no_ignore { std::env::remove_var("KNOWLEDGE_RS_NO_IGNORE"); } return 1; } };
+                    if no_ignore { std::env::remove_var("KNOWLEDGE_RS_NO_IGNORE"); }
+                    res
+                };
+                let id = crate::graph::ItemId(item_id);
+                let q = ItemInfoQuery::new(id, show_code);
+                let result = q.run(&graph);
+                let fmt = if let Some(cfg_path) = config.as_ref() {
+                    if let Some(cfg) = crate::utils::config::load_config_at(std::path::Path::new(cfg_path)) { cfg.query.and_then(|q| q.default_format).unwrap_or(format.clone()) } else { format.clone() }
+                } else { format.clone() };
+                if fmt == "json" {
+                    match serde_json::to_string_pretty(&result) { Ok(s) => println!("{s}"), Err(e) => { eprintln!("JSON encode error: {e}"); return 1; } }
+                } else {
+                    match result {
+                        None => println!("<item not found>"),
+                        Some(info) => {
+                            println!("Item: {}", info.name);
+                            println!("Id: {}", info.id);
+                            println!("Kind: {}", info.kind);
+                            println!("Vis: {}", info.visibility);
+                            println!("Location: {}:{}-{}", info.path, info.line_start, info.line_end);
+                            if show_code {
+                                if let Some(code) = info.code.as_deref() {
+                                    println!("\n--- code ---\n{}\n--- end code ---", code);
+                                }
+                            }
+                            if info.inbound.is_empty() { println!("\nInbound: <none>"); } else {
+                                println!("\nInbound:");
+                                for r in info.inbound {
+                                    println!("- [{}] {} ({}) @ {} :: {}", r.relation, r.name, r.id, r.path, r.context);
+                                }
+                            }
+                            if info.outbound.is_empty() { println!("\nOutbound: <none>"); } else {
+                                println!("\nOutbound:");
+                                for r in info.outbound {
+                                    println!("- [{}] {} ({}) @ {} :: {}", r.relation, r.name, r.id, r.path, r.context);
+                                }
+                            }
+                        }
+                    }
+                }
+                0
+            }
         },
     }
 }

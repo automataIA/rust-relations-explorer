@@ -12,7 +12,7 @@ cargo install cargo-tarpaulin --locked
 cargo tarpaulin --engine llvm --out Lcov --timeout 600 --workspace --exclude-files benches/*,examples/*,target/*
 ```
 
-# 📚 knowledge-rs — Rust Knowledge Graph System
+# 📚 rust-relations-explorer — Rust Knowledge Graph System
 
 ![Rust Edition](https://img.shields.io/badge/edition-2021-blue)
 ![Language](https://img.shields.io/badge/language-Rust-orange)
@@ -34,6 +34,7 @@ A fast, lightweight tool to parse Rust projects into a knowledge graph and run i
 - ✅ CLI powered by `clap`
 - ✅ Queries
   - `connected-files` — files related to a target file
+  - `item-info` — show item metadata, code, and relations by ItemId
   - `function-usage` — callers/callees of a function
   - `cycles` — detect file-level cycles
   - `path` — shortest path between two files
@@ -67,7 +68,7 @@ Build a graph from a Rust project and export artifacts:
 
 ```bash
 # Build and save artifacts (uses cache by default)
-knowledge-rs build --path . \
+rust-relations-explorer build --path . \
   --json graph.json \
   --dot graph.dot \
   --svg graph.svg \
@@ -75,50 +76,54 @@ knowledge-rs build --path . \
   --dot-theme light --dot-clusters on --dot-legend on
 
 # Force parsing all files without using cache
-knowledge-rs build --path . --no-cache
+rust-relations-explorer build --path . --no-cache
 
 # Rebuild cache from scratch (clears previous cache file)
-knowledge-rs build --path . --rebuild
+rust-relations-explorer build --path . --rebuild
 
 # Apply options from a configuration file
-knowledge-rs build --path . --config knowledge-rs.toml --svg graph.svg
+rust-relations-explorer build --path . --config rust-relations-explorer.toml --svg graph.svg
 
 # Bypass ignore rules (include files even if ignored)
-knowledge-rs build --path . --no-ignore
+rust-relations-explorer build --path . --no-ignore
 ```
 
 Run queries (builds the graph on-the-fly unless `--graph` is provided):
 
 ```bash
 # Connected files for a given file
-knowledge-rs query connected-files --path . --file src/lib.rs --format text
+rust-relations-explorer query connected-files --path . --file src/lib.rs --format text
+
+# Show detailed info for an item by ItemId (text or JSON)
+rust-relations-explorer query item-info --path . --item-id fn:createIcons:6 --format text
+rust-relations-explorer query item-info --path . --item-id fn:createIcons:6 --format json
 
 # Function usage: who calls `foo` (callers) or who does `foo` call (callees)
-knowledge-rs query function-usage --path . --function foo --direction callers --format json
+rust-relations-explorer query function-usage --path . --function foo --direction callers --format json
 
 # Detect cycles
-knowledge-rs query cycles --path . --format text
+rust-relations-explorer query cycles --path . --format text
 
 # Shortest path between files
-knowledge-rs query path --path . --from src/a.rs --to src/b.rs --format text
+rust-relations-explorer query path --path . --from src/a.rs --to src/b.rs --format text
 
 # Hubs: top-N by degree centrality
-knowledge-rs query hubs --path . --metric total --top 10 --format text
+rust-relations-explorer query hubs --path . --metric total --top 10 --format text
 
 # Module centrality: top-N modules by degree
-knowledge-rs query module-centrality --path . --metric total --top 10 --format text
+rust-relations-explorer query module-centrality --path . --metric total --top 10 --format text
 
 # Trait implementations for Display
-knowledge-rs query trait-impls --path . --trait Display --format json
+rust-relations-explorer query trait-impls --path . --trait Display --format json
 
 # Any query can also bypass ignore rules when building on-the-fly
-knowledge-rs query cycles --path . --no-ignore --format text
+rust-relations-explorer query cycles --path . --no-ignore --format text
 ```
 
 Use a prebuilt graph for faster queries:
 
 ```bash
-knowledge-rs query hubs --graph graph.json --metric in --top 5 --format json
+rust-relations-explorer query hubs --graph graph.json --metric in --top 5 --format json
 ```
 
 ## 📎 Examples
@@ -146,8 +151,8 @@ Example sources:
 - __Build and save graph to JSON__
 
   ```bash
-  knowledge-rs build --path . --json graph.json
-  knowledge-rs query hubs --graph graph.json --metric total --top 10 --format json
+  rust-relations-explorer build --path . --json graph.json
+  rust-relations-explorer query hubs --graph graph.json --metric total --top 10 --format json
   ```
 
 - __Programmatic DOT/SVG generation__
@@ -163,24 +168,24 @@ Example sources:
 - __Bypass ignore rules for one-off analyses__
 
   ```bash
-  knowledge-rs build --path . --no-ignore --svg graph.svg
+  rust-relations-explorer build --path . --no-ignore --svg graph.svg
   ```
 
 - __Save and load graph JSON__
 
   ```bash
   # Save
-  knowledge-rs build --path . --json graph.json
+  rust-relations-explorer build --path . --json graph.json
 
   # Query using saved graph (faster)
-  knowledge-rs query hubs --graph graph.json --metric in --top 5 --format json
+  rust-relations-explorer query hubs --graph graph.json --metric in --top 5 --format json
   ```
 
 - __Programmatic save/load JSON__
 
   ```rust
-  use knowledge_rs::graph::KnowledgeGraph;
-  use knowledge_rs::utils::cache::CacheMode;
+  use rust_relations_explorer::graph::KnowledgeGraph;
+  use rust_relations_explorer::utils::cache::CacheMode;
 
   fn main() -> Result<(), Box<dyn std::error::Error>> {
       let root = std::path::Path::new(".");
@@ -200,6 +205,7 @@ Example sources:
 ## 🧩 Mapping: CLI queries ↔ API
 
 - `query connected-files` → `query::ConnectedFilesQuery`
+- `query item-info --item-id ID` → `query::ItemInfoQuery`
 - `query function-usage --direction callers|callees` → `query::FunctionUsageQuery::{callers,callees}`
 - `query cycles` → `query::CycleDetectionQuery`
 - `query path --from A --to B` → `query::ShortestPathQuery::new(A,B)`
@@ -312,20 +318,20 @@ cargo run --example generate_synthetic -- /tmp/kr_synth 10000
 cargo build --release
 
 # Use the built binary to avoid compile overhead
-/usr/bin/time -v target/release/knowledge-rs build --path /tmp/kr_synth --json /tmp/kr_graph.json
+/usr/bin/time -v target/release/rust-relations-explorer build --path /tmp/kr_synth --json /tmp/kr_graph.json
 ```
 
 3) Compare cache modes:
 
 ```sh
-/usr/bin/time -v target/release/knowledge-rs build --path /tmp/kr_synth --json /tmp/kr_graph.json --rebuild
-/usr/bin/time -v target/release/knowledge-rs build --path /tmp/kr_synth --json /tmp/kr_graph.json --no-cache
+/usr/bin/time -v target/release/rust-relations-explorer build --path /tmp/kr_synth --json /tmp/kr_graph.json --rebuild
+/usr/bin/time -v target/release/rust-relations-explorer build --path /tmp/kr_synth --json /tmp/kr_graph.json --no-cache
 ```
 
 4) Optional memory profiling:
 
 ```sh
-/usr/bin/time -v target/release/knowledge-rs build --path /tmp/kr_synth --json /tmp/kr_graph.json
+/usr/bin/time -v target/release/rust-relations-explorer build --path /tmp/kr_synth --json /tmp/kr_graph.json
 # or use heaptrack if available
 ```
 
@@ -372,7 +378,7 @@ cargo run -- query module-centrality --path . --metric in --top 5 --format text
 Types implementing a trait (e.g., Display):
 
 ```sh
-cargo run -- query trait-impls --path . --trait Display --format text
+cargo run -- query trait-impls --path . --trait Display --format json
 ```
 
 ## 🧠 Caching Modes
@@ -413,11 +419,11 @@ Bypass ignores (use with care):
 
 ```bash
 # Preferred: CLI flag (explicit)
-knowledge-rs build --path . --no-ignore
+rust-relations-explorer build --path . --no-ignore
 
 # Optional: environment variable (legacy/compat)
 # Still supported, but not required since the CLI now passes the flag directly.
-KNOWLEDGE_RS_NO_IGNORE=1 knowledge-rs build --path .
+KNOWLEDGE_RS_NO_IGNORE=1 rust-relations-explorer build --path .
 ```
 
 ## ⚙️ Configuration
@@ -428,7 +434,7 @@ You can provide a TOML config with `--config <path>` for both `build` and all `q
   - CLI flags override binary defaults.
   - Config values are applied on top of CLI defaults to provide convenient project-wide settings (as implemented, config values for DOT/SVG and query format will be applied even if CLI uses defaulted values).
 
-Example `knowledge-rs.toml`:
+Example `rust-relations-explorer.toml`:
 
 ```toml
 [dot]

@@ -1,6 +1,6 @@
-use knowledge_rs::graph::KnowledgeGraph;
-use knowledge_rs::utils::cache::CacheMode;
-use knowledge_rs::visualization::{DotGenerator, DotOptions, EdgeStyle, RankDir, SvgGenerator, SvgOptions, DotTheme};
+use rust_relations_explorer::graph::KnowledgeGraph;
+use rust_relations_explorer::utils::cache::CacheMode;
+use rust_relations_explorer::visualization::{DotGenerator, DotOptions, EdgeStyle, RankDir, SvgGenerator, SvgOptions, DotTheme};
 
 fn main() {
     let root = std::path::Path::new(".");

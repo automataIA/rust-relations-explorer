@@ -23,13 +23,13 @@ fn dot_generator_clusters_and_flat_themes() {
 
     // Build a graph JSON then load it via CLI to ensure consistency
     let graph_json = root.join("graph.json");
-    let mut build = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut build = Command::cargo_bin("rust-relations-explorer").unwrap();
     build.arg("build").arg("--path").arg(root).arg("--json").arg(&graph_json);
     build.assert().success();
 
     // Use the CLI to emit DOT with clusters + legend + dark theme
     let dot_dark = graph_json.parent().unwrap().join("dark.dot");
-    let mut build_dot_dark = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut build_dot_dark = Command::cargo_bin("rust-relations-explorer").unwrap();
     build_dot_dark
         .arg("build").arg("--path").arg(graph_json.parent().unwrap())
         .arg("--dot").arg(&dot_dark)
@@ -50,7 +50,7 @@ fn dot_generator_clusters_and_flat_themes() {
 
     // Emit DOT without clusters, light theme defaults
     let dot_light = graph_json.parent().unwrap().join("light.dot");
-    let mut build_dot_light = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut build_dot_light = Command::cargo_bin("rust-relations-explorer").unwrap();
     build_dot_light
         .arg("build").arg("--path").arg(graph_json.parent().unwrap())
         .arg("--dot").arg(&dot_light)

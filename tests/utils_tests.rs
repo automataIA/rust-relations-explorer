@@ -1,4 +1,4 @@
-use knowledge_rs::utils::{file_walker, table};
+use rust_relations_explorer::utils::{file_walker, table};
 use std::fs;
 use std::io::Write;
 use tempfile::tempdir;

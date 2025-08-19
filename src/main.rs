@@ -1,7 +1,7 @@
 fn main() {
-    use knowledge_rs::cli::parse;
+    use rust_relations_explorer::cli::parse;
     let cli = parse();
-    let code = knowledge_rs::app::run_cli(cli);
+    let code = rust_relations_explorer::app::run_cli(cli);
     if code != 0 { std::process::exit(code); }
 }
 /*
@@ -13,10 +13,10 @@ fn main() {
                         res
                     }
                 };
-                let q = knowledge_rs::query::ConnectedFilesQuery::new(&file);
+                let q = rust_relations_explorer::query::ConnectedFilesQuery::new(&file);
                 let results = q.run(&graph);
                 let fmt = if let Some(cfg_path) = config.as_ref() {
-                    if let Some(cfg) = knowledge_rs::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
+                    if let Some(cfg) = rust_relations_explorer::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
                         cfg.query.and_then(|q| q.default_format).unwrap_or(format.clone())
                     } else { format.clone() }
                 } else { format.clone() };
@@ -32,7 +32,7 @@ fn main() {
                         .enumerate()
                         .map(|(i,p)| vec![format!("{}", i+1), p.display().to_string()])
                         .collect();
-                    let table = knowledge_rs::utils::table::render(&["#", "Path"], &rows);
+                    let table = rust_relations_explorer::utils::table::render(&["#", "Path"], &rows);
                     println!("{}", table);
                 }
             }
@@ -53,13 +53,13 @@ fn main() {
                     }
                 };
                 let dir = match direction.as_str() {
-                    "callees" => knowledge_rs::query::UsageDirection::Callees,
-                    _ => knowledge_rs::query::UsageDirection::Callers,
+                    "callees" => rust_relations_explorer::query::UsageDirection::Callees,
+                    _ => rust_relations_explorer::query::UsageDirection::Callers,
                 };
-                let q = knowledge_rs::query::FunctionUsageQuery { function, direction: dir };
+                let q = rust_relations_explorer::query::FunctionUsageQuery { function, direction: dir };
                 let results = q.run(&graph);
                 let fmt = if let Some(cfg_path) = config.as_ref() {
-                    if let Some(cfg) = knowledge_rs::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
+                    if let Some(cfg) = rust_relations_explorer::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
                         cfg.query.and_then(|q| q.default_format).unwrap_or(format.clone())
                     } else { format.clone() }
                 } else { format.clone() };
@@ -89,10 +89,10 @@ fn main() {
                         res
                     }
                 };
-                let q = knowledge_rs::query::CycleDetectionQuery::new();
+                let q = rust_relations_explorer::query::CycleDetectionQuery::new();
                 let cycles = q.run(&graph);
                 let fmt = if let Some(cfg_path) = config.as_ref() {
-                    if let Some(cfg) = knowledge_rs::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
+                    if let Some(cfg) = rust_relations_explorer::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
                         cfg.query.and_then(|q| q.default_format).unwrap_or(format.clone())
                     } else { format.clone() }
                 } else { format.clone() };
@@ -128,10 +128,10 @@ fn main() {
                         res
                     }
                 };
-                let q = knowledge_rs::query::ShortestPathQuery::new(&from, &to);
+                let q = rust_relations_explorer::query::ShortestPathQuery::new(&from, &to);
                 let results = q.run(&graph);
                 let fmt = if let Some(cfg_path) = config.as_ref() {
-                    if let Some(cfg) = knowledge_rs::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
+                    if let Some(cfg) = rust_relations_explorer::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
                         cfg.query.and_then(|q| q.default_format).unwrap_or(format.clone())
                     } else { format.clone() }
                 } else { format.clone() };
@@ -150,13 +150,13 @@ fn main() {
                             .enumerate()
                             .map(|(i,p)| vec![format!("{}", i+1), p.display().to_string()])
                             .collect();
-                        let table = knowledge_rs::utils::table::render(&["Step", "Path"], &rows);
+                        let table = rust_relations_explorer::utils::table::render(&["Step", "Path"], &rows);
                         println!("{}", table);
                     }
                 }
             }
             QueryCommands::Hubs { path, config, no_ignore, graph: graph_path, metric, top, format } => {
-                use knowledge_rs::query::{HubsQuery, CentralityMetric};
+                use rust_relations_explorer::query::{HubsQuery, CentralityMetric};
                 let graph = match graph_path {
                     Some(p) => match KnowledgeGraph::load_json(std::path::Path::new(&p)) {
                         Ok(g) => g,
@@ -180,7 +180,7 @@ fn main() {
                 let q = HubsQuery::new(m, top);
                 let rows = q.run(&graph);
                 let fmt = if let Some(cfg_path) = config.as_ref() {
-                    if let Some(cfg) = knowledge_rs::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
+                    if let Some(cfg) = rust_relations_explorer::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
                         cfg.query.and_then(|q| q.default_format).unwrap_or(format.clone())
                     } else { format.clone() }
                 } else { format.clone() };
@@ -197,12 +197,12 @@ fn main() {
                         .into_iter()
                         .map(|(p,i,o)| vec![p.display().to_string(), i.to_string(), o.to_string(), (i+o).to_string()])
                         .collect();
-                    let table = knowledge_rs::utils::table::render(&["Path", "In", "Out", "Total"], &body);
+                    let table = rust_relations_explorer::utils::table::render(&["Path", "In", "Out", "Total"], &body);
                     println!("{}", table);
                 }
             }
             QueryCommands::ModuleCentrality { path, config, no_ignore, graph: graph_path, metric, top, format } => {
-                use knowledge_rs::query::{ModuleCentralityQuery, CentralityMetric, Query};
+                use rust_relations_explorer::query::{ModuleCentralityQuery, CentralityMetric, Query};
                 let graph = match graph_path {
                     Some(p) => match KnowledgeGraph::load_json(std::path::Path::new(&p)) {
                         Ok(g) => g,
@@ -226,7 +226,7 @@ fn main() {
                 let q = ModuleCentralityQuery::new(m, top);
                 let rows = q.run(&graph);
                 let fmt = if let Some(cfg_path) = config.as_ref() {
-                    if let Some(cfg) = knowledge_rs::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
+                    if let Some(cfg) = rust_relations_explorer::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
                         cfg.query.and_then(|q| q.default_format).unwrap_or(format.clone())
                     } else { format.clone() }
                 } else { format.clone() };
@@ -243,12 +243,12 @@ fn main() {
                         .into_iter()
                         .map(|(p,i,o)| vec![p.display().to_string(), i.to_string(), o.to_string(), (i+o).to_string()])
                         .collect();
-                    let table = knowledge_rs::utils::table::render(&["Module", "In", "Out", "Total"], &body);
+                    let table = rust_relations_explorer::utils::table::render(&["Module", "In", "Out", "Total"], &body);
                     println!("{}", table);
                 }
             }
             QueryCommands::TraitImpls { path, config, no_ignore, r#trait, graph: graph_path, format } => {
-                use knowledge_rs::query::{TraitImplsQuery, Query};
+                use rust_relations_explorer::query::{TraitImplsQuery, Query};
                 let graph = match graph_path {
                     Some(p) => match KnowledgeGraph::load_json(std::path::Path::new(&p)) {
                         Ok(g) => g,
@@ -267,7 +267,7 @@ fn main() {
                 let q = TraitImplsQuery::new(&r#trait);
                 let rows = q.run(&graph);
                 let fmt = if let Some(cfg_path) = config.as_ref() {
-                    if let Some(cfg) = knowledge_rs::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
+                    if let Some(cfg) = rust_relations_explorer::utils::config::load_config_at(std::path::Path::new(cfg_path)) {
                         cfg.query.and_then(|q| q.default_format).unwrap_or(format.clone())
                     } else { format.clone() }
                 } else { format.clone() };
@@ -287,7 +287,7 @@ fn main() {
                             .into_iter()
                             .map(|(p,t)| vec![p.display().to_string(), t])
                             .collect();
-                        let table = knowledge_rs::utils::table::render(&["Path", "Type"], &body);
+                        let table = rust_relations_explorer::utils::table::render(&["Path", "Type"], &body);
                         println!("{}", table);
                     }
                 }

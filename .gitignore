@@ -1,6 +1,9 @@
 /target
 info/
-
+lcov.info
 design.md
 plan-tasks.md
 requisites.md
+heaptrack.knowledge-rs.469342.gz
+heaptrack-summary.txt
+builder.md

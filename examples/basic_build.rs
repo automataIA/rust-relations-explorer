@@ -1,5 +1,5 @@
-use knowledge_rs::graph::KnowledgeGraph;
-use knowledge_rs::utils::cache::CacheMode;
+use rust_relations_explorer::graph::KnowledgeGraph;
+use rust_relations_explorer::utils::cache::CacheMode;
 
 fn main() {
     let root = std::path::Path::new(".");

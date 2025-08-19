@@ -1,5 +1,5 @@
 use proptest::prelude::*;
-use knowledge_rs::parser::RustParser;
+use rust_relations_explorer::parser::RustParser;
 
 // Bottom-up property-based tests: parser robustness on arbitrary inputs
 proptest! {

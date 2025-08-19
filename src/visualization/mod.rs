@@ -24,7 +24,7 @@ pub struct DotOptions {
 
 impl Default for DotOptions {
     fn default() -> Self {
-        Self { clusters: true, legend: true, theme: DotTheme::Light, rankdir: RankDir::LR, splines: EdgeStyle::Curved, rounded: true }
+        Self { clusters: true, legend: true, theme: DotTheme::Light, rankdir: RankDir::LR, splines: EdgeStyle::Polyline, rounded: true }
     }
 }
 
@@ -137,7 +137,7 @@ impl DotGenerator {
         let node_style = if opts.rounded { "filled,rounded" } else { "filled" };
         let _ = write!(
             s,
-            "  rankdir={rank};\n  graph [fontname=Helvetica, splines={splines}] ;\n  node [shape=box, fontsize=10, style={node_style}] ;\n  edge [fontname=Helvetica, fontsize=9];\n"
+            "  rankdir={rank};\n  graph [fontname=Helvetica, splines={splines}] ;\n  node [shape=box, fontsize=10, style=\"{node_style}\"] ;\n  edge [fontname=Helvetica, fontsize=9];\n"
         );
 
         if opts.clusters {

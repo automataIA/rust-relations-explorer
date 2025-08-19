@@ -1,4 +1,4 @@
-use knowledge_rs::utils::config::{self};
+use rust_relations_explorer::utils::config::{self};
 use std::fs;
 use std::path::Path;
 

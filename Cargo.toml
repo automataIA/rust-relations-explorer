@@ -1,7 +1,21 @@
 [package]
-name = "knowledge-rs"
+name = "rust-relations-explorer"
 version = "0.1.0"
 edition = "2021"
+description = "Explore relationships in Rust codebases: build a knowledge graph and run queries (connected files, function usage, cycles, paths, hubs, module centrality, trait impls)."
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+keywords = ["rust", "graph", "relations", "analysis", "cli"]
+categories = ["command-line-utilities", "development-tools"]
+documentation = "https://docs.rs/rust-relations-explorer"
+
+[lib]
+name = "rust_relations_explorer"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rust-relations-explorer"
+path = "src/main.rs"
 
 [dependencies]
 regex = "1.10"

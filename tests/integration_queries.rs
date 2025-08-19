@@ -1,8 +1,8 @@
 use std::fs;
 use std::path::PathBuf;
 
-use knowledge_rs::graph::KnowledgeGraph;
-use knowledge_rs::query::{ConnectedFilesQuery, Query, CycleDetectionQuery};
+use rust_relations_explorer::graph::KnowledgeGraph;
+use rust_relations_explorer::query::{ConnectedFilesQuery, Query, CycleDetectionQuery};
 
 fn make_temp_project(contents: Vec<(&str, &str)>) -> PathBuf {
     let base = std::env::temp_dir()

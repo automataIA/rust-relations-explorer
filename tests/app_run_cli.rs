@@ -1,5 +1,5 @@
-use knowledge_rs::app::run_cli;
-use knowledge_rs::cli::{Cli, Commands, QueryCommands};
+use rust_relations_explorer::app::run_cli;
+use rust_relations_explorer::cli::{Cli, Commands, QueryCommands};
 use std::fs;
 use std::io::Write;
 use std::path::PathBuf;

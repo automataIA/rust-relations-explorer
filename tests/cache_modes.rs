@@ -1,5 +1,5 @@
-use knowledge_rs::graph::KnowledgeGraph;
-use knowledge_rs::utils::cache::{self, CacheMode};
+use rust_relations_explorer::graph::KnowledgeGraph;
+use rust_relations_explorer::utils::cache::{self, CacheMode};
 use std::fs::{self, File};
 use std::io::Write;
 use std::path::{Path, PathBuf};

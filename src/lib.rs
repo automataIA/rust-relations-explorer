@@ -1,4 +1,4 @@
-//! knowledge-rs — Rust Knowledge Graph System
+//! rust-relations-explorer — Rust Knowledge Graph System
 //!
 //! Build a knowledge graph from a Rust codebase and query relationships.
 //!
@@ -10,8 +10,8 @@
 //!
 //! # Quickstart (Library)
 //! ```no_run
-//! use knowledge_rs::graph::KnowledgeGraph;
-//! use knowledge_rs::utils::cache::CacheMode;
+//! use rust_relations_explorer::graph::KnowledgeGraph;
+//! use rust_relations_explorer::utils::cache::CacheMode;
 //!
 //! let root = std::path::Path::new(".");
 //! // Build with cache and respect ignore rules
@@ -22,8 +22,8 @@
 //!
 //! # Quickstart (CLI)
 //! ```text
-//! knowledge-rs build --path . --json graph.json
-//! knowledge-rs query connected-files --path . --file src/lib.rs --format text
+//! rust-relations-explorer build --path . --json graph.json
+//! rust-relations-explorer query connected-files --path . --file src/lib.rs --format text
 //! ```
 //!
 //! # Ignore Behavior

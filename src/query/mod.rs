@@ -1,5 +1,7 @@
 use std::collections::{HashMap, HashSet};
 use std::path::{Path, PathBuf};
+use regex::Regex;
+use serde::Serialize;
 
 use crate::graph::{ItemId, KnowledgeGraph};
 
@@ -364,6 +366,187 @@ impl Query<Vec<(PathBuf, usize, usize)>> for HubsQuery {
 
         rows.truncate(self.top);
         rows
+    }
+}
+
+/// Find items without inbound Uses/Calls edges.
+///
+/// Skips the synthetic file-level module (first item in each file). By default,
+/// public items are excluded (they may be used by downstream crates). Set `include_public`
+/// to include them as well.
+pub struct UnreferencedItemsQuery {
+    pub include_public: bool,
+    pub exclude: Option<Regex>,
+}
+
+impl UnreferencedItemsQuery {
+    #[must_use]
+    pub fn new(include_public: bool, exclude: Option<Regex>) -> Self { Self { include_public, exclude } }
+}
+
+impl Query<Vec<(PathBuf, String, String, String, String)>> for UnreferencedItemsQuery {
+    fn run(&self, graph: &KnowledgeGraph) -> Vec<(PathBuf, String, String, String, String)> {
+        use crate::graph::{ItemType, RelationshipType, Visibility};
+        let mut used: HashSet<ItemId> = HashSet::new();
+        for rel in &graph.relationships {
+            match rel.relationship_type {
+                RelationshipType::Uses { .. } | RelationshipType::Calls { .. } => {
+                    used.insert(rel.to_item.clone());
+                }
+                _ => {}
+            }
+        }
+
+        let mut out: Vec<(PathBuf, String, String, String, String)> = Vec::new();
+        for (path, file) in &graph.files {
+            if let Some(re) = &self.exclude {
+                if re.is_match(&path.display().to_string()) { continue; }
+            }
+            for (idx, item) in file.items.iter().enumerate() {
+                if idx == 0 { continue; }
+                if !self.include_public {
+                    if let Visibility::Public = item.visibility { continue; }
+                }
+                if used.contains(&item.id) { continue; }
+
+                let kind = match &item.item_type {
+                    ItemType::Module { .. } => "Module",
+                    ItemType::Function { .. } => "Function",
+                    ItemType::Struct { .. } => "Struct",
+                    ItemType::Enum { .. } => "Enum",
+                    ItemType::Trait { .. } => "Trait",
+                    ItemType::Impl { .. } => "Impl",
+                    ItemType::Const => "Const",
+                    ItemType::Static { .. } => "Static",
+                    ItemType::Type => "Type",
+                    ItemType::Macro => "Macro",
+                };
+                let vis = match item.visibility {
+                    Visibility::Public => "public",
+                    Visibility::Private => "private",
+                    Visibility::PubCrate => "pub(crate)",
+                    Visibility::PubSuper => "pub(super)",
+                    Visibility::PubIn(_) => "pub(in)",
+                };
+                out.push((path.clone(), item.id.0.clone(), item.name.to_string(), kind.to_string(), vis.to_string()));
+            }
+        }
+        out
+    }
+}
+
+// Detailed info for a single item id
+#[derive(Debug, Serialize)]
+pub struct ItemInfoRelationEntry {
+    pub id: String,
+    pub name: String,
+    pub path: String,
+    pub relation: String,
+    pub context: String,
+}
+
+#[derive(Debug, Serialize)]
+pub struct ItemInfoResult {
+    pub id: String,
+    pub name: String,
+    pub kind: String,
+    pub visibility: String,
+    pub path: String,
+    pub line_start: usize,
+    pub line_end: usize,
+    pub code: Option<String>,
+    pub inbound: Vec<ItemInfoRelationEntry>,
+    pub outbound: Vec<ItemInfoRelationEntry>,
+}
+
+pub struct ItemInfoQuery {
+    pub item_id: crate::graph::ItemId,
+    pub show_code: bool,
+}
+
+impl ItemInfoQuery {
+    #[must_use]
+    pub fn new(item_id: crate::graph::ItemId, show_code: bool) -> Self { Self { item_id, show_code } }
+}
+
+impl Query<Option<ItemInfoResult>> for ItemInfoQuery {
+    fn run(&self, graph: &KnowledgeGraph) -> Option<ItemInfoResult> {
+        use crate::graph::{ItemType, Visibility};
+        // Build an index of ItemId -> (path, &Item)
+        let mut idx: HashMap<&crate::graph::ItemId, (&PathBuf, &crate::graph::Item)> = HashMap::new();
+        for (p, f) in &graph.files {
+            for it in &f.items { idx.insert(&it.id, (p, it)); }
+        }
+        let (path, item) = idx.get(&self.item_id)?.to_owned();
+
+        let kind = match &item.item_type {
+            ItemType::Module { .. } => "Module",
+            ItemType::Function { .. } => "Function",
+            ItemType::Struct { .. } => "Struct",
+            ItemType::Enum { .. } => "Enum",
+            ItemType::Trait { .. } => "Trait",
+            ItemType::Impl { .. } => "Impl",
+            ItemType::Const => "Const",
+            ItemType::Static { .. } => "Static",
+            ItemType::Type => "Type",
+            ItemType::Macro => "Macro",
+        }.to_string();
+        let visibility = match &item.visibility {
+            Visibility::Public => "public".to_string(),
+            Visibility::Private => "private".to_string(),
+            Visibility::PubCrate => "pub(crate)".to_string(),
+            Visibility::PubSuper => "pub(super)".to_string(),
+            Visibility::PubIn(p) => format!("pub(in {p})"),
+        };
+
+        // Gather relations
+        let mut inbound: Vec<ItemInfoRelationEntry> = Vec::new();
+        let mut outbound: Vec<ItemInfoRelationEntry> = Vec::new();
+        let rel_to_string = |r: &crate::graph::RelationshipType| -> String {
+            match r {
+                crate::graph::RelationshipType::Uses { import_type } => format!("Uses:{import_type}"),
+                crate::graph::RelationshipType::Implements { trait_name } => format!("Implements:{trait_name}"),
+                crate::graph::RelationshipType::Contains { containment_type } => format!("Contains:{containment_type}"),
+                crate::graph::RelationshipType::Extends { extension_type } => format!("Extends:{extension_type}"),
+                crate::graph::RelationshipType::Calls { call_type } => format!("Calls:{call_type}"),
+            }
+        };
+        for r in &graph.relationships {
+            if r.to_item == item.id {
+                if let Some((pp, it)) = idx.get(&r.from_item) {
+                    inbound.push(ItemInfoRelationEntry { id: r.from_item.0.clone(), name: it.name.to_string(), path: pp.display().to_string(), relation: rel_to_string(&r.relationship_type), context: r.context.clone() });
+                }
+            }
+            if r.from_item == item.id {
+                if let Some((pp, it)) = idx.get(&r.to_item) {
+                    outbound.push(ItemInfoRelationEntry { id: r.to_item.0.clone(), name: it.name.to_string(), path: pp.display().to_string(), relation: rel_to_string(&r.relationship_type), context: r.context.clone() });
+                }
+            }
+        }
+
+        // Optional code snippet
+        let mut code: Option<String> = None;
+        if self.show_code {
+            if let Ok(content) = std::fs::read_to_string(path) {
+                let lines: Vec<&str> = content.lines().collect();
+                let s = item.location.line_start.saturating_sub(1);
+                let e = item.location.line_end.min(lines.len());
+                if s < e { code = Some(lines[s..e].join("\n")); }
+            }
+        }
+
+        Some(ItemInfoResult {
+            id: item.id.0.clone(),
+            name: item.name.to_string(),
+            kind,
+            visibility,
+            path: path.display().to_string(),
+            line_start: item.location.line_start,
+            line_end: item.location.line_end,
+            code,
+            inbound,
+            outbound,
+        })
     }
 }
 

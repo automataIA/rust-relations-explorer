@@ -23,7 +23,7 @@ fn build_uses_config_overrides_and_save() {
     write_file(&src.join("lib.rs"), "pub fn top() {}\n");
 
     // config file overriding DOT and SVG options + query defaults
-    let cfg_path = root.join("knowledge-rs.toml");
+    let cfg_path = root.join("rust-relations-explorer.toml");
     write_file(&cfg_path, r#"
 [dot]
 clusters = true
@@ -45,7 +45,7 @@ default_format = "json"
     let json_out = root.join("graph.json");
 
     // run build with config and outputs and save
-    let mut cmd = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut cmd = Command::cargo_bin("rust-relations-explorer").unwrap();
     cmd.arg("build")
         .arg("--path").arg(root)
         .arg("--config").arg(&cfg_path)
@@ -83,7 +83,7 @@ fn queries_without_graph_build_from_path_and_text_formats() {
     write_file(&src.join("b.rs"), "pub fn bar() { crate::a::foo(); }\n");
 
     // connected-files text output via table (no --graph)
-    let mut cf = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut cf = Command::cargo_bin("rust-relations-explorer").unwrap();
     cf.arg("query").arg("connected-files")
         .arg("--path").arg(root)
         .arg("--file").arg(src.join("a.rs"))
@@ -91,7 +91,7 @@ fn queries_without_graph_build_from_path_and_text_formats() {
     cf.assert().success().stdout(predicate::str::contains("#").and(predicate::str::contains("Path")));
 
     // function-usage callees branch (no --graph)
-    let mut fu = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut fu = Command::cargo_bin("rust-relations-explorer").unwrap();
     fu.arg("query").arg("function-usage")
         .arg("--path").arg(root)
         .arg("--function").arg("bar")
@@ -100,7 +100,7 @@ fn queries_without_graph_build_from_path_and_text_formats() {
     fu.assert().success();
 
     // hubs with metric in and text output
-    let mut hubs = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut hubs = Command::cargo_bin("rust-relations-explorer").unwrap();
     hubs.arg("query").arg("hubs")
         .arg("--path").arg(root)
         .arg("--metric").arg("in")
@@ -109,7 +109,7 @@ fn queries_without_graph_build_from_path_and_text_formats() {
     hubs.assert().success().stdout(predicate::str::contains("In").and(predicate::str::contains("Out")));
 
     // module-centrality with metric out and text output
-    let mut mc = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut mc = Command::cargo_bin("rust-relations-explorer").unwrap();
     mc.arg("query").arg("module-centrality")
         .arg("--path").arg(root)
         .arg("--metric").arg("out")
@@ -118,7 +118,7 @@ fn queries_without_graph_build_from_path_and_text_formats() {
     mc.assert().success().stdout(predicate::str::contains("Module").and(predicate::str::contains("Total")));
 
     // path query no path branch should print <no path>
-    let mut pathq = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut pathq = Command::cargo_bin("rust-relations-explorer").unwrap();
     pathq.arg("query").arg("path")
         .arg("--path").arg(root)
         .arg("--from").arg(src.join("a.rs"))
@@ -139,7 +139,7 @@ fn cycles_text_output_branch() {
     write_file(&src.join("a.rs"), "pub fn fa() {}\n");
     write_file(&src.join("b.rs"), "pub fn fb() { }\n");
 
-    let mut cy = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut cy = Command::cargo_bin("rust-relations-explorer").unwrap();
     cy.arg("query").arg("cycles")
         .arg("--path").arg(root)
         .arg("--format").arg("text");

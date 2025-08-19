@@ -24,7 +24,7 @@ fn cli_build_svg_when_graphviz_available() {
         pub fn top() {}
     "#);
 
-    let mut cmd = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut cmd = Command::cargo_bin("rust-relations-explorer").unwrap();
     cmd.arg("build")
         .arg("--path").arg(root)
         .arg("--svg").arg(root.join("graph.svg"));
@@ -59,7 +59,7 @@ fn cli_query_module_centrality_trait_impls_and_cycles() {
     "#);
 
     // Build graph JSON
-    let mut build = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut build = Command::cargo_bin("rust-relations-explorer").unwrap();
     build.arg("build")
         .arg("--path").arg(root)
         .arg("--json").arg(root.join("graph.json"));
@@ -67,7 +67,7 @@ fn cli_query_module_centrality_trait_impls_and_cycles() {
     let graph_path = root.join("graph.json");
 
     // module-centrality: expect some output rows
-    let mut mc = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut mc = Command::cargo_bin("rust-relations-explorer").unwrap();
     mc.arg("query").arg("module-centrality")
         .arg("--graph").arg(&graph_path)
         .arg("--metric").arg("total")
@@ -76,7 +76,7 @@ fn cli_query_module_centrality_trait_impls_and_cycles() {
     mc.assert().success().stdout(predicate::str::contains("["));
 
     // trait-impls: parser may or may not extract impls in this minimal setup; accept empty but valid JSON array
-    let mut ti = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut ti = Command::cargo_bin("rust-relations-explorer").unwrap();
     ti.arg("query").arg("trait-impls")
         .arg("--graph").arg(&graph_path)
         .arg("--trait").arg("T")
@@ -84,7 +84,7 @@ fn cli_query_module_centrality_trait_impls_and_cycles() {
     ti.assert().success().stdout(predicate::str::contains("["));
 
     // cycles: command should succeed; output may be empty which is acceptable
-    let mut cy = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut cy = Command::cargo_bin("rust-relations-explorer").unwrap();
     cy.arg("query").arg("cycles")
         .arg("--graph").arg(&graph_path)
         .arg("--format").arg("json");
@@ -110,7 +110,7 @@ fn cli_query_path_and_function_usage() {
     "#);
 
     // Build graph JSON to speed queries
-    let mut build = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut build = Command::cargo_bin("rust-relations-explorer").unwrap();
     build.arg("build")
         .arg("--path").arg(root)
         .arg("--json").arg(root.join("graph.json"));
@@ -118,7 +118,7 @@ fn cli_query_path_and_function_usage() {
     let graph_path = root.join("graph.json");
 
     // path query: expect a path from b.rs to a.rs
-    let mut pathq = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut pathq = Command::cargo_bin("rust-relations-explorer").unwrap();
     pathq.arg("query").arg("path")
         .arg("--graph").arg(&graph_path)
         .arg("--from").arg(src.join("b.rs"))
@@ -127,7 +127,7 @@ fn cli_query_path_and_function_usage() {
     pathq.assert().success().stdout(predicate::str::contains("a.rs"));
 
     // function-usage: callers of foo should include b.rs
-    let mut funcq = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut funcq = Command::cargo_bin("rust-relations-explorer").unwrap();
     funcq.arg("query").arg("function-usage")
         .arg("--graph").arg(&graph_path)
         .arg("--function").arg("foo")

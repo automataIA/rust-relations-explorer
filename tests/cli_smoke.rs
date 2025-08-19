@@ -26,7 +26,7 @@ fn cli_build_and_connected_files_smoke() {
     "#);
 
     // Act: run build command
-    let mut cmd = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut cmd = Command::cargo_bin("rust-relations-explorer").unwrap();
     cmd.arg("build")
         .arg("--path").arg(root)
         .arg("--json").arg(root.join("graph.json"));
@@ -39,7 +39,7 @@ fn cli_build_and_connected_files_smoke() {
     assert!(content.contains("lib.rs"));
 
     // Act: run query connected-files
-    let mut cmd2 = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut cmd2 = Command::cargo_bin("rust-relations-explorer").unwrap();
     cmd2.arg("query").arg("connected-files")
         .arg("--path").arg(root)
         .arg("--file").arg(src.join("a.rs"))

@@ -2,7 +2,7 @@ use clap::{Parser, Subcommand};
 
 #[derive(Debug, Parser)]
 #[command(
-    name = "knowledge-rs",
+    name = "rust-relations-explorer",
     version,
     about = "Rust Knowledge Graph System",
     long_about = "Parse Rust projects into a knowledge graph and run queries. File discovery respects .gitignore and .ignore with parent traversal. Global git excludes are disabled for determinism. Use --no-ignore to bypass ignore rules."
@@ -92,6 +92,30 @@ pub enum QueryCommands {
         /// Optional path to a prebuilt graph JSON (skips rebuild)
         #[arg(long)]
         graph: Option<String>,
+        /// Output format: text or json
+        #[arg(long, value_parser = ["text", "json"], default_value = "text")]
+        format: String,
+    },
+    /// Show a single item's definition and relations by ItemId
+    ItemInfo {
+        /// Path to project root (directory containing src/)
+        #[arg(short, long, default_value = ".")] 
+        path: String,
+        /// Path to a TOML configuration file
+        #[arg(long)]
+        config: Option<String>,
+        /// Bypass ignore rules (.gitignore/.ignore) when discovering files
+        #[arg(long, default_value_t = false)]
+        no_ignore: bool,
+        /// ItemId (e.g., fn:createIcons:6)
+        #[arg(long, value_name = "ID")]
+        item_id: String,
+        /// Optional path to a prebuilt graph JSON (skips rebuild)
+        #[arg(long)]
+        graph: Option<String>,
+        /// Include code snippet of the item's definition
+        #[arg(long, default_value_t = true)]
+        show_code: bool,
         /// Output format: text or json
         #[arg(long, value_parser = ["text", "json"], default_value = "text")]
         format: String,
@@ -224,6 +248,30 @@ pub enum QueryCommands {
         /// Trait name (e.g., Display)
         #[arg(long, value_name = "NAME")]
         r#trait: String,
+        /// Optional path to a prebuilt graph JSON (skips rebuild)
+        #[arg(long)]
+        graph: Option<String>,
+        /// Output format: text or json
+        #[arg(long, value_parser = ["text", "json"], default_value = "text")]
+        format: String,
+    },
+    /// List items with no inbound usage edges (potentially dead code)
+    UnreferencedItems {
+        /// Path to project root (directory containing src/)
+        #[arg(short, long, default_value = ".")] 
+        path: String,
+        /// Path to a TOML configuration file
+        #[arg(long)]
+        config: Option<String>,
+        /// Bypass ignore rules (.gitignore/.ignore) when discovering files
+        #[arg(long, default_value_t = false)]
+        no_ignore: bool,
+        /// Include public items as well (by default public items are excluded)
+        #[arg(long, default_value_t = false)]
+        include_public: bool,
+        /// Regex to exclude paths (e.g., 'tests|benches|examples')
+        #[arg(long)]
+        exclude: Option<String>,
         /// Optional path to a prebuilt graph JSON (skips rebuild)
         #[arg(long)]
         graph: Option<String>,

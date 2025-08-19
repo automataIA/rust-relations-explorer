@@ -80,7 +80,8 @@ pub mod config {
     }
 
     fn default_config_path(root: &Path) -> PathBuf {
-        root.join("knowledge-rs.toml")
+        // Prefer new name, keep backward compatibility with old filename
+        root.join("rust-relations-explorer.toml")
     }
 
     #[must_use]
@@ -91,8 +92,12 @@ pub mod config {
 
     #[must_use]
     pub fn load_config_near(root: &Path) -> Option<Config> {
-        let p = default_config_path(root);
-        if p.exists() { load_config_at(&p) } else { None }
+        let p_new = default_config_path(root);
+        if p_new.exists() {
+            return load_config_at(&p_new);
+        }
+        let p_old = root.join("knowledge-rs.toml");
+        if p_old.exists() { load_config_at(&p_old) } else { None }
     }
 }
 

@@ -20,7 +20,7 @@ fn cli_build_cache_modes_succeed() {
     let json = root.join("graph.json");
 
     // Default (Use cache)
-    let mut use_cache = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut use_cache = Command::cargo_bin("rust-relations-explorer").unwrap();
     use_cache.arg("build")
         .arg("--path").arg(root)
         .arg("--json").arg(&json);
@@ -28,7 +28,7 @@ fn cli_build_cache_modes_succeed() {
     assert!(json.exists());
 
     // Rebuild
-    let mut rebuild = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut rebuild = Command::cargo_bin("rust-relations-explorer").unwrap();
     rebuild.arg("build")
         .arg("--path").arg(root)
         .arg("--json").arg(&json)
@@ -37,7 +37,7 @@ fn cli_build_cache_modes_succeed() {
     assert!(json.exists());
 
     // No-cache
-    let mut no_cache = Command::cargo_bin("knowledge-rs").unwrap();
+    let mut no_cache = Command::cargo_bin("rust-relations-explorer").unwrap();
     no_cache.arg("build")
         .arg("--path").arg(root)
         .arg("--json").arg(&json)

@@ -1,9 +1,9 @@
 use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};
-use knowledge_rs::graph::KnowledgeGraph;
-use knowledge_rs::query::{
+use rust_relations_explorer::graph::KnowledgeGraph;
+use rust_relations_explorer::query::{
     CentralityMetric, ConnectedFilesQuery, HubsQuery, Query, ShortestPathQuery,
 };
-use knowledge_rs::utils::cache::CacheMode;
+use rust_relations_explorer::utils::cache::CacheMode;
 use std::path::Path;
 
 fn build_graph_once() -> KnowledgeGraph {

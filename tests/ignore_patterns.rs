@@ -1,7 +1,7 @@
 use std::fs;
 use std::path::PathBuf;
 
-use knowledge_rs::graph::KnowledgeGraph;
+use rust_relations_explorer::graph::KnowledgeGraph;
 
 fn make_temp_project(entries: Vec<(&str, &str)>) -> PathBuf {
     let base = std::env::temp_dir()
