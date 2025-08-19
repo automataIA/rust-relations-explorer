@@ -19,8 +19,26 @@ cargo tarpaulin --engine llvm --out Lcov --timeout 600 --workspace --exclude-fil
 ![Status](https://img.shields.io/badge/status-Alpha-yellow)
 ![Coverage](https://img.shields.io/badge/coverage-87.6%25-brightgreen)
 ![CLI](https://img.shields.io/badge/CLI-clap%204.5-9cf)
+[![CI](https://github.com/automataIA/rust-relations-explorer/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/automataIA/rust-relations-explorer/actions/workflows/ci.yml)
+![crates.io](https://img.shields.io/crates/v/rust-relations-explorer)
+![docs.rs](https://img.shields.io/docsrs/rust-relations-explorer)
 
 A fast, lightweight tool to parse Rust projects into a knowledge graph and run insightful queries over code structure. Generate DOT/SVG visualizations, persist graphs to JSON, and explore code relationships via a clean CLI. ✨
+
+
+## ⚡ Quick install
+
+```bash
+cargo install rust-relations-explorer
+```
+
+
+## 🔗 Links
+
+- crates.io: @web https://crates.io/crates/rust-relations-explorer
+- docs.rs: @web https://docs.rs/rust-relations-explorer
+- CI status: @web https://github.com/automataIA/rust-relations-explorer/actions/workflows/ci.yml
+- Releases: @web https://github.com/automataIA/rust-relations-explorer/releases
 
 
 ## ✨ Features
@@ -47,6 +65,12 @@ A fast, lightweight tool to parse Rust projects into a knowledge graph and run i
 
 ## 🧰 Installation
 
+Install from crates.io:
+
+```bash
+cargo install rust-relations-explorer
+```
+
 Build from source:
 
 ```bash
@@ -68,7 +92,7 @@ Build a graph from a Rust project and export artifacts:
 
 ```bash
 # Build and save artifacts (uses cache by default)
-rust-relations-explorer build --path . \
+rust-relations-explorer build --path path/to/project \
   --json graph.json \
   --dot graph.dot \
   --svg graph.svg \
@@ -76,48 +100,48 @@ rust-relations-explorer build --path . \
   --dot-theme light --dot-clusters on --dot-legend on
 
 # Force parsing all files without using cache
-rust-relations-explorer build --path . --no-cache
+rust-relations-explorer build --path path/to/project --no-cache
 
 # Rebuild cache from scratch (clears previous cache file)
-rust-relations-explorer build --path . --rebuild
+rust-relations-explorer build --path path/to/project --rebuild
 
 # Apply options from a configuration file
-rust-relations-explorer build --path . --config rust-relations-explorer.toml --svg graph.svg
+rust-relations-explorer build --path path/to/project --config rust-relations-explorer.toml --svg graph.svg
 
 # Bypass ignore rules (include files even if ignored)
-rust-relations-explorer build --path . --no-ignore
+rust-relations-explorer build --path path/to/project --no-ignore
 ```
 
 Run queries (builds the graph on-the-fly unless `--graph` is provided):
 
 ```bash
 # Connected files for a given file
-rust-relations-explorer query connected-files --path . --file src/lib.rs --format text
+rust-relations-explorer query connected-files --path path/to/project --file src/lib.rs --format text
 
 # Show detailed info for an item by ItemId (text or JSON)
-rust-relations-explorer query item-info --path . --item-id fn:createIcons:6 --format text
-rust-relations-explorer query item-info --path . --item-id fn:createIcons:6 --format json
+rust-relations-explorer query item-info --path path/to/project --item-id fn:createIcons:6 --format text
+rust-relations-explorer query item-info --path path/to/project --item-id fn:createIcons:6 --format json
 
 # Function usage: who calls `foo` (callers) or who does `foo` call (callees)
-rust-relations-explorer query function-usage --path . --function foo --direction callers --format json
+rust-relations-explorer query function-usage --path path/to/project --function foo --direction callers --format json
 
 # Detect cycles
-rust-relations-explorer query cycles --path . --format text
+rust-relations-explorer query cycles --path path/to/project --format text
 
 # Shortest path between files
-rust-relations-explorer query path --path . --from src/a.rs --to src/b.rs --format text
+rust-relations-explorer query path --path path/to/project --from src/a.rs --to src/b.rs --format text
 
 # Hubs: top-N by degree centrality
-rust-relations-explorer query hubs --path . --metric total --top 10 --format text
+rust-relations-explorer query hubs --path path/to/project --metric total --top 10 --format text
 
 # Module centrality: top-N modules by degree
-rust-relations-explorer query module-centrality --path . --metric total --top 10 --format text
+rust-relations-explorer query module-centrality --path path/to/project --metric total --top 10 --format text
 
 # Trait implementations for Display
-rust-relations-explorer query trait-impls --path . --trait Display --format json
+rust-relations-explorer query trait-impls --path path/to/project --trait Display --format json
 
 # Any query can also bypass ignore rules when building on-the-fly
-rust-relations-explorer query cycles --path . --no-ignore --format text
+rust-relations-explorer query cycles --path path/to/project --no-ignore --format text
 ```
 
 Use a prebuilt graph for faster queries:
@@ -151,7 +175,7 @@ Example sources:
 - __Build and save graph to JSON__
 
   ```bash
-  rust-relations-explorer build --path . --json graph.json
+  rust-relations-explorer build --path path/to/project --json graph.json
   rust-relations-explorer query hubs --graph graph.json --metric total --top 10 --format json
   ```
 
@@ -168,18 +192,37 @@ Example sources:
 - __Bypass ignore rules for one-off analyses__
 
   ```bash
-  rust-relations-explorer build --path . --no-ignore --svg graph.svg
+  rust-relations-explorer build --path path/to/project --no-ignore --svg graph.svg
   ```
 
 - __Save and load graph JSON__
 
   ```bash
   # Save
-  rust-relations-explorer build --path . --json graph.json
+  rust-relations-explorer build --path path/to/project --json graph.json
 
   # Query using saved graph (faster)
   rust-relations-explorer query hubs --graph graph.json --metric in --top 5 --format json
   ```
+
+## 🚢 Releasing
+
+Create a GitHub release using notes from `CHANGELOG.md` via GitHub CLI:
+
+```bash
+# Mark as latest and use notes from CHANGELOG.md [0.1.0]
+scripts/release_from_changelog.sh 0.1.0 --latest
+
+# Without marking latest
+scripts/release_from_changelog.sh 0.1.1
+```
+
+Requirements:
+
+- GitHub CLI installed and authenticated:
+  - gh auth login -w
+- Existing tag `v<version>` pushed (e.g., `v0.1.0`).
+- `CHANGELOG.md` includes a section like `## [0.1.0] - YYYY-MM-DD`.
 
 - __Programmatic save/load JSON__
 
@@ -342,43 +385,43 @@ Record the elapsed wall time and peak memory, and confirm the 10k-in-30s target.
 Build graph with DOT and SVG outputs:
 
 ```sh
-cargo run -- build --path . --json graph.json --dot graph.dot --svg graph.svg
+cargo run -- build --path path/to/project --json graph.json --dot graph.dot --svg graph.svg
 ```
 
 Connected files for a target file (JSON):
 
 ```sh
-cargo run -- query connected-files --path . --file src/lib.rs --format json
+cargo run -- query connected-files --path path/to/project --file src/lib.rs --format json
 ```
 
 Function usage: callers of function `foo` (JSON):
 
 ```sh
-cargo run -- query function-usage --path . --function foo --direction callers --format json
+cargo run -- query function-usage --path path/to/project --function foo --direction callers --format json
 ```
 
 Shortest path between two files (JSON):
 
 ```sh
-cargo run -- query path --path . --from src/a.rs --to src/b.rs --format json
+cargo run -- query path --path path/to/project --from src/a.rs --to src/b.rs --format json
 ```
 
 Top hubs by total degree (top 10):
 
 ```sh
-cargo run -- query hubs --path . --metric total --top 10 --format text
+cargo run -- query hubs --path path/to/project --metric total --top 10 --format text
 ```
 
 Top modules (directories) by in-degree (top 5):
 
 ```sh
-cargo run -- query module-centrality --path . --metric in --top 5 --format text
+cargo run -- query module-centrality --path path/to/project --metric in --top 5 --format text
 ```
 
 Types implementing a trait (e.g., Display):
 
 ```sh
-cargo run -- query trait-impls --path . --trait Display --format json
+cargo run -- query trait-impls --path path/to/project --trait Display --format json
 ```
 
 ## 🧠 Caching Modes
@@ -419,11 +462,11 @@ Bypass ignores (use with care):
 
 ```bash
 # Preferred: CLI flag (explicit)
-rust-relations-explorer build --path . --no-ignore
+rust-relations-explorer build --path path/to/project --no-ignore
 
 # Optional: environment variable (legacy/compat)
 # Still supported, but not required since the CLI now passes the flag directly.
-KNOWLEDGE_RS_NO_IGNORE=1 rust-relations-explorer build --path .
+KNOWLEDGE_RS_NO_IGNORE=1 rust-relations-explorer build --path path/to/project
 ```
 
 ## ⚙️ Configuration
@@ -469,4 +512,9 @@ Issues and PRs are welcome! Please run `cargo fmt`, `cargo clippy`, and `cargo t
 
 ## 📄 License
 
-TBD
+Licensed under either of
+
+- Apache License, Version 2.0, see `LICENSE-APACHE`
+- MIT license, see `LICENSE-MIT`
+
+at your option.
