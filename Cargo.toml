@@ -1,6 +1,6 @@
 [package]
 name = "rust-relations-explorer"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 description = "Explore relationships in Rust codebases: build a knowledge graph and run queries (connected files, function usage, cycles, paths, hubs, module centrality, trait impls)."
 readme = "README.md"

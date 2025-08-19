@@ -46,17 +46,26 @@ fi
 NOTES_FILE=$(mktemp)
 trap 'rm -f "$NOTES_FILE"' EXIT
 
-awk -v ver="$VERSION" '
-  BEGIN { in_section=0 }
-  /^## \[/ {
-    if (in_section) exit 0
-    if ($0 ~ "^## \[" ver "\]") { in_section=1; next }
-  }
-  { if (in_section) print }
-' CHANGELOG.md > "$NOTES_FILE"
+# Find the header line for the version (supports optional date after dash)
+START_LINE=$(grep -n -E "^## \\[$VERSION\\]( - .*)?$" CHANGELOG.md | head -n1 | cut -d: -f1 || true)
+if [[ -z "${START_LINE:-}" ]]; then
+  echo "Error: could not find section header for version $VERSION in CHANGELOG.md" >&2
+  exit 1
+fi
+
+# Find the next header start line after START_LINE (or set to EOF)
+END_LINE=$(awk -v s="$START_LINE" 'NR>s && /^## \[/ {print NR; exit}' CHANGELOG.md)
+if [[ -z "${END_LINE:-}" ]]; then
+  END_LINE=$(wc -l < CHANGELOG.md)
+else
+  END_LINE=$((END_LINE - 1))
+fi
+
+# Extract everything between the header and the next header
+sed -n "$((START_LINE + 1)),$END_LINE p" CHANGELOG.md > "$NOTES_FILE"
 
 if [[ ! -s "$NOTES_FILE" ]]; then
-  echo "Error: could not find section for version $VERSION in CHANGELOG.md" >&2
+  echo "Error: found header for $VERSION but no content under it in CHANGELOG.md" >&2
   exit 1
 fi
 

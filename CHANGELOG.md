@@ -9,6 +9,18 @@ and this project adheres to Semantic Versioning (@web https://semver.org/spec/v2
 
 - Planned improvements and enhancements.
 
+## [0.1.2] - 2025-08-19
+
+### Changed
+- README/doc polish: angle-bracket autolinks for `@web` to satisfy rustdoc.
+- Crate docs: retain `README.md` inclusion and `doc_cfg`.
+
+### Fixed
+- CI fmt failure: ensure no trailing blank lines in `src/lib.rs`.
+
+### Tooling
+- `scripts/release_from_changelog.sh`: robust changelog parsing (supports `## [X.Y.Z] - YYYY-MM-DD`), no awk warnings.
+
 ## [0.1.1] - 2025-08-19
 
 ### Fixed
@@ -40,6 +52,7 @@ and this project adheres to Semantic Versioning (@web https://semver.org/spec/v2
 - CI workflow with fmt/clippy/test and coverage (tarpaulin).
 - Examples and benches.
 
-[Unreleased]: @web <https://github.com/automataIA/rust-relations-explorer/compare/v0.1.1...HEAD>
+[Unreleased]: @web <https://github.com/automataIA/rust-relations-explorer/compare/v0.1.2...HEAD>
+[0.1.2]: @web <https://github.com/automataIA/rust-relations-explorer/releases/tag/v0.1.2>
 [0.1.1]: @web <https://github.com/automataIA/rust-relations-explorer/releases/tag/v0.1.1>
 [0.1.0]: @web <https://github.com/automataIA/rust-relations-explorer/releases/tag/v0.1.0>
