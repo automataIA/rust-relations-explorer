@@ -1,3 +1,11 @@
+//! Graph model and builder for the crate.
+//!
+//! This module defines the core data structures for the knowledge graph
+//! (`KnowledgeGraph`, `FileNode`, `Item`, `Relationship`) and the analysis
+//! passes that populate relationships (module hierarchy, import uses, calls).
+//!
+//! You typically construct a graph via `KnowledgeGraph::build_from_directory_*`
+//! and then pass it to queries in `crate::query`.
 use crate::utils::cache;
 use rayon::prelude::*;
 use regex::Regex;

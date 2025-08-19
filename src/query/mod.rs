@@ -1,3 +1,12 @@
+//! Query framework and built-in queries over the knowledge graph.
+//!
+//! This module defines the `Query` trait and a collection of ready-to-use
+//! queries such as `ConnectedFilesQuery`, `FunctionUsageQuery`,
+//! `CycleDetectionQuery`, `ShortestPathQuery`, `HubsQuery`,
+//! `ModuleCentralityQuery`, `TraitImplsQuery`, and `UnreferencedItemsQuery`.
+//!
+//! Each query operates on `crate::graph::KnowledgeGraph` and returns results
+//! suitable for CLI or library consumption.
 use regex::Regex;
 use serde::Serialize;
 use std::collections::{HashMap, HashSet};

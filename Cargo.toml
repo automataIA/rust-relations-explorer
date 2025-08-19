@@ -44,3 +44,9 @@ harness = false
 [[bench]]
 name = "queries"
 harness = false
+
+[package.metadata.docs.rs]
+# Build documentation with all features enabled on docs.rs
+all-features = true
+# Expose cfg(docsrs) so we can use #[cfg_attr(docsrs, ...)] in the crate
+rustdoc-args = ["--cfg", "docsrs"]

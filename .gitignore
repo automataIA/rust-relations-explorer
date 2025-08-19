@@ -7,3 +7,5 @@ requisites.md
 heaptrack.knowledge-rs.469342.gz
 heaptrack-summary.txt
 builder.md
+.knowledge_cache.json
+graph.json

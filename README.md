@@ -35,10 +35,10 @@ cargo install rust-relations-explorer
 
 ## 🔗 Links
 
-- crates.io: @web https://crates.io/crates/rust-relations-explorer
-- docs.rs: @web https://docs.rs/rust-relations-explorer
-- CI status: @web https://github.com/automataIA/rust-relations-explorer/actions/workflows/ci.yml
-- Releases: @web https://github.com/automataIA/rust-relations-explorer/releases
+- crates.io: @web <https://crates.io/crates/rust-relations-explorer>
+- docs.rs: @web <https://docs.rs/rust-relations-explorer>
+- CI status: @web <https://github.com/automataIA/rust-relations-explorer/actions/workflows/ci.yml>
+- Releases: @web <https://github.com/automataIA/rust-relations-explorer/releases>
 
 
 ## ✨ Features
@@ -245,141 +245,6 @@ Requirements:
 
   Note: `KnowledgeGraph` implements `serde::Serialize`/`Deserialize`.
 
-## 🧩 Mapping: CLI queries ↔ API
-
-- `query connected-files` → `query::ConnectedFilesQuery`
-- `query item-info --item-id ID` → `query::ItemInfoQuery`
-- `query function-usage --direction callers|callees` → `query::FunctionUsageQuery::{callers,callees}`
-- `query cycles` → `query::CycleDetectionQuery`
-- `query path --from A --to B` → `query::ShortestPathQuery::new(A,B)`
-- `query hubs --metric in|out|total` → `query::HubsQuery` with `CentralityMetric`
-- `query module-centrality` → `query::ModuleCentralityQuery`
-- `query trait-impls --trait NAME` → `query::TraitImplsQuery::new(NAME)`
-
-## 🛠️ Troubleshooting
-
-- __Graphviz `dot` not found__
-  - Ensure Graphviz is installed and `dot` is on PATH. The `generate_svg` example will print a hint on failure.
-- __Empty graph__
-  - Check ignore rules. Try `--no-ignore` to include ignored files. See `Ignore Patterns` section.
-- __Slow runs on large repos__
-  - Use saved JSON and query with `--graph graph.json`. Ensure cache (default) is enabled.
-
-## 🧱 Design Overview
-
-- __Graph model__
-  - Nodes: items parsed from Rust files (functions, structs, enums, traits, impls, etc.). See `src/graph/mod.rs`.
-  - Edges: relationships between items (uses, implements, contains, extends, calls). Projectable to file-level.
-- __File discovery & ignores__
-  - File walking in `src/utils/mod.rs` honors `.gitignore`, global ignores, nested ignores. Explicit override via `--no-ignore`.
-- __Visualization__
-  - DOT via `visualization::DotGenerator`; SVG via `visualization::SvgGenerator` using Graphviz `dot`.
-
-## ❓ FAQ
-
-- __How do item-level relationships map to files?__
-  - Each relationship stores `from_item`/`to_item` (item IDs). For file-level analyses (e.g., connected files), items are mapped to their defining file and deduplicated.
-- __Does the CLI modify environment variables for ignores?__
-  - No. Ignoring is controlled explicitly via flags. Legacy env is still read by the library for backwards compatibility but not set by the CLI.
-
-
-## 🗺️ Roadmap
-
-See `plan-tasks.md` for full project plan, phases, and task status.
-
-- Core queries: ✅
-- Centrality/hubs: ✅
-- Table output: 🚧
-- Config file and ignores: 🚧
-- Performance (parallelism, caching, incremental): 🚧
-
-## 🏁 Benchmarks
-
-- __Run all benches__
-
-  ```bash
-  cargo bench
-  ```
-
-- __Reports__
-  - Criterion stores results under `target/criterion/`.
-  - With `html_reports` enabled, open `target/criterion/report/index.html` for an overview.
-
-- __What’s measured__
-  - Build performance by cache mode: `benches/build_graph.rs`.
-  - Query performance (connected files, hubs, shortest path): `benches/queries.rs`.
-
-- __Notes__
-  - Benches use `criterion` 0.5. Setup occurs outside `iter` and results are `black_box`ed.
-
-### 📊 Sample Results (local, 2025-08-18)
-
-- __Build graph__ (lower is better)
-  - rebuild: [6.86 ms, 6.98 ms, 7.11 ms]
-  - use_cache: [4.42 ms, 4.46 ms, 4.52 ms]
-  - ignore_cache: [7.06 ms, 7.20 ms, 7.35 ms]
-
-- __Queries__ (lower is better)
-  - connected_files: [55.65 µs, 57.48 µs, 59.75 µs]
-  - hubs (top10 total): [43.09 µs, 44.77 µs, 47.06 µs]
-  - shortest_path (a→b): [42.73 µs, 43.17 µs, 43.64 µs]
-
-#### 📦 10k synthetic project (release)
-
-- Dataset: generated via `examples/generate_synthetic.rs` (10,000 files)
-- Default (use cache), warm run: 0.29s elapsed, ~103 MB max RSS
-- No-cache: 0.85s elapsed, ~100 MB max RSS
-- Notes:
-  - First invocation via `cargo run` includes compilation overhead; use the built binary for timing.
-  - Results are for a simple synthetic workload (flat modules, tiny files). Real projects will vary.
-
-Notes:
-- These are Criterion min/mean/max for 100 samples on the current machine and can vary across runs and environments.
-- Please record your machine specs (CPU model, cores, RAM, OS) alongside results for context.
-
-#### 🖥️ Machine specs (example, replace with yours)
-
-- CPU: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz (6 cores / 12 threads)
-- RAM: 32 GB
-- OS: Ubuntu 22.04 x86_64
-- Rust: nightly toolchain (see `rust-toolchain.toml` or `rustup show`)
-
-### 🔬 Validate 10k-file Performance (Phase 4)
-
-Use the synthetic generator example to create a large project and measure performance.
-
-1) Generate N files (e.g., 10,000):
-
-```sh
-cargo run --example generate_synthetic -- /tmp/kr_synth 10000
-```
-
-2) Measure build time (Use cache by default):
-
-```sh
-# Build release binary once
-cargo build --release
-
-# Use the built binary to avoid compile overhead
-/usr/bin/time -v target/release/rust-relations-explorer build --path /tmp/kr_synth --json /tmp/kr_graph.json
-```
-
-3) Compare cache modes:
-
-```sh
-/usr/bin/time -v target/release/rust-relations-explorer build --path /tmp/kr_synth --json /tmp/kr_graph.json --rebuild
-/usr/bin/time -v target/release/rust-relations-explorer build --path /tmp/kr_synth --json /tmp/kr_graph.json --no-cache
-```
-
-4) Optional memory profiling:
-
-```sh
-/usr/bin/time -v target/release/rust-relations-explorer build --path /tmp/kr_synth --json /tmp/kr_graph.json
-# or use heaptrack if available
-```
-
-Record the elapsed wall time and peak memory, and confirm the 10k-in-30s target.
-
 ## 🧪 CLI Quick Examples
 
 Build graph with DOT and SVG outputs:
@@ -498,11 +363,11 @@ default_format = "json" # "text" | "json"
 
 ## 📎 References
 
-- @web https://doc.rust-lang.org/
-- @web https://graphviz.org/
-- @web https://crates.io/crates/clap
-- @web https://serde.rs/
-- @web https://docs.rs/regex
+- @web <https://doc.rust-lang.org/>
+- @web <https://graphviz.org/>
+- @web <https://crates.io/crates/clap>
+- @web <https://serde.rs/>
+- @web <https://docs.rs/regex>
 
 
 ## 🤝 Contributing
