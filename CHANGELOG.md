@@ -9,6 +9,20 @@ and this project adheres to Semantic Versioning (@web https://semver.org/spec/v2
 
 - Planned improvements and enhancements.
 
+## [0.1.1] - 2025-08-19
+
+### Fixed
+- Rustfmt failure in `src/lib.rs` due to trailing blank line (CI fmt check now passes).
+
+### Documentation
+- Docs.rs configuration: build with all features and enable `docsrs` cfg via `[package.metadata.docs.rs]` in `Cargo.toml`.
+- Crate-level docs now include `README.md` via `#![doc = include_str!("../README.md")]` and enable `doc_cfg`.
+- Module overviews added to `src/graph/mod.rs` and `src/query/mod.rs` for better docs navigation.
+- README: wrap `@web` bare URLs in angle brackets to silence rustdoc warnings.
+
+### Tooling
+- Verified `cargo doc --all-features --no-deps` and `cargo test --doc` succeed locally.
+
 ## [0.1.0] - 2025-08-19
 
 ### Added
@@ -26,5 +40,6 @@ and this project adheres to Semantic Versioning (@web https://semver.org/spec/v2
 - CI workflow with fmt/clippy/test and coverage (tarpaulin).
 - Examples and benches.
 
-[Unreleased]: @web https://github.com/automataIA/rust-relations-explorer/compare/v0.1.0...HEAD
-[0.1.0]: @web https://github.com/automataIA/rust-relations-explorer/releases/tag/v0.1.0
+[Unreleased]: @web <https://github.com/automataIA/rust-relations-explorer/compare/v0.1.1...HEAD>
+[0.1.1]: @web <https://github.com/automataIA/rust-relations-explorer/releases/tag/v0.1.1>
+[0.1.0]: @web <https://github.com/automataIA/rust-relations-explorer/releases/tag/v0.1.0>
