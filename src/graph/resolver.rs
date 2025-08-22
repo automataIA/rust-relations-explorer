@@ -59,6 +59,45 @@ impl Resolver<'_> {
 }
 
 impl<'a> Resolver<'a> {
+    /// Find items by simple name using the prebuilt name index.
+    #[must_use]
+    pub fn find_by_name(&self, name: &str) -> Vec<ItemId> {
+        if let Some(ids) = self.name_index.get(&Arc::<str>::from(name)) {
+            return ids.clone();
+        }
+        // Fallback: try looking up using the shared string pool if present
+        // (Most names will hit the Arc<str>::from path above already.)
+        let key: Arc<str> = {
+            let pool =
+                self.graph.string_pool.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+            if let Some(a) = pool.get(name) {
+                a.clone()
+            } else {
+                Arc::from(name)
+            }
+        };
+        self.name_index.get(&key).cloned().unwrap_or_default()
+    }
+
+    /// Get the file path where an item is defined.
+    #[must_use]
+    pub fn item_path(&self, id: &ItemId) -> Option<&PathBuf> {
+        self.item_to_file.get(id)
+    }
+
+    /// Get the ItemType (kind) for a given item id.
+    #[must_use]
+    pub fn item_kind(&self, id: &ItemId) -> Option<ItemType> {
+        let path = self.item_to_file.get(id)?;
+        let file = self.graph.files.get(path)?;
+        for it in &file.items {
+            if &it.id == id {
+                return Some(it.item_type.clone());
+            }
+        }
+        None
+    }
+
     #[must_use]
     pub fn new(graph: &'a KnowledgeGraph) -> Self {
         // Pre-size maps based on graph characteristics to reduce rehashing/allocations

@@ -1,5 +1,8 @@
 use rust_relations_explorer::app::run_cli;
-use rust_relations_explorer::cli::{Cli, Commands, QueryCommands};
+use rust_relations_explorer::cli::{
+    CentralityMetricArg, Cli, Commands, Direction, DotRankDirArg, DotSplinesArg, DotThemeArg,
+    OnOffArg, OutputFormat, QueryCommands,
+};
 use std::fs;
 use std::io::Write;
 use std::path::PathBuf;
@@ -26,8 +29,10 @@ fn app_build_generates_dot_and_json() {
     let json_out = root.join("graph.json");
 
     let cli = Cli {
+        verbose: 0,
+        quiet: false,
         command: Commands::Build {
-            path: root.display().to_string(),
+            path: Some(root.to_path_buf()),
             config: None,
             no_ignore: false,
             no_cache: false,
@@ -35,13 +40,13 @@ fn app_build_generates_dot_and_json() {
             json: Some(json_out.display().to_string()),
             dot: Some(dot_out.display().to_string()),
             svg: None,
-            dot_clusters: "on".into(),
-            dot_legend: "on".into(),
-            dot_theme: "light".into(),
-            dot_rankdir: "LR".into(),
-            dot_splines: "curved".into(),
-            dot_rounded: "on".into(),
-            svg_interactive: "on".into(),
+            dot_clusters: OnOffArg::On,
+            dot_legend: OnOffArg::On,
+            dot_theme: DotThemeArg::Light,
+            dot_rankdir: DotRankDirArg::LR,
+            dot_splines: DotSplinesArg::Curved,
+            dot_rounded: OnOffArg::On,
+            svg_interactive: OnOffArg::On,
             save: None,
         },
     };
@@ -67,14 +72,19 @@ fn app_query_connected_files_json_branch() {
     write_file(&src.join("b.rs"), "pub fn bar() { crate::a::foo(); }\n");
 
     let cli = Cli {
+        verbose: 0,
+        quiet: false,
         command: Commands::Query {
             query: QueryCommands::ConnectedFiles {
-                path: root.display().to_string(),
+                path: Some(root.to_path_buf()),
                 config: None,
                 no_ignore: false,
-                file: src.join("a.rs").display().to_string(),
+                file_pos: None,
+                file: Some(src.join("a.rs").display().to_string()),
                 graph: None,
-                format: "json".into(),
+                format: OutputFormat::Json,
+                offset: 0,
+                limit: None,
             },
         },
     };
@@ -96,15 +106,19 @@ fn app_query_function_usage_callers_and_callees() {
 
     // callers branch (default)
     let cli_callers = Cli {
+        verbose: 0,
+        quiet: false,
         command: Commands::Query {
             query: QueryCommands::FunctionUsage {
-                path: root.display().to_string(),
+                path: Some(root.to_path_buf()),
                 config: None,
                 no_ignore: false,
                 function: "foo".into(),
-                direction: "callers".into(),
+                direction: Direction::Callers,
                 graph: None,
-                format: "text".into(),
+                format: OutputFormat::Text,
+                offset: 0,
+                limit: None,
             },
         },
     };
@@ -112,15 +126,19 @@ fn app_query_function_usage_callers_and_callees() {
 
     // callees branch
     let cli_callees = Cli {
+        verbose: 0,
+        quiet: false,
         command: Commands::Query {
             query: QueryCommands::FunctionUsage {
-                path: root.display().to_string(),
+                path: Some(root.to_path_buf()),
                 config: None,
                 no_ignore: false,
                 function: "bar".into(),
-                direction: "callees".into(),
+                direction: Direction::Callees,
                 graph: None,
-                format: "json".into(),
+                format: OutputFormat::Json,
+                offset: 0,
+                limit: None,
             },
         },
     };
@@ -138,13 +156,17 @@ fn app_query_cycles_json_branch() {
     write_file(&src.join("b.rs"), "pub fn b() {}\n");
 
     let cli = Cli {
+        verbose: 0,
+        quiet: false,
         command: Commands::Query {
             query: QueryCommands::Cycles {
-                path: root.display().to_string(),
+                path: Some(root.to_path_buf()),
                 config: None,
                 no_ignore: false,
                 graph: None,
-                format: "json".into(),
+                format: OutputFormat::Json,
+                offset: 0,
+                limit: None,
             },
         },
     };
@@ -164,15 +186,19 @@ fn app_query_path_json_path_and_no_path() {
 
     // json format
     let cli_json = Cli {
+        verbose: 0,
+        quiet: false,
         command: Commands::Query {
             query: QueryCommands::Path {
-                path: root.display().to_string(),
+                path: Some(root.to_path_buf()),
                 config: None,
                 no_ignore: false,
                 from: src.join("lib.rs").display().to_string(),
                 to: src.join("a.rs").display().to_string(),
                 graph: None,
-                format: "json".into(),
+                format: OutputFormat::Json,
+                offset: 0,
+                limit: None,
             },
         },
     };
@@ -180,15 +206,19 @@ fn app_query_path_json_path_and_no_path() {
 
     // no path text branch: a -> lib.rs likely no direct path
     let cli_no_path = Cli {
+        verbose: 0,
+        quiet: false,
         command: Commands::Query {
             query: QueryCommands::Path {
-                path: root.display().to_string(),
+                path: Some(root.to_path_buf()),
                 config: None,
                 no_ignore: false,
                 from: src.join("a.rs").display().to_string(),
                 to: src.join("lib.rs").display().to_string(),
                 graph: None,
-                format: "text".into(),
+                format: OutputFormat::Text,
+                offset: 0,
+                limit: None,
             },
         },
     };
@@ -206,15 +236,19 @@ fn app_query_module_centrality_json() {
     write_file(&src.join("b.rs"), "pub fn b() {}\n");
 
     let cli = Cli {
+        verbose: 0,
+        quiet: false,
         command: Commands::Query {
             query: QueryCommands::ModuleCentrality {
-                path: root.display().to_string(),
+                path: Some(root.to_path_buf()),
                 config: None,
                 no_ignore: false,
                 graph: None,
-                metric: "total".into(),
+                metric: CentralityMetricArg::Total,
                 top: 3,
-                format: "json".into(),
+                format: OutputFormat::Json,
+                offset: 0,
+                limit: None,
             },
         },
     };
@@ -234,28 +268,36 @@ fn app_query_trait_impls_text_and_json() {
     );
 
     let cli_text = Cli {
+        verbose: 0,
+        quiet: false,
         command: Commands::Query {
             query: QueryCommands::TraitImpls {
-                path: root.display().to_string(),
+                path: Some(root.to_path_buf()),
                 config: None,
                 no_ignore: false,
                 r#trait: "T".into(),
                 graph: None,
-                format: "text".into(),
+                format: OutputFormat::Text,
+                offset: 0,
+                limit: None,
             },
         },
     };
     assert_eq!(run_cli(cli_text), 0);
 
     let cli_json = Cli {
+        verbose: 0,
+        quiet: false,
         command: Commands::Query {
             query: QueryCommands::TraitImpls {
-                path: root.display().to_string(),
+                path: Some(root.to_path_buf()),
                 config: None,
                 no_ignore: false,
                 r#trait: "T".into(),
                 graph: None,
-                format: "json".into(),
+                format: OutputFormat::Json,
+                offset: 0,
+                limit: None,
             },
         },
     };
@@ -272,8 +314,10 @@ fn app_build_with_cache_flags_and_no_ignore() {
 
     // First build with no-cache
     let cli_no_cache = Cli {
+        verbose: 0,
+        quiet: false,
         command: Commands::Build {
-            path: root.display().to_string(),
+            path: Some(root.to_path_buf()),
             config: None,
             no_ignore: true,
             no_cache: true,
@@ -281,13 +325,13 @@ fn app_build_with_cache_flags_and_no_ignore() {
             json: None,
             dot: None,
             svg: None,
-            dot_clusters: "off".into(),
-            dot_legend: "off".into(),
-            dot_theme: "light".into(),
-            dot_rankdir: "LR".into(),
-            dot_splines: "curved".into(),
-            dot_rounded: "off".into(),
-            svg_interactive: "off".into(),
+            dot_clusters: OnOffArg::Off,
+            dot_legend: OnOffArg::Off,
+            dot_theme: DotThemeArg::Light,
+            dot_rankdir: DotRankDirArg::LR,
+            dot_splines: DotSplinesArg::Curved,
+            dot_rounded: OnOffArg::Off,
+            svg_interactive: OnOffArg::Off,
             save: None,
         },
     };
@@ -295,8 +339,10 @@ fn app_build_with_cache_flags_and_no_ignore() {
 
     // Then rebuild to ensure rebuild branch executes
     let cli_rebuild = Cli {
+        verbose: 0,
+        quiet: false,
         command: Commands::Build {
-            path: root.display().to_string(),
+            path: Some(root.to_path_buf()),
             config: None,
             no_ignore: false,
             no_cache: false,
@@ -304,13 +350,13 @@ fn app_build_with_cache_flags_and_no_ignore() {
             json: None,
             dot: None,
             svg: None,
-            dot_clusters: "off".into(),
-            dot_legend: "off".into(),
-            dot_theme: "light".into(),
-            dot_rankdir: "LR".into(),
-            dot_splines: "curved".into(),
-            dot_rounded: "off".into(),
-            svg_interactive: "off".into(),
+            dot_clusters: OnOffArg::Off,
+            dot_legend: OnOffArg::Off,
+            dot_theme: DotThemeArg::Light,
+            dot_rankdir: DotRankDirArg::LR,
+            dot_splines: DotSplinesArg::Curved,
+            dot_rounded: OnOffArg::Off,
+            svg_interactive: OnOffArg::Off,
             save: None,
         },
     };
@@ -329,15 +375,19 @@ fn app_query_hubs_text_branch() {
     write_file(&src.join("b.rs"), "pub fn fb() { }\n");
 
     let cli = Cli {
+        verbose: 0,
+        quiet: false,
         command: Commands::Query {
             query: QueryCommands::Hubs {
-                path: root.display().to_string(),
+                path: Some(root.to_path_buf()),
                 config: None,
                 no_ignore: false,
                 graph: None,
-                metric: "in".into(),
+                metric: CentralityMetricArg::In,
                 top: 5,
-                format: "text".into(),
+                format: OutputFormat::Text,
+                offset: 0,
+                limit: None,
             },
         },
     };

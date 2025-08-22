@@ -122,7 +122,8 @@ fn queries_without_graph_build_from_path_and_text_formats() {
 
     // hubs with metric in and text output
     let mut hubs = Command::cargo_bin("rust-relations-explorer").unwrap();
-    hubs.arg("query")
+    hubs.arg("-v")
+        .arg("query")
         .arg("hubs")
         .arg("--path")
         .arg(root)

@@ -90,6 +90,31 @@ cargo test
 
 Build a graph from a Rust project and export artifacts:
 
+### Defaults & name lookup (quick examples)
+
+```bash
+# Use env defaults (see Configuration section)
+export RRE_PATH=/path/to/project
+export RRE_FORMAT=json
+
+# Name lookup without ItemId
+rust-relations-explorer query item-info --path path/to/project --name createIcons --format text
+
+# Short flags and defaults (local dev via cargo)
+# Explicit short flags
+cargo run -- query item-info -p src -n resolver -f text
+# Using environment defaults (omit -p and -f)
+export RRE_PATH=src
+export RRE_FORMAT=text
+cargo run -- query item-info -n resolver
+# Increase verbosity (-v, -vv, -vvv)
+rust-relations-explorer -vv query cycles
+
+# Quiet mode suppresses non-essential logs
+rust-relations-explorer -q query hubs --metric total --top 5 --format text
+rust-relations-explorer -q query hubs --metric total --top 5
+```
+
 ```bash
 # Build and save artifacts (uses cache by default)
 rust-relations-explorer build --path path/to/project \
@@ -115,12 +140,26 @@ rust-relations-explorer build --path path/to/project --no-ignore
 Run queries (builds the graph on-the-fly unless `--graph` is provided):
 
 ```bash
-# Connected files for a given file
-rust-relations-explorer query connected-files --path path/to/project --file src/lib.rs --format text
+# Connected files for a given file (positional <file>)
+rust-relations-explorer query connected-files --path path/to/project src/lib.rs --format text
 
 # Show detailed info for an item by ItemId (text or JSON)
 rust-relations-explorer query item-info --path path/to/project --item-id fn:createIcons:6 --format text
 rust-relations-explorer query item-info --path path/to/project --item-id fn:createIcons:6 --format json
+
+# Name-only lookup (no ItemId needed)
+# Prefer current crate matches; if ambiguous, CLI lists candidates and hints how to disambiguate.
+rust-relations-explorer query item-info --path path/to/project --name createIcons --format text
+
+# Narrow by kind to avoid ambiguity (kinds: module|function|struct|enum|trait|impl|const|static|type|macro)
+rust-relations-explorer query item-info --path path/to/project --name createIcons --kind function --format text
+
+# Example disambiguation flow (pseudo):
+# > Multiple items named 'createIcons' were found. Use --kind or --item-id to disambiguate.
+# > Candidates:
+# > - fn:createIcons:6  src/a.rs
+# > - fn:createIcons:12 src/b.rs
+# Then run with --kind function or the exact --item-id shown above.
 
 # Function usage: who calls `foo` (callers) or who does `foo` call (callees)
 rust-relations-explorer query function-usage --path path/to/project --function foo --direction callers --format json
@@ -142,6 +181,29 @@ rust-relations-explorer query trait-impls --path path/to/project --trait Display
 
 # Any query can also bypass ignore rules when building on-the-fly
 rust-relations-explorer query cycles --path path/to/project --no-ignore --format text
+```
+
+### Output controls (quiet/verbose, pagination)
+
+- Quiet mode suppresses non-essential stderr/info logs:
+
+```bash
+rust-relations-explorer -q query hubs --path path/to/project --format json
+```
+
+- Increase verbosity with repeated `-v` (e.g., `-v`, `-vv`, `-vvv`). Defaults to concise output.
+
+- Paginate large result sets with `--offset` and `--limit` (supported by all queries except `item-info`):
+
+```bash
+# First page (10 rows)
+rust-relations-explorer query hubs --path path/to/project --metric total --top 100 --offset 0 --limit 10 --format text
+
+# Next page (rows 10..20)
+rust-relations-explorer query hubs --path path/to/project --metric total --top 100 --offset 10 --limit 10 --format text
+
+# JSON output is also paginated by the same flags
+rust-relations-explorer query function-usage --path path/to/project --function foo --direction callers --offset 0 --limit 20 --format json
 ```
 
 Use a prebuilt graph for faster queries:
@@ -256,7 +318,7 @@ cargo run -- build --path path/to/project --json graph.json --dot graph.dot --sv
 Connected files for a target file (JSON):
 
 ```sh
-cargo run -- query connected-files --path path/to/project --file src/lib.rs --format json
+cargo run -- query connected-files --path path/to/project src/lib.rs --format json
 ```
 
 Function usage: callers of function `foo` (JSON):
@@ -274,7 +336,7 @@ cargo run -- query path --path path/to/project --from src/a.rs --to src/b.rs --f
 Top hubs by total degree (top 10):
 
 ```sh
-cargo run -- query hubs --path path/to/project --metric total --top 10 --format text
+cargo run -- query hubs --path path/to/project --metric total --top 10 --offset 0 --limit 10 --format text
 ```
 
 Top modules (directories) by in-degree (top 5):
@@ -286,7 +348,7 @@ cargo run -- query module-centrality --path path/to/project --metric in --top 5 
 Types implementing a trait (e.g., Display):
 
 ```sh
-cargo run -- query trait-impls --path path/to/project --trait Display --format json
+cargo run -- query trait-impls --path path/to/project --trait Display --offset 0 --limit 50 --format json
 ```
 
 ## 🧠 Caching Modes
@@ -338,9 +400,15 @@ KNOWLEDGE_RS_NO_IGNORE=1 rust-relations-explorer build --path path/to/project
 
 You can provide a TOML config with `--config <path>` for both `build` and all `query` subcommands.
 
-- **Precedence**:
-  - CLI flags override binary defaults.
-  - Config values are applied on top of CLI defaults to provide convenient project-wide settings (as implemented, config values for DOT/SVG and query format will be applied even if CLI uses defaulted values).
+- **Precedence (highest to lowest)**:
+  - CLI flags
+  - Environment variables
+  - Config file (`--config`)
+  - Binary defaults
+
+Notes:
+- Config only backfills when a value is still at its default. It never overwrites values provided by CLI flags or env vars.
+- Currently supported config keys: DOT/SVG options for `build`, and default query output format for all queries.
 
 Example `rust-relations-explorer.toml`:
 
@@ -358,6 +426,88 @@ interactive = true
 
 [query]
 default_format = "json" # "text" | "json"
+```
+
+### Environment variables
+
+- `RRE_PATH` — default project root for all commands with `--path`
+- `RRE_GRAPH` — default graph JSON for query subcommands
+- `RRE_FORMAT` — default output format for queries (`text` or `json`)
+
+Examples:
+
+```bash
+# Use a default project root and JSON output for queries
+export RRE_PATH=/path/to/project
+export RRE_FORMAT=json
+
+# Point queries to a prebuilt graph by default
+export RRE_GRAPH=/path/to/graph.json
+
+# Now flags can be omitted
+rust-relations-explorer query cycles --format json
+rust-relations-explorer query hubs --metric total --top 10
+```
+
+
+## 🐚 Shell completions
+
+Generate completion scripts with the built-in subcommand and install them in your shell's completion directory.
+
+- __Bash__ (user-level):
+
+  ```bash
+  rust-relations-explorer completions bash > ~/.local/share/bash-completion/completions/rust-relations-explorer
+  # If directory doesn't exist, create it and re-source bashrc
+  mkdir -p ~/.local/share/bash-completion/completions
+  source ~/.bashrc
+  ```
+
+  System-wide (requires sudo):
+
+  ```bash
+  sudo sh -c 'rust-relations-explorer completions bash > /etc/bash_completion.d/rust-relations-explorer'
+  ```
+
+- __Zsh__:
+
+  ```bash
+  rust-relations-explorer completions zsh > ~/.zsh/completions/_rust-relations-explorer
+  mkdir -p ~/.zsh/completions
+  fpath+=(~/.zsh/completions)
+  autoload -U compinit && compinit
+  ```
+
+- __Fish__:
+
+  ```bash
+  rust-relations-explorer completions fish > ~/.config/fish/completions/rust-relations-explorer.fish
+  ```
+
+- __PowerShell__ (Windows, current session):
+
+  ```powershell
+  rust-relations-explorer completions powershell | Out-String | Invoke-Expression
+  ```
+
+  Persist for all sessions (PowerShell profile):
+
+  ```powershell
+  $path = "$HOME/.config/powershell/rust-relations-explorer.ps1"
+  rust-relations-explorer completions powershell > $path
+  Add-Content -Path $PROFILE -Value ". $path"
+  ```
+
+- __Elvish__:
+
+  ```bash
+  rust-relations-explorer completions elvish > ~/.elvish/lib/rust-relations-explorer.elv
+  ```
+
+To test without installing, you can print to stdout:
+
+```bash
+rust-relations-explorer completions zsh
 ```
 
 

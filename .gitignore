@@ -1,5 +1,5 @@
 /target
-info/
+# info/
 lcov.info
 design.md
 plan-tasks.md

@@ -228,3 +228,50 @@ pub mod file_walker {
         rust_files_with_options(root, no_ignore)
     }
 }
+
+pub mod project_root {
+    use std::env;
+    use std::path::{Path, PathBuf};
+
+    /// Detect the Cargo project root by walking ancestors looking for both `Cargo.toml` and `src/`.
+    #[must_use]
+    pub fn detect(start: Option<&Path>) -> PathBuf {
+        let mut cur = start
+            .map(|p| p.to_path_buf())
+            .unwrap_or_else(|| env::current_dir().unwrap_or_else(|_| PathBuf::from(".")));
+        loop {
+            let cargo = cur.join("Cargo.toml");
+            let src = cur.join("src");
+            if cargo.exists() && src.is_dir() {
+                return cur;
+            }
+            if let Some(parent) = cur.parent() {
+                cur = parent.to_path_buf();
+            } else {
+                // Fallback to current_dir when nothing found
+                return env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
+            }
+        }
+    }
+
+    /// If `p` is "." (implicit default), replace with detected project root. Otherwise, return as-is.
+    #[must_use]
+    pub fn effective_path_str(p: &str) -> String {
+        if p == "." {
+            detect(None).to_string_lossy().to_string()
+        } else {
+            p.to_string()
+        }
+    }
+
+    /// Convert an optional Path into an effective absolute project root path.
+    /// None or "." resolve to the detected project root; any other path is returned as owned PathBuf.
+    #[must_use]
+    pub fn effective_path_opt(p: Option<&Path>) -> PathBuf {
+        match p {
+            None => detect(None),
+            Some(path) if path == Path::new(".") => detect(None),
+            Some(path) => path.to_path_buf(),
+        }
+    }
+}

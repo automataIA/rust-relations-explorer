@@ -1,6 +1,6 @@
 [package]
 name = "rust-relations-explorer"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 description = "Explore relationships in Rust codebases: build a knowledge graph and run queries (connected files, function usage, cycles, paths, hubs, module centrality, trait impls)."
 readme = "README.md"
@@ -24,7 +24,8 @@ regex = "1.10"
 serde = { version = "1.0", features = ["derive", "rc"] }
 serde_json = "1.0"
 walkdir = "2.4"
-clap = { version = "4.5", features = ["derive"] }
+clap = { version = "4.5", features = ["derive", "env"] }
+clap_complete = "4.5"
 thiserror = "1.0"
 rayon = "1.10"
 toml = "0.8"
